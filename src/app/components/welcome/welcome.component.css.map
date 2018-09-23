@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,UAAU;AAEV,WAAW;AAEX,UAAU;AAEV,UAAU;AAEV,YAAY;AAOZ,kBAAkB;ACflB,OAAQ;EACN,UAAU,ECqBA,4DAAsD;EDpBhE,gBAAgB,EDCH,KAAoB;ECAjC,MAAM,EAAE,IAAI",
+"sources": ["../../../assets/src/abstracts/_variables.scss","welcome.component.scss","../../../assets/src/abstracts/_functions.scss"],
+"names": [],
+"file": "welcome.component.css"
+}

@@ -1,0 +1,28 @@
+.container{
+  position: relative;
+  width: 100%;
+  display: block;
+  font-size: 0.9rem;
+  overflow: hidden;
+  &>*{
+    max-height: inherit;
+    overflow: hidden;
+  }
+}
+
+.open{
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  i{
+    float:right;
+  }
+  background-color: rgba(255,255,255,0.6);
+  z-index:2;
+  padding:10px;
+  width: 100%;
+  box-sizing: border-box;
+  span{
+    float:right;
+  }
+}

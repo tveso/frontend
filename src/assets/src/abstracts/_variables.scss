@@ -1,0 +1,23 @@
+
+/* Black*/
+$color_1_base: hsl(0, 0%, 0%);
+/* white */
+$color_2_base: hsl(360, 100%, 100%);
+/** Ink */
+$color_3_base: hsl(193, 71%, 19%);
+/* Posy */
+$color_4_base: hsl(312, 40%, 36%);
+/* Embers */
+$color_5_base: hsl(12, 99%, 36%);
+
+$font_family: 'Open Sans', sans-serif;
+
+$c_complementary_1: tint($color_3_base,91);
+$c_complementary_2: tint($color_3_base,10);
+/** Media query */
+
+$breakpoints: (
+        'phone':  200px,
+        'tablet':  992px,
+        'pc':  1200px,
+) !default;

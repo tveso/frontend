@@ -1,0 +1,29 @@
+@import "vendor/font-awesome/css/font-awesome.min.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import
+"src/abstracts/_abstract.scss";
+
+@import
+"src/base/reset",
+"src/base/typogragpy",
+"src/base/base";
+
+@import
+"src/layouts/grids",
+"src/layouts/links",
+"src/layouts/structure",
+"src/layouts/table",
+"src/layouts/forms",
+"src/layouts/_utils";
+
+@import
+"src/components/components";
+
+.dialog{
+  min-width: 70%;
+  max-height: 100vh;
+  max-width: 100%;
+  @include respond-between("phone", "tablet"){
+    min-width: 100%;
+  }
+}

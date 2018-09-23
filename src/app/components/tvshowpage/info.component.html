@@ -1,0 +1,35 @@
+<div class="content">
+<article class="sidebar">
+    <h2>Datos</h2>
+    <ul>
+        <li><h3>Primera fecha de emisión</h3> {{tvshow.first_air_date}}</li>
+        <li><h3>Duración por capítulo</h3> {{tvshow.duration}}</li>
+        <li><h3>Género/s</h3>
+            <app-genre *ngFor="let g of tvshow.genres" [genre]="g" [type]="tvshow.type"></app-genre>
+        </li>
+    </ul>
+    <h2>Imágenes</h2>
+    <div class="images">
+        <ul>
+            <li *ngFor="let i of tvshow.images?.posters|slice:0:8">
+                <app-tmdbimage size="w500" [image]="i.file_path"></app-tmdbimage>
+            </li>
+        </ul>
+    </div>
+    <h2>Otros enlaces</h2>
+    <a target="_blank" href="https://imdb.com/title/{{tvshow._id}}">
+        <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/512/IMDb-icon.png" width="50"/>
+    </a>
+</article>
+<article>
+    <h2>Sinopsis</h2>
+    <p>{{tvshow.overview}}</p>
+    <h2>Series Recomendadas</h2>
+    <ng-container *ngIf="!recommendedTvshows">
+        Cargando series recomendadas...
+        <div><app-spinner></app-spinner></div>
+    </ng-container>
+
+    <app-list-movies-compress [movies]="recommendedTvshows" [listSize]="12"></app-list-movies-compress>
+</article>
+</div>

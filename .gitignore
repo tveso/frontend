@@ -7,7 +7,7 @@
 
 # dependencies
 /node_modules
-
+proxy.cnf.json
 # IDEs and editors
 /.idea
 .project

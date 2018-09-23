@@ -1,0 +1,26 @@
+<section>
+  <header [style.background-image]="getBackground()">
+      <div class="puntuation">{{utilService.getRating(tvshow)}} <i class="fa fa-star"></i>
+          <small>{{utilService.getVoteCount(tvshow)}} votos</small></div>
+    <nav>
+      <a routerLink="/tvshow/{{tvshow._id}}"><h1>{{tvshow|moviename}} <small>({{utilService.getReleaseDate(tvshow)}})</small></h1></a>
+        <ul>
+            <li><a [routerLink]="['/tvshow',tvshow._id]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+true}"> Información</a></li>
+            <li><a [class.active]="mode==='season'" [matMenuTriggerFor]="seasonMenu"> Temporadas
+                <mat-menu #seasonMenu="matMenu">
+                    <ng-container *ngFor="let s of tvshow.seasons">
+                    <ng-container *ngIf="s.episodes?.length>0">
+                    <button mat-menu-item
+                             [routerLink]="['/tvshow',tvshow._id,'season']"
+                            [queryParams]="{'number': s.season_number }">{{s.name}}</button>
+                    </ng-container>
+                    </ng-container>
+                </mat-menu>
+            </a> </li>
+            <li><a [routerLink]="['/tvshow',tvshow._id,'casting']" routerLinkActive="active"> Casting</a></li>
+        </ul>
+    </nav>
+  </header>
+    <router-outlet></router-outlet>
+</section>

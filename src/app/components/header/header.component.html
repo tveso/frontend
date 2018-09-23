@@ -1,0 +1,10 @@
+<div (click)="show.open()" class="menu-button fa fa-bars" ></div>
+<app-sidebar #show></app-sidebar>
+<h1><a routerLink="">TVesame</a></h1>
+<nav>
+    <a routerLink="movies" routerLinkActive="active">Películas</a>
+    <a routerLink="tvshows" routerLinkActive="active">Series</a>
+    <a routerLink="actors" routerLinkActive="active">Actores</a>
+</nav>
+<app-searchbox></app-searchbox>
+

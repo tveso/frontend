@@ -1,0 +1,49 @@
+/* Black*/
+/* white */
+/** Ink */
+/* Posy */
+/* Embers */
+/** Media query */
+:host .month {
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  margin-bottom: 5px; }
+  :host .month h1 {
+    margin: 0;
+    font-size: inherit;
+    text-align: center;
+    padding: 0; }
+
+.calendar {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  font-size: 0.9em;
+  background-color: #f0f0f0;
+  color: black; }
+  .calendar > * {
+    box-sizing: border-box; }
+  .calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 14.27%);
+    justify-items: center; }
+    .calendar .days div {
+      padding: 7%;
+      margin: 10px;
+      justify-items: center;
+      box-sizing: border-box; }
+    .calendar .days .header {
+      font-size: 1.2em;
+      font-weight: bold; }
+  .calendar .monthBefore, .calendar .monthAfter {
+    opacity: 0.3; }
+
+.busyDay {
+  background-color: #cccccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out; }
+  .busyDay:hover {
+    background-color: #abbec3; }
+
+/*# sourceMappingURL=calendar.component.css.map */

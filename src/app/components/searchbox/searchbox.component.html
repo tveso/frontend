@@ -1,0 +1,20 @@
+<input type="search" [class]="wclass" (focus)="focused=true" (blur)="focused=false" (keydown)="changeSelected($event)" placeholder="Buscar"
+       [formControl]="searchControl" #searchText/>
+<button class="button" (click)="searchBox()" [disabled]="searchText.value.length===0"><i class="fa fa-search"></i> </button>
+<div (mouseleave)="showSearchList=false" (mouseover)="showSearchList=true" (click)="showSearchList=true" class="search-list"
+      [hidden]="(results.length===0 || showSearchList===false) && focused===false">
+    <span [hidden]="searched || searchControl.value ==='' || results.length!==0 || !searchControl.value">
+       <app-spinner></app-spinner>
+    </span>
+    <span [hidden]="!searched || results.length!==0  || !searchControl.value">
+        No se han encontrado resultados
+    </span>
+    <ul>
+        <li *ngFor="let m of results;index as i">
+            <a (mouseover)="selected=i"
+               [ngClass]="(i===selected) ? 'selected' : ''"
+               routerLink="{{m.type}}/{{m._id}}">
+                <div class="imageWrapper"><app-tmdbimage image="{{m.poster_path}}" size="w92"></app-tmdbimage></div>
+                <h1>{{m | moviename}} <small>{{m.type|typeOfShow}}</small></h1></a></li>
+    </ul>
+</div>

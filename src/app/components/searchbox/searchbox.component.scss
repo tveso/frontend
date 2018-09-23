@@ -1,0 +1,105 @@
+@import "../../../assets/src/abstracts/abstract";
+
+:host {
+  grid-column: fr;
+  margin-right: 20px;
+  position: relative;
+  input[type=search] {
+    display: inline-table;
+    text-rendering: auto;
+    background-color:rgba($color_2_base,0.9);
+    margin: 0;
+    font-size: 0.7em!important;
+    padding: 0 16px;
+    height: 42px;
+    border-radius: 4px 0 0 4px;
+    width: 70%;
+    transition: 0.2s all ease-in-out;
+    &:focus{
+      background-color:rgba($color_2_base,1);
+    }
+
+  }
+  button{
+    margin: 0!important;
+    font-size: 0.7em!important;
+    padding: 0 16px;
+    height: 43px;
+    display: inline-table!important;
+    background-color: tint($color_4_base,20);
+    cursor:pointer;
+    color: #FFF;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    transition: all .4s ease;
+    border-radius: 0 4px 4px 0;
+    &:active{
+      background-color: tint($color_4_base,10);
+    }
+    &:disabled{
+      background-color: tint($color_1_base,50);
+      cursor:default;
+    }
+  }
+}
+.search-list{
+  position: absolute;
+  box-shadow: box-shadow('medium');
+  z-index:2;
+  left:0;
+  top:100%;
+  background-color: $color_2_base;
+  color:$color_1_base;
+  width: 100%;
+  &>span{
+    padding:10px;
+    font-size:0.8rem;
+    display: block;
+  }
+  ul{
+    li{
+      a{
+        padding:10px;
+        display: grid;
+        grid-template-columns: max-content fit-content(80%);
+        grid-gap:20px;
+        color:$color_1_base;
+        font-size:0.8rem;
+        transition: 0.2s all ease-in-out;
+        &:hover{
+          @extend .selected;
+        }
+        h1{
+          font-size: 0.8rem;
+        }
+        small{
+          color:shade($color_5_base,10);
+          display: block;
+        }
+      }
+      .selected{
+        background-color: tint($color_4_base,80%);
+        &:hover{
+          background-color: tint($color_4_base,80%);
+        }
+      }
+    }
+  }
+}
+
+
+.imageWrapper{
+  width: 50px;
+  height: 50px;
+}
+
+[hidden]{
+  display: none!important;
+}
+.container{
+  width: 100%;
+}
+.withBorder{
+    border:1px solid tint($color_1_base,85);
+}
+

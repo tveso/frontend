@@ -1,0 +1,30 @@
+@import "../assets/src/abstracts/abstract";
+@import "../assets/src/layouts/grids";
+@import "../assets/src/components/components";
+
+main{
+    margin-left:3%;
+    margin-right:3%;
+    box-sizing: border-box;
+    @include respond-between("phone","tablet"){
+        margin-right: 0;
+        margin-left: 0;
+        padding: 0;
+    }
+}
+
+
+.logginPanel{
+  width:25%;
+  margin: 5% auto 0;
+  h1{
+    color:$color_2_base;
+    font-weight: normal;
+  }
+}
+
+.panel{
+  @extend .panel;
+  margin-top:20px;
+  margin-bottom: 20px;
+}

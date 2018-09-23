@@ -1,0 +1,12 @@
+
+<div class="month">
+    <h1>{{getCurrentMonthInWord()}}</h1>
+</div>
+
+    <div class="calendar">
+        <div class="days">
+            <div class="header" *ngFor="let weekDay of ['Lun','Mar','Mie','Jue','Vie','Sab','Dom']">{{weekDay}}</div>
+            <div class="day" *ngFor="let day of this.days"  [class]="'day ' + getClass(day)" (click)="clickHandler(day)">
+            {{day.day}}
+        </div>
+    </div>

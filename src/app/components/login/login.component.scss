@@ -1,0 +1,28 @@
+@import "../../../assets/src/abstracts/abstract";
+@import "../../../assets/src/layouts/grids";
+@import "../../../assets/src/components/components";
+
+
+form{
+ @extend .panel;
+}
+label{
+  display: block;
+}
+
+input[type=text]
+ {
+   width:95%;
+ }
+input[type=password]
+{
+  width:95%;
+}
+
+button{
+  display: block;
+  background-color: $color_3_base;
+  color:white;
+  margin:10px;
+  width:95%;
+}

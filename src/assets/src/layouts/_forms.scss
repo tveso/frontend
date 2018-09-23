@@ -1,0 +1,29 @@
+form{
+  border-radius:3px;
+  border:1px solid tint($color_4_base,70);
+  padding:10px;
+}
+
+input{
+  padding:12px 12px;
+  font-size:0.8em;
+  outline: 0;
+  border:0;
+  margin:10px;
+  background-color:tint($color_3_base,90) ;
+}
+
+input[type=search]
+{
+  border-radius:4px;
+  font-size:0.8em;
+}
+
+label{
+  display:block;
+}
+
+input[type=submit]{
+  @extend %block,.button ;
+}
+

@@ -1,0 +1,40 @@
+/* Black*/
+/* white */
+/** Ink */
+/* Posy */
+/* Embers */
+/** Media query */
+small {
+  font-size: 0.7rem; }
+
+article {
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #333333;
+  transition: 0.2s all ease-in-out;
+  border-radius: 4px; }
+  article h1 {
+    padding: 5px;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+    font-size: 0.75rem; }
+  article h2 {
+    position: absolute;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+    color: white;
+    top: 0;
+    width: fit-content;
+    right: 0;
+    font-size: 0.75rem; }
+  article:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+  article img {
+    border-radius: 4px; }
+
+/*# sourceMappingURL=movieitem.component.css.map */

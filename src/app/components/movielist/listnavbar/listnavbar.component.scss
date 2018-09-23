@@ -1,0 +1,19 @@
+@import "../../../../assets/src/abstracts/abstract";
+@import "../../../../assets/src/layouts/grids";
+
+ul{
+  li{
+    display: inline-block;
+    a{
+      font-size: 0.85rem;
+      background-color: tint($color_4_base,40);
+      padding:9px;
+      border-radius:4px;
+      margin-left: 10px;
+      color:white;
+    }
+    .active{
+      background-color: $color_4_base;
+    }
+  }
+}

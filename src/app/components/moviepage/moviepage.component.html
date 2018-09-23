@@ -1,0 +1,37 @@
+<section>
+<header [style.background-image]="getBackground()">
+    <div class="puntuation">{{utilService.getRating(m)}} <i class="fa fa-star"></i>
+    <small>{{utilService.getVoteCount(m)}} votos</small></div>
+    <nav>
+        <a routerLink="/movie/{{m?._id}}"><h1>{{m|moviename}} <small>({{utilService.getReleaseDate(m)}})</small></h1></a>
+    </nav>
+</header>
+    <div class="content">
+    <article class="sidebar">
+    <h2>Datos</h2>
+    <ul>
+        <li><h3>Fecha de lanzamiento</h3> {{m.release_date}}</li>
+        <li><h3>Duración</h3> {{m.duration}}</li>
+        <li><h3>Género/s</h3>
+            <app-genre *ngFor="let g of m.genres" [genre]="g" [type]="m.type"></app-genre>
+        </li>
+    </ul>
+        <h2>Imágenes</h2>
+        <div class="images">
+            <ul>
+                <li *ngFor="let i of sortByVoteAverage(m.images?.posters)|slice:0:8">
+                    <app-tmdbimage size="w500" [image]="i.file_path"></app-tmdbimage>
+                </li>
+            </ul>
+        </div>
+    </article>
+    <article>
+        <h2>Sinopsis</h2>
+        <p>{{m.overview}}</p>
+        <h2 *ngIf="getTrailer(m) !== null">Trailer</h2>
+        <app-youtube [id]="getTrailer(m)" [width]="'100%'"></app-youtube>
+        <h2 *ngIf="recommendedMovies.length>0">Película recomendadas</h2>
+        <app-list-movies-compress [movies]="recommendedMovies" [listSize]="12"></app-list-movies-compress>
+    </article>
+    </div>
+</section>

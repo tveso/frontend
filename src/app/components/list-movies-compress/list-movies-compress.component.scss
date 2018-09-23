@@ -1,0 +1,15 @@
+@import "../../../assets/src/abstracts/placeholders";
+@import "../../../assets/src/abstracts/functions";
+@import "../../../assets/src/abstracts/variables";
+@import "../../../assets/src/layouts/grids";
+@import "../../../assets/src/abstracts/mixins";
+
+ul{
+  @extend %gridable;
+  grid-column-gap: 2%;
+  li {
+    @extend .g-2;
+    width: 100%;
+    display: inline-table;;
+  }
+}

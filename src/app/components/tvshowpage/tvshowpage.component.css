@@ -1,0 +1,162 @@
+/* Black*/
+/* white */
+/** Ink */
+/* Posy */
+/* Embers */
+/** Media query */
+section {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-color: white;
+  padding: 0 !important; }
+  section header {
+    padding: 0;
+    background-size: 100%;
+    height: 250px;
+    background-attachment: fixed;
+    position: relative; }
+    @media (min-width: 200px) and (max-width: 991px) {
+      section header {
+        height: 150px;
+        background-position: 0 0;
+        background-size: 100% auto; } }
+    section header nav {
+      position: absolute;
+      bottom: 0;
+      margin: 0;
+      padding: 0;
+      width: 74%;
+      left: 25%; }
+      @media (min-width: 200px) and (max-width: 991px) {
+        section header nav {
+          padding-left: 10px;
+          left: 0; } }
+      section header nav ul li {
+        display: inline-block;
+        margin-right: 2%; }
+        section header nav ul li a {
+          background-color: rgba(255, 255, 255, 0.5);
+          padding: 8px;
+          text-shadow: 1px 1px 1px black;
+          font-size: 0.9rem;
+          color: white;
+          display: block; }
+        section header nav ul li .active {
+          background-color: white;
+          color: black;
+          text-shadow: none; }
+      section header nav h1 {
+        font-size: 2rem;
+        color: white;
+        text-shadow: 1px 1px 1px black;
+        margin: 0;
+        display: inline-table; }
+        section header nav h1 small {
+          opacity: 0.7;
+          font-size: 0.7em; }
+
+.images ul li {
+  width: 20%;
+  margin-right: 10px;
+  box-sizing: border-box;
+  display: inline-table; }
+
+.content {
+  display: grid;
+  grid-template-columns: 25% 70%; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .content {
+      display: block; } }
+  .content article p {
+    font-size: 0.9rem; }
+  .content article h1 small {
+    font-size: 0.9rem;
+    color: #567c87;
+    font-weight: normal;
+    cursor: pointer; }
+  .content .sidebar {
+    background-color: #e9eef0;
+    color: black;
+    font-size: 0.9em; }
+    .content .sidebar ul li {
+      margin-bottom: 10px; }
+    .content .sidebar h3 {
+      font-size: 1em;
+      margin: 0;
+      padding: 0; }
+
+.seasonsList li {
+  cursor: pointer;
+  padding: 15px;
+  background-color: #e9eef0;
+  display: inline-table;
+  font-size: 0.9rem;
+  margin-right: 1%;
+  width: 15%;
+  margin-bottom: 1%;
+  box-sizing: border-box; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .seasonsList li {
+      display: block;
+      width: 100%;
+      margin-right: 0;
+      max-width: 100%; } }
+
+a {
+  cursor: pointer; }
+
+.seasonsInfo {
+  margin-bottom: 0;
+  font-size: 0.9rem; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .seasonsInfo {
+      max-height: 250px;
+      overflow-y: scroll; } }
+  .seasonsInfo li {
+    margin-bottom: 0 !important; }
+    .seasonsInfo li a {
+      color: #333333;
+      display: block;
+      padding: 15px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
+      .seasonsInfo li a:hover {
+        background-color: rgba(255, 255, 255, 0.4); }
+    .seasonsInfo li .active {
+      background-color: rgba(255, 255, 255, 0.8); }
+      .seasonsInfo li .active:hover {
+        background-color: rgba(255, 255, 255, 0.8); }
+
+.sidebarUtils li a {
+  padding: 10px;
+  color: #333333; }
+
+.episodeList {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .episodeList {
+      margin: 0;
+      grid-template-columns: 1fr;
+      grid-row-gap: 10px; } }
+
+.filterEpisodes {
+  padding: 25px;
+  border: 1px solid #9fb4ba;
+  margin-bottom: 20px;
+  font-size: 0.9rem; }
+
+.puntuation {
+  position: absolute;
+  right: 0;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 1px black;
+  color: white;
+  font-size: 1.7rem; }
+  .puntuation small {
+    font-size: 0.4em;
+    display: block; }
+
+/*# sourceMappingURL=tvshowpage.component.css.map */

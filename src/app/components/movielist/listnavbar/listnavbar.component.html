@@ -1,0 +1,5 @@
+<ul>
+  <li><a [routerLink]="[]" [queryParams]="{sort: 'popularity'}" [class]="getNavClass('popularity')">Populares</a></li>
+  <li><a [routerLink]="[]" [queryParams]="getDateObject()" [class]="getNavClass('first_air_date','release_date')">Novedades</a></li>
+  <li><a [routerLink]="[]" [queryParams]="{sort: 'rating.averageRating'}" [class]="getNavClass('rating.averageRating')">Mejores puntuados</a></li>
+</ul>

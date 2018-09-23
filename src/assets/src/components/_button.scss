@@ -1,0 +1,21 @@
+.button{
+  color:inherit;
+}
+
+.btn-alert{
+  background-color: tint($color_5_base,30);
+  color:white;
+  &:hover{
+    background-color: tint($color_5_base,30);
+    color:white;
+  }
+}
+
+.btn-grey{
+  background-color: tint($color_1_base,50);
+  color:white;
+  &:hover{
+    background-color: tint($color_1_base,50);
+    color:white;
+  }
+}

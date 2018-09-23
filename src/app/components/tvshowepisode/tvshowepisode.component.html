@@ -1,0 +1,8 @@
+<div class="episode" [style.background-image]="getBackground()">
+    <div class="episode-number">{{episode.episode_number}}</div>
+    <h1>{{episode.name}}</h1>
+    <div class="episode-rating"><i class="fa fa-star"></i> {{Math.round(episode.vote_average*100)/100}}
+    <span class="episode-watched"><i class="fa fa-eye"></i> </span></div>
+
+    <p class="episode-description" [hidden]="spoiler===true">{{episode.overview}}</p>
+</div>

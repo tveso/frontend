@@ -1,0 +1,6 @@
+<article><a routerLink="/{{movie.type}}/{{movie._id}}">
+  <app-tmdbimage image="{{movie?.poster_path}}"></app-tmdbimage>
+    <h1>{{movie|moviename}} <small>({{utilService.getReleaseDate(movie)}})</small></h1>
+    <h2><i class="fa fa-star"></i> {{utilService.getRating(movie)}} </h2>
+</a>
+</article>

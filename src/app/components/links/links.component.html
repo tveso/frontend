@@ -1,0 +1,32 @@
+<button mat-icon-button="" [mat-dialog-close]="true" style="float:right" ><i class="fa fa-close"></i> </button>
+<div class="image">
+    <app-tmdbimage size="w500" image="{{episode.still_path}}" *ngIf="episode.still_path"></app-tmdbimage>
+</div>
+<div class="overview">
+    <h2 mat-dialog-title><b>{{showName}}</b>
+        <div>{{seasonNumber}}x{{episodeNumber}} {{episodeName}}</div></h2>
+    <p>{{episode.overview}}</p>
+</div>
+
+<mat-dialog-content>
+    <h3>Enlaces</h3>
+    <ng-container *ngIf="loading">
+        <app-spinner></app-spinner> Cargando enlaces
+    </ng-container>
+    <table *ngIf="links.length>0" matSort (matSortChange)="sortData($event)">
+        <tr>
+            <th mat-sort-header="host">Servidor</th>
+            <th mat-sort-header="quality">Calidad</th>
+            <th mat-sort-header="language">Idioma</th>
+        </tr>
+
+        <tr *ngFor="let link of links">
+            <td><button mat-raised-button (click)="go(link)">{{link.host}}</button> </td>
+            <td>{{link.quality}}</td>
+            <td><img width="30px" src="assets/images/flags/{{link.language.voice}}.png"/></td>
+        </tr>
+    </table>
+    <ng-container *ngIf="links.length===0 && loading===false">
+        No hay enlaces para este episodio
+    </ng-container>
+</mat-dialog-content>

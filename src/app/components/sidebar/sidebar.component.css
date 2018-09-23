@@ -1,0 +1,76 @@
+/* Black*/
+/* white */
+/** Ink */
+/* Posy */
+/* Embers */
+/** Media query */
+:host {
+  box-sizing: border-box; }
+
+.navbar {
+  height: 100vh;
+  /* 100% Full-height */
+  position: fixed;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  z-index: 2;
+  color: white;
+  top: 0;
+  left: -25%;
+  background-color: #265764;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  transition: 0.3s left ease-in-out;
+  width: 25%;
+  font-size: 1.1rem; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .navbar {
+      width: 80%; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .navbar {
+      width: 40%; } }
+  .navbar h1 {
+    font-size: inherit;
+    padding: 20px;
+    text-align: center;
+    margin: 0; }
+  .navbar ul li i {
+    margin-right: 5px; }
+  .navbar ul li a {
+    display: block;
+    padding: 15px;
+    background-color: #3e6975;
+    border-bottom: 1px solid #265764;
+    transition: all 0.2s ease-in-out; }
+    .navbar ul li a:hover {
+      background-color: #6e8f98; }
+  .navbar a {
+    color: white; }
+
+.close {
+  cursor: pointer;
+  box-sizing: border-box;
+  float: right;
+  font-size: 1.5em;
+  margin: 10px; }
+
+.show {
+  display: block;
+  left: 0; }
+
+.hidden {
+  left: -100%; }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  z-index: 1; }
+
+.searchbox {
+  padding: 15px;
+  width: 70%; }
+
+/*# sourceMappingURL=sidebar.component.css.map */

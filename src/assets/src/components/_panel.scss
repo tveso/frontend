@@ -1,0 +1,8 @@
+.panel {
+  padding:15px;
+  background-color: $color_2_base;
+  border:1px solid shade($color_2_base, 50);
+  >*{
+    box-sizing: border-box;
+  }
+}
