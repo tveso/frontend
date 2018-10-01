@@ -94,10 +94,10 @@
   color: inherit; }
 
 .btn-alert {
-  background-color: #cd664d;
+  background-color: #f76854;
   color: white; }
   .btn-alert:hover {
-    background-color: #cd664d;
+    background-color: #f76854;
     color: white; }
 
 .btn-grey {
@@ -166,21 +166,27 @@
   background-color: white;
   z-index: 15; }
 
-.panel, form {
+.panel {
   padding: 15px;
   background-color: white;
   border: 1px solid gray; }
-  .panel > *, form > * {
+  .panel > * {
     box-sizing: border-box; }
+
+form {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  width: 100%;
+  height: min-content;
+  margin: auto; }
 
 label {
   display: block; }
 
-input[type=text] {
-  width: 95%; }
-
-input[type=password] {
-  width: 95%; }
+.input {
+  width: 90%;
+  box-sizing: border-box; }
 
 button {
   display: block;
@@ -188,5 +194,24 @@ button {
   color: white;
   margin: 10px;
   width: 95%; }
+
+.red {
+  color: #f6523c;
+  font-size: 0.8em; }
+
+img {
+  width: 300px;
+  max-width: max-content;
+  margin: 0 auto; }
+
+.new {
+  border-radius: 3px;
+  border: 1px solid #d9c3d5;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  width: 100%;
+  margin: 10px auto auto !important; }
+  .new a {
+    color: white; }
 
 /*# sourceMappingURL=login.component.css.map */

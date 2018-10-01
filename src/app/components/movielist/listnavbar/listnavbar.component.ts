@@ -13,10 +13,10 @@ export class ListnavbarComponent implements OnInit {
   ngOnInit() {
   }
     getNavClass(...type) {
-      let result = '';
+      let result = false;
       type.forEach((a) => {
           if (this.params.sort === a) {
-              result = 'active';
+              result = true;
               return;
           }
       });

@@ -90,16 +90,16 @@
     .g-12 {
       grid-column: span 12; } }
 
-ul li {
-  display: inline-block; }
-  ul li a {
-    font-size: 0.85rem;
-    background-color: #b387aa;
-    padding: 9px;
-    border-radius: 4px;
-    margin-left: 10px;
-    color: white; }
-  ul li .active {
-    background-color: #813772; }
+.buttons {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 1%; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .buttons {
+      grid-template-columns: 1fr; } }
+  .buttons a {
+    background-color: #9a5f8e; }
+  .buttons [data-active=true] {
+    background-color: #672c5b; }
 
 /*# sourceMappingURL=listnavbar.component.css.map */

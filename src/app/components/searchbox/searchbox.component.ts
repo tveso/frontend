@@ -4,6 +4,7 @@ import {MoviesService} from '../../services/movies.service';
 import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import {FindService} from '../../services/find.service';
 @Component({
   selector: 'app-searchbox',
   templateUrl: './searchbox.component.html',
@@ -19,9 +20,9 @@ export class SearchboxComponent implements OnInit {
     showSearchList = false;
     focused = false;
     searched = false;
-  constructor(private movieService: MoviesService, private router: Router, private activatedRouter: ActivatedRoute) { }
+  constructor(private findService: FindService, private router: Router) { }
   ngOnInit() {
-      this.searchControl.valueChanges.pipe(debounceTime(400),
+      this.searchControl.valueChanges.pipe(debounceTime(150),
           switchMap((value) => {
               this.searched = false;
               this.results = [];
@@ -30,7 +31,7 @@ export class SearchboxComponent implements OnInit {
                   return [];
               }
               this.searchText = value;
-              return this.movieService.search(value, 5);
+              return this.findService.search(value, 5);
           })).subscribe((value) => {
               this.results = value;
               this.searched = true;

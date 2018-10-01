@@ -1,0 +1,15 @@
+
+<div class="content">
+    <article>
+    </article>
+    <article>
+    <h2>Imágenes</h2>
+    <div class="images">
+        <ul>
+            <li *ngFor="let i of tvshow.images?.posters">
+                <app-tmdbimage size="w500" [image]="i.file_path"></app-tmdbimage>
+            </li>
+        </ul>
+    </div>
+    </article>
+</div>

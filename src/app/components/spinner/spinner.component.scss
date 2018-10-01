@@ -1,10 +1,10 @@
 @import "../../../assets/src/abstracts/abstract";
 
-
+:host{
+    margin:auto;
+}
 .cssload-jumping{
-    position:relative;
-    display: inline-block;
-    margin: 0 auto;
+    margin: auto;
 }
 
 .cssload-jumping, .cssload-jumping * {
@@ -15,48 +15,53 @@
     display: inline-block;
     height: 15px;
     width: 15px;
-    background: rgba(47,172,155,0.44);
+    background: tint($color_3_base, 50);
     border-radius: 487px;
     background-clip: padding-box;
 }
 
 .cssload-jumping span:nth-child(1) {
     animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -o-animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -ms-animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -webkit-animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -moz-animation: scale 1.15s 0.12s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 .cssload-jumping span:nth-child(2) {
     animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -o-animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -ms-animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -webkit-animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -moz-animation: scale 1.15s 0.23s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 .cssload-jumping span:nth-child(3) {
     animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -o-animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -ms-animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -webkit-animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -moz-animation: scale 1.15s 0.35s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 .cssload-jumping span:nth-child(4) {
     animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -o-animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -ms-animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -webkit-animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -moz-animation: scale 1.15s 0.46s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 .cssload-jumping span:nth-child(5) {
     animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -o-animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -ms-animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -webkit-animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    -moz-animation: scale 1.15s 0.58s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+.cssload-jumping span:nth-child(6) {
+    animation: scale 1.15s 0.64s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 
+.cssload-jumping span:nth-child(6) {
+    animation: scale 1.15s 0.72s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
 
+.cssload-jumping span:nth-child(7) {
+    animation: scale 1.15s 0.84s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.cssload-jumping span:nth-child(8) {
+    animation: scale 1.15s 0.96s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.cssload-jumping span:nth-child(9) {
+    animation: scale 1.15s 0.96s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.cssload-jumping span:nth-child(10) {
+    animation: scale 1.15s 1.08s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.cssload-jumping span:nth-child(11) {
+    animation: scale 1.15s 1.20s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
 
 @keyframes scale {
     0% {
@@ -64,12 +69,12 @@
     }
     25% {
         transform: scale(0.9, 0.9);
-        background: rgb(147,225,215);
+        background: tint($color_3_base, 80);
     }
     50% {
         transform: scale(1, 1);
         margin: 0 3px;
-        background: rgb(47,172,155);
+        background: tint($color_3_base, 50);
     }
     100% {
         transform: scale(0);
@@ -137,4 +142,8 @@
     25% {
         -moz-transform: scale(0.9, 0.9);
     }
+}
+
+.white{
+    background-color: shade($color_2_base,5);
 }

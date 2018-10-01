@@ -3,14 +3,14 @@
 @import "../assets/src/components/components";
 
 main{
-    margin-left:3%;
-    margin-right:3%;
-    box-sizing: border-box;
-    @include respond-between("phone","tablet"){
-        margin-right: 0;
-        margin-left: 0;
-        padding: 0;
-    }
+  margin-left:3%;
+  margin-right:3%;
+  box-sizing: border-box;
+  @include respond-between("phone","tablet"){
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0;
+  }
 }
 
 
@@ -27,4 +27,18 @@ main{
   @extend .panel;
   margin-top:20px;
   margin-bottom: 20px;
+}
+
+.container{
+  display: grid;
+  color:$color_2_base;
+  padding:15px;
+  >*{
+    margin:auto;
+  }
+  img{
+    width:300px;
+    max-width: max-content;
+    margin:0 auto;
+  }
 }

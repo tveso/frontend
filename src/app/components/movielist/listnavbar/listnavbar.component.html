@@ -1,5 +1,10 @@
-<ul>
-  <li><a [routerLink]="[]" [queryParams]="{sort: 'popularity'}" [class]="getNavClass('popularity')">Populares</a></li>
-  <li><a [routerLink]="[]" [queryParams]="getDateObject()" [class]="getNavClass('first_air_date','release_date')">Novedades</a></li>
-  <li><a [routerLink]="[]" [queryParams]="{sort: 'rating.averageRating'}" [class]="getNavClass('rating.averageRating')">Mejores puntuados</a></li>
-</ul>
+<div class="buttons">
+
+<a mat-flat-button [routerLink]="[]" [attr.data-active]="getNavClass('popularity')"
+         [queryParams]="{sort: 'popularity'}">Popular</a>
+<a mat-flat-button  [routerLink]="[]" [queryParams]="getDateObject()"
+         [attr.data-active]="getNavClass('release_date','first_air_date')">Novedades</a>
+<a  mat-flat-button [routerLink]="[]"
+          [attr.data-active]="getNavClass('rating.averageRating')" [queryParams]="{sort: 'rating.averageRating'}" >
+    Mejores puntuados</a>
+</div>

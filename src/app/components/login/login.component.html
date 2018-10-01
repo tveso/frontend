@@ -1,13 +1,28 @@
+<ng-container  *ngIf="securityService.loggedIn()===false">
 <form name="login" #loginForm="ngForm" (ngSubmit)="onSubmit()">
   <h1>Login</h1>
-  <label for="username">
-    Nombre de usuario
-  </label>
-  <input id="username" type="text" name="username" placeholder="Username"  [(ngModel)]="model.username"/>
-  <label for="password">
-    Contraseña
-  </label>
-  <input id="password" type="password" name="password"  title="Contraseña"  [(ngModel)]="model.password"/>
-
-  <button mat-raised-button>Entrar!</button>
+    <ul *ngFor="let error of errors">
+        <li class="red">{{error}}</li>
+    </ul>
+    <label for="username">
+        Username
+    </label>
+        <input id="username" type="text" autocomplete="username" placeholder="Nombre de usuario"
+               [(ngModel)]="model.username" name="username">
+    <label for="password">
+        Contraseña
+    </label>
+        <input id="password" type="password" autocomplete="current-password"
+               [(ngModel)]="model.password" name="password">
+  <button mat-raised-button>
+    <app-spinner *ngIf="loading===true"></app-spinner>
+    <ng-container *ngIf="loading===false">
+      Entrar!
+    </ng-container>
+  </button>
 </form>
+    <article class="new">
+      ¿Nuevo en TVeso? <a routerLink="register">Create una cuenta</a>
+    </article>
+
+</ng-container>

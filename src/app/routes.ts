@@ -1,5 +1,5 @@
 import {MovieInfoPageResolver} from './components/moviepage/moviepageResolver';
-import {SeasonComponent, TvInfoComponent, TvshowpageComponent} from './components/tvshowpage/tvshowpage.component';
+import {SeasonComponent, TvImagesComponent, TvInfoComponent, TvshowpageComponent} from './components/tvshowpage/tvshowpage.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {PopularResolver} from './components/welcome/WelcomeResolver';
 import {WelcomeComponent} from './components/welcome/welcome.component';
@@ -33,7 +33,9 @@ const RoutesList = [
             {path: 'season', component: SeasonComponent
             },
             {path: '', component: TvInfoComponent
-            }]},
+            },
+            {path: 'images', component: TvImagesComponent},
+            ]},
     {path: 'login', component: LoginComponent, data: {title: 'Login'}},
     { path: '**', component: PageNotFoundComponent },
 ];

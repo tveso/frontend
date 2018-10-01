@@ -7,13 +7,15 @@
 </main>
 <app-footer></app-footer>
 </ng-container>
-<ng-container *ngIf="securityService.loggedIn()===false">
-    <div class="logginPanel">
-        <h1>TVeso</h1>
-    <app-login></app-login>
-        <article class="panel">
-            ¿Nuevo en TVeso? <a routerLink="register">Create una cuenta</a>
-        </article>
+</ng-container>
+<div class="container" *ngIf="securityService.loggedIn()===false || dataLoaded===false">
+    <div>
+        <img src="assets/images/logo_web.png" title="Logo de Tveso">
+    <ng-container *ngIf="dataLoaded===false">
+        <app-loading></app-loading>
+    </ng-container>
+    <ng-container *ngIf="securityService.loggedIn()===false && dataLoaded===true">
+        <app-login></app-login>
+    </ng-container>
     </div>
-</ng-container>
-</ng-container>
+</div>

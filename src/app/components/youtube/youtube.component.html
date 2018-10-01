@@ -1,4 +1,5 @@
-
-<iframe *ngIf="id" width="{{width}}" height="{{height}}"
-        [src]="getUrl()"
-        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="video-container">
+    <iframe *ngIf="id"
+            [src]="getUrl()"
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>

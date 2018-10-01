@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import {MatSnackBar} from '@angular/material';
 import {SecurityService} from '../services/security.service';
-import {ActivatedRoute, ActivationEnd, Router} from '@angular/router';
+import {ActivatedRoute, ActivationEnd, NavigationStart, Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +26,11 @@ export class AuthHandlerInterceptor {
 
     private intercept() {
         this.router.events.subscribe((evt) => {
+            if (evt instanceof NavigationStart) {
+                if (evt.url === '/login' && this.securityService.loggedIn()) {
+                    this.router.navigate(['/home']);
+                }
+            }
             if (!(evt instanceof ActivationEnd)) {
                 return;
             }
@@ -34,10 +39,11 @@ export class AuthHandlerInterceptor {
                 return;
             }
             if (!this.securityService.loggedIn()) {
-                this.router.navigate(['/login']);
+                 this.router.navigate(['/login']);
+                 return;
             }
             if (!(this.securityService.hasAccess(role))) {
-                this.router.navigate(['/login']);
+                 this.router.navigate(['/home']);
             }
         });
     }

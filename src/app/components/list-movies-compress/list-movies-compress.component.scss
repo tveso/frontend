@@ -8,7 +8,6 @@ ul{
   @extend %gridable;
   grid-column-gap: 2%;
   li {
-    @extend .g-2;
     width: 100%;
     display: inline-table;;
   }

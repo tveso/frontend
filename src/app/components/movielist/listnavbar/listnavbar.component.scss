@@ -1,19 +1,17 @@
 @import "../../../../assets/src/abstracts/abstract";
 @import "../../../../assets/src/layouts/grids";
 
-ul{
-  li{
-    display: inline-block;
-    a{
-      font-size: 0.85rem;
-      background-color: tint($color_4_base,40);
-      padding:9px;
-      border-radius:4px;
-      margin-left: 10px;
-      color:white;
-    }
-    .active{
-      background-color: $color_4_base;
-    }
+.buttons{
+  display: grid;
+  grid-template-columns: auto auto auto ;
+  grid-column-gap: 1%;
+  @include respond-between('phone','tablet'){
+    grid-template-columns: 1fr;
   }
+    a{
+      background-color: tint($color_4_base,20);
+    }
+    [data-active=true]{
+      background-color: shade($color_4_base,20);
+    }
 }

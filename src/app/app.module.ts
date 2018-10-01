@@ -24,7 +24,7 @@ import {MovieInfoPageResolver} from './components/moviepage/moviepageResolver';
 import { GenreComponent } from './components/genre/genre.component';
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
 import {PopularResolver} from './components/welcome/WelcomeResolver';
-import {SeasonComponent, TvInfoComponent, TvshowpageComponent} from './components/tvshowpage/tvshowpage.component';
+import {SeasonComponent, TvImagesComponent, TvInfoComponent, TvshowpageComponent} from './components/tvshowpage/tvshowpage.component';
 import {TvShowInfoPageResolver} from './components/tvshowpage/TvShowpageResolver';
 import {RoutesList} from './routes';
 import {Routes} from '@angular/router';
@@ -44,6 +44,14 @@ import {CookieService} from 'ngx-cookie-service';
 import { HomeComponent } from './components/home/home.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { YoutubeComponent } from './components/youtube/youtube.component';
+import { FollowComponent } from './components/follow/follow.component';
+import { CommentSectionComponent } from './components/comment-section/comment-section.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
+import {CovalentTextEditorModule} from '@covalent/text-editor';
+import { TimeagoPipe } from './pipes/timeago.pipe';
+import { CommentComponent } from './components/comment-section/comment/comment.component';
+
 
 
 
@@ -81,7 +89,13 @@ const appRoutes: Routes = RoutesList;
       HomeComponent,
       CalendarComponent,
       YoutubeComponent,
-      DialogEpisodeToWatchComponent
+      DialogEpisodeToWatchComponent,
+      TvImagesComponent,
+      FollowComponent,
+      CommentSectionComponent,
+      LoadingComponent,
+      TimeagoPipe,
+      CommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +105,16 @@ const appRoutes: Routes = RoutesList;
       LoadingBarRouterModule,
       BrowserAnimationsModule,
       MaterialModule,
+      CovalentTextEditorModule,
       InfiniteScrollModule,
+      MarkdownModule.forRoot({
+          markedOptions: {
+              provide: MarkedOptions,
+              useValue: {
+                  sanitize: true,
+              },
+          },
+      }),
       RouterModule.forRoot(
           appRoutes,
           { enableTracing: false }
@@ -114,7 +137,7 @@ const appRoutes: Routes = RoutesList;
       PopularResolver,
       TvShowInfoPageResolver,
       SearchResultResolver,
-      CookieService
+      CookieService,
   ],
   bootstrap: [AppComponent],
     entryComponents: [LinksComponent, DialogEpisodeToWatchComponent]

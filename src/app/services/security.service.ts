@@ -23,29 +23,27 @@ export class SecurityService {
         headers: new HttpHeaders(this.headers)
     };
     public user = null;
-    private _user = new Subject<boolean>();
+    public _user = new Subject<boolean>();
     private apiuri = `${Api.API_URL}security/`;
     constructor(private http: HttpClient, private cookieService: CookieService) {
-        this._user.next(false);
+        this._user.next(this.user);
+        this._user.asObservable().subscribe((a) => {
+            this.user = a;
+        });
     }
 
     login(user: User) {
-        this.http.post<any[]>(`${this.apiuri}login`, user).subscribe((data: any) => {
-            this.user = data.user;
-            this._user.next(this.loggedIn());
-        });
-        return this.isLogged();
+        return this.http.post<any[]>(`${this.apiuri}login`, user, this.httpOptions);
     }
     checkAuth() {
         const sessionId = this.cookieService.get('PHPSESSID');
         if (sessionId !== '') {
             this.user = JSON.parse(localStorage.getItem('user'));
-            this._user.next(this.loggedIn());
         }
         this.http.get<any[]>(`${this.apiuri}islogged`, this.httpOptions).subscribe((data: any) => {
             this.user = data.user;
             localStorage.setItem('user', JSON.stringify(data.user));
-            this._user.next(this.loggedIn());
+            this._user.next(this.user);
         });
         return this.isLogged();
     }
@@ -54,7 +52,7 @@ export class SecurityService {
     }
 
     loggedIn() {
-        return this.user !== null && this.user !== 'null';
+        return this.user !== null && this.user !== 'null' && this.user !== false;
     }
     getUserRoles() {
         if (typeof this.user === 'undefined' || this.user === null) {

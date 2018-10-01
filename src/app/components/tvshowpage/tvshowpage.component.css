@@ -4,80 +4,115 @@
 /* Posy */
 /* Embers */
 /** Media query */
+.only-mobile {
+  display: none; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .only-mobile {
+      display: block; } }
+
 section {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  background-color: white;
-  padding: 0 !important; }
+  padding: 0 !important;
+  background: white fixed 0 0;
+  background-size: 100% auto; }
   section header {
     padding: 0;
-    background-size: 100%;
     height: 250px;
-    background-attachment: fixed;
     position: relative; }
     @media (min-width: 200px) and (max-width: 991px) {
       section header {
-        height: 150px;
+        height: 130px;
         background-position: 0 0;
         background-size: 100% auto; } }
-    section header nav {
+    section header .puntuation {
+      padding: 15px;
+      background-color: rgba(0, 0, 0, 0.3);
+      text-shadow: 1px 1px 1px black;
+      color: white;
+      font-size: 1.5rem;
+      width: fit-content;
+      position: absolute;
+      right: 0; }
+      @media (min-width: 200px) and (max-width: 991px) {
+        section header .puntuation {
+          padding: 8px;
+          font-size: 1.2rem; } }
+      section header .puntuation small {
+        font-size: 0.4em;
+        display: block; }
+    section header .title {
+      color: white;
+      text-shadow: 1px 1px 1px black;
       position: absolute;
       bottom: 0;
-      margin: 0;
-      padding: 0;
-      width: 74%;
       left: 25%; }
       @media (min-width: 200px) and (max-width: 991px) {
-        section header nav {
-          padding-left: 10px;
-          left: 0; } }
-      section header nav ul li {
-        display: inline-block;
-        margin-right: 2%; }
-        section header nav ul li a {
-          background-color: rgba(255, 255, 255, 0.5);
-          padding: 8px;
-          text-shadow: 1px 1px 1px black;
-          font-size: 0.9rem;
-          color: white;
-          display: block; }
-        section header nav ul li .active {
-          background-color: white;
-          color: black;
-          text-shadow: none; }
-      section header nav h1 {
-        font-size: 2rem;
-        color: white;
-        text-shadow: 1px 1px 1px black;
+        section header .title {
+          left: 1%; } }
+      section header .title .info {
+        font-size: 0.8em;
+        width: fit-content;
+        padding: 8px;
+        background-color: rgba(0, 0, 0, 0.4); }
+      section header .title a {
         margin: 0;
-        display: inline-table; }
-        section header nav h1 small {
+        display: inline-table;
+        color: white; }
+        section header .title a small {
           opacity: 0.7;
           font-size: 0.7em; }
+        @media (min-width: 200px) and (max-width: 991px) {
+          section header .title a h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 1em; } }
 
-.images ul li {
-  width: 20%;
-  margin-right: 10px;
-  box-sizing: border-box;
-  display: inline-table; }
+.navigation nav {
+  margin-left: 25%; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .navigation nav {
+      margin-left: 0; } }
+  .navigation nav a {
+    background-color: #eef2f3; }
+
+.images ul {
+  display: block; }
+  .images ul li {
+    width: 24%;
+    margin-right: 1%;
+    box-sizing: border-box;
+    display: inline-table; }
+    @media (min-width: 200px) and (max-width: 991px) {
+      .images ul li {
+        width: 48%; } }
+
+.main {
+  padding: 0; }
 
 .content {
   display: grid;
-  grid-template-columns: 25% 70%; }
+  grid-template-columns: 25% 75%; }
   @media (min-width: 200px) and (max-width: 991px) {
     .content {
       display: block; } }
-  .content article p {
-    font-size: 0.9rem; }
-  .content article h1 small {
-    font-size: 0.9rem;
-    color: #567c87;
-    font-weight: normal;
-    cursor: pointer; }
+  .content article {
+    background-color: white; }
+    .content article p {
+      font-size: 0.9rem; }
+    .content article h1 small {
+      font-size: 0.9rem;
+      color: #567c87;
+      font-weight: normal;
+      cursor: pointer; }
   .content .sidebar {
-    background-color: #e9eef0;
     color: black;
-    font-size: 0.9em; }
-    .content .sidebar ul li {
+    font-size: 0.9em;
+    background-color: #eef2f3; }
+    @media (min-width: 200px) and (max-width: 991px) {
+      .content .sidebar > ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr; } }
+    .content .sidebar > ul li {
       margin-bottom: 10px; }
     .content .sidebar h3 {
       font-size: 1em;
@@ -147,16 +182,26 @@ a {
   margin-bottom: 20px;
   font-size: 0.9rem; }
 
-.puntuation {
-  position: absolute;
-  right: 0;
-  padding: 15px;
-  background-color: rgba(0, 0, 0, 0.3);
-  text-shadow: 1px 1px 1px black;
-  color: white;
-  font-size: 1.7rem; }
-  .puntuation small {
-    font-size: 0.4em;
-    display: block; }
+@media (min-width: 200px) and (max-width: 991px) {
+  article {
+    padding: 1px; } }
+
+.creators {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2%; }
+  .creators .creator h4 {
+    margin: 0;
+    padding: 0; }
+  .creators .creator small {
+    font-size: 0.85em;
+    color: gray; }
+  .creators .creator .creator-image {
+    width: 50%; }
+
+.follow {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 1rem; }
 
 /*# sourceMappingURL=tvshowpage.component.css.map */

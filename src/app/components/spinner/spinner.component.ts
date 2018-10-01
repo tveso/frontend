@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {MessageService} from '../../services/message.service';
 
 @Component({
   selector: 'app-spinner',
@@ -6,10 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./spinner.component.css']
 })
 export class SpinnerComponent implements OnInit {
-
-  constructor() { }
+    private error = false;
+   @Input() public className = '';
+   @Input() numSpin = 5;
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
+    this.messageService.listen().subscribe((a) => {
+        if (a.get('xherror') === true) {
+            this.error = true;
+        }
+        this.error = false;
+
+    });
   }
 
+    getNumOfSpins() {
+      const list = [];
+        for (let i = 0; i <= this.numSpin; i++) {
+            list.push(i);
+        }
+
+        return list;
+    }
 }

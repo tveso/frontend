@@ -14,10 +14,14 @@ class PopularResolver implements Resolve<Movie> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any>|Promise<any>|any {
-        return forkJoin(this.tvshowService.upcoming(), this.movieService.getPopularMovies(), this.movieService.getUpcomingMovies())
-            .pipe(map((data) => {
-            return {'popularmovies' : data[1], 'upcomingtv': data[0], 'upcomingmovies': data[2]};
-        }));
+        if (!this.securityService.loggedIn()) {
+            return of([false]);
+        }
+            return forkJoin(this.tvshowService.upcoming(), this.movieService.getPopularMovies(), this.movieService.getUpcomingMovies())
+                .pipe(map((data) => {
+                    return {'popularmovies' : data[1], 'upcomingtv': data[0], 'upcomingmovies': data[2]};
+                }), );
+
     }
 }
 

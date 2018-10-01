@@ -35,9 +35,9 @@ export class WelcomeComponent implements OnInit {
     }
 
     openDay(date) {
-      const episodes = this.filterEpisodesOnAir(date);
+      const episodes = this.filterEpisodesOnAir(date.date);
       this.dialog.open(DialogEpisodeToWatchComponent, {
-          data: episodes,
+          data: {episodes: episodes, date: date.date},
           panelClass: 'dialog',
           position: {top: '10px'}});
     }
@@ -46,14 +46,22 @@ export class WelcomeComponent implements OnInit {
 @Component({
     selector: 'app-episodes-to-watch',
     templateUrl: 'dialogs/episodes.to.watch.html',
+    styleUrls: ['./welcome.component.css']
 })
 export class DialogEpisodeToWatchComponent {
+    public date: any;
 
     constructor(
         public dialogRef: MatDialogRef<DialogEpisodeToWatchComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any) {}
-
+        @Inject(MAT_DIALOG_DATA) public data: any) {
+        this.data = data.episodes;
+        this.date = data.date;
+    }
     onNoClick(): void {
+        this.dialogRef.close();
+    }
+
+    closeDialog() {
         this.dialogRef.close();
     }
 

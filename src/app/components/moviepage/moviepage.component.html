@@ -1,37 +1,52 @@
-<section>
-<header [style.background-image]="getBackground()">
-    <div class="puntuation">{{utilService.getRating(m)}} <i class="fa fa-star"></i>
-    <small>{{utilService.getVoteCount(m)}} votos</small></div>
-    <nav>
-        <a routerLink="/movie/{{m?._id}}"><h1>{{m|moviename}} <small>({{utilService.getReleaseDate(m)}})</small></h1></a>
-    </nav>
-</header>
-    <div class="content">
-    <article class="sidebar">
-    <h2>Datos</h2>
-    <ul>
-        <li><h3>Fecha de lanzamiento</h3> {{m.release_date}}</li>
-        <li><h3>Duración</h3> {{m.duration}}</li>
-        <li><h3>Género/s</h3>
-            <app-genre *ngFor="let g of m.genres" [genre]="g" [type]="m.type"></app-genre>
-        </li>
-    </ul>
-        <h2>Imágenes</h2>
-        <div class="images">
-            <ul>
-                <li *ngFor="let i of sortByVoteAverage(m.images?.posters)|slice:0:8">
-                    <app-tmdbimage size="w500" [image]="i.file_path"></app-tmdbimage>
-                </li>
-            </ul>
+<section  [style.background-image]="getBackground(m)">
+    <header>
+        <div class="puntuation">{{utilService.getRating(m)}} <i class="fa fa-star"></i>
+            <small>{{utilService.getVoteCount(m)}} votos</small>
+        </div>
+        <div class="title">
+            <a routerLink="/m/{{m._id}}"><h1>{{m | moviename}} <small>
+                ({{utilService.getReleaseDate(m)}})</small>
+                 </h1></a><span class="follow"> <app-follow [movie]="m"></app-follow></span>
+            <div class="info">
+                {{m.runtime}} min | {{m.release_date}} | <app-genre *ngFor="let g of m.genres|slice:0:genreNumbers"
+                                                                    [genre]="g" [type]="m.type">
+            </app-genre>
+                <a *ngIf="genreNumbers<m.genres.length" (click)="genreNumbers=m.genres.length">+</a>
+
+            </div>
+        </div>
+    </header>
+    <article class="main">
+        <div class="content">
+            <article class="sidebar">
+                <h2>Creadores</h2>
+                <div class="creators">
+                    <div class="creator" *ngFor="let creator of orderCrew(m.credits?.crew)|slice:0:4">
+                        <h4>{{creator.name}}</h4>
+                        <small>{{getJob(creator)}}</small>
+                        <div class="creator-image">
+                            <app-tmdbimage image="{{creator.profile_path}}"></app-tmdbimage>
+                        </div>
+                    </div>
+                </div>
+                <h2>Película recomendadas</h2>
+                <ng-container *ngIf="recommendedMovies.length === 0">
+                    Cargando películas recomendadas...
+                    <div><app-spinner></app-spinner></div>
+                </ng-container>
+                <app-list-movies-compress [movies]="recommendedMovies" [listSize]="6" [class]="'g-4'"></app-list-movies-compress>
+                <h2>Enlaces</h2>
+                <a target="_blank" href="https://imdb.com/title/{{m._id}}">
+                    <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/512/IMDb-icon.png" width="50"/>
+                </a>
+            </article>
+            <article>
+                <h2>Sinopsis</h2>
+                <p>{{m.overview}}</p>
+                <h2 *ngIf="getTrailer(m) !== null">Trailer</h2>
+                <!--<app-youtube [id]="getTrailer(m)"></app-youtube>-->
+                <app-comment-section [resource]="m._id"></app-comment-section>
+            </article>
         </div>
     </article>
-    <article>
-        <h2>Sinopsis</h2>
-        <p>{{m.overview}}</p>
-        <h2 *ngIf="getTrailer(m) !== null">Trailer</h2>
-        <app-youtube [id]="getTrailer(m)" [width]="'100%'"></app-youtube>
-        <h2 *ngIf="recommendedMovies.length>0">Película recomendadas</h2>
-        <app-list-movies-compress [movies]="recommendedMovies" [listSize]="12"></app-list-movies-compress>
-    </article>
-    </div>
 </section>

@@ -1,0 +1,22 @@
+<form name="add_comment" #loginForm="ngForm" (ngSubmit)="post(model)">
+    <h3>Comentar</h3>
+    <div class="textarea">
+        <td-text-editor name="text" [(ngModel)]="model.text" [options]="options" ></td-text-editor>
+    </div>
+    <button mat-flat-button>
+        <app-spinner *ngIf="loading===true"></app-spinner>
+        <ng-container *ngIf="loading===false">
+            Comentar
+        </ng-container>
+    </button>
+</form>
+<h3>Comentarios</h3>
+<app-spinner *ngIf="loadingComments===true">
+    Cargando comentarios....
+</app-spinner>
+<div *ngFor="let comment of getCurrentComments()">
+    <app-comment [comment]="comment" [comments]="comments"></app-comment>
+</div>
+<div *ngIf="loadingComments===false && comments.length===0">
+    <p>Aún no hay ningún comentario... ¡Sé el primero!</p>
+</div>

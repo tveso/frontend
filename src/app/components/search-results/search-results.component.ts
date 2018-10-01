@@ -5,6 +5,7 @@ import {MoviesService} from '../../services/movies.service';
 import {Movie} from '../../entities/movie';
 import {TvshowService} from '../../services/tvshow.service';
 import {map} from 'rxjs/operators';
+import {FindService} from '../../services/find.service';
 
 @Component({
   selector: 'app-search-results',
@@ -15,13 +16,13 @@ export class SearchResultsComponent implements OnInit {
     private query: any;
     results: Movie[];
 
-  constructor(private activatedRouter: ActivatedRoute, private movieService: MoviesService) {
+  constructor(private activatedRouter: ActivatedRoute, private findService: FindService) {
   }
 
   ngOnInit() {
       this.activatedRouter.queryParams.subscribe((data) => {
           this.query = data.query;
-          this.movieService.search(this.query, 30).subscribe((data2) => {
+          this.findService.search(this.query, 30).subscribe((data2) => {
               this.results = data2;
           });
       });
@@ -47,12 +48,12 @@ export class SearchResultsComponent implements OnInit {
 
 @Injectable()
 export class SearchResultResolver implements Resolve<Movie> {
-    constructor(private movieService: MoviesService, private tvshowService: TvshowService) {}
+    constructor(private findService: FindService) {}
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any>|Promise<any>|any {
-        return this.movieService.search(route.queryParams.query, 30);
+        return this.findService.search(route.queryParams.query, 30);
     }
 }
 

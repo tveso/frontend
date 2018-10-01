@@ -1,0 +1,9 @@
+@import
+"src/abstracts/_abstract.scss";
+
+.only-mobile{
+  display: none;
+  @include respond-between('phone','tablet'){
+    display: block;
+  }
+}

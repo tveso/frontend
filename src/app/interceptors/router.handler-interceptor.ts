@@ -31,9 +31,6 @@ export class RouterHandlerInterceptor {
             if (!(evt instanceof ActivationEnd)) {
                 return;
             }
-            if (!(evt instanceof ActivationEnd)) {
-                return;
-            }
             const title = evt.snapshot.data.title;
             if ( typeof title !== 'undefined' ) {
                 this.titleService.setTitle(title);

@@ -14,6 +14,7 @@ import {MatDialog} from '@angular/material';
 import {LinksComponent} from '../links/links.component';
 import {FindService} from '../../services/find.service';
 import {UtilService} from '../../services/util.service';
+import {PageAbstract} from '../../entities/page.abstract';
 
 @Injectable({
     providedIn: 'root'
@@ -31,16 +32,18 @@ class SharedService {
   templateUrl: './tvshowpage.component.html',
   styleUrls: ['./tvshowpage.component.css']
 })
-class TvshowpageComponent implements OnInit, OnDestroy {
+class TvshowpageComponent extends PageAbstract implements OnInit, OnDestroy {
     tvshow: Movie;
     @Input() activeSeason: number;
     mode: any = 'info';
     observer: Subscription;
     protected recommendedTvshows = undefined;
-
-    constructor(private activatedRouter: ActivatedRoute, private imageService: ImageService,
+    constructor(private activatedRouter: ActivatedRoute,
                 private router: Router, private sharedService: SharedService, private messageService: MessageService,
-                private titleService: TitleService, private findService: FindService, public utilService: UtilService) {}
+                private titleService: TitleService, private findService: FindService, public utilService: UtilService,
+                imageService: ImageService) {
+        super(imageService);
+    }
     ngOnInit() {
         this.sharedService.add(this.activatedRouter.data);
         this.observer = this.activatedRouter.data.subscribe((data) => {
@@ -62,13 +65,11 @@ class TvshowpageComponent implements OnInit, OnDestroy {
         });
     }
 
-    getBackground() {
-        const poster = this.imageService.getImageUrl(this.tvshow.backdrop_path, 'w1280');
-        return `url(${poster})`;
-    }
+
     ngOnDestroy() {
         this.observer.unsubscribe();
     }
+
 }
 
 
@@ -77,7 +78,7 @@ class TvshowpageComponent implements OnInit, OnDestroy {
     templateUrl: './season.component.html',
     styleUrls: ['./tvshowpage.component.css']
 })
-class SeasonComponent implements OnInit, OnDestroy, OnChanges {
+class SeasonComponent extends PageAbstract implements OnInit, OnDestroy, OnChanges {
     tvshow: Movie;
     private tvshow$ = new BehaviorSubject<Movie>(new Movie());
     selectedSeason: any;
@@ -89,8 +90,9 @@ class SeasonComponent implements OnInit, OnDestroy, OnChanges {
     @Input() showFilter = false;
 
     constructor(private sharedService: SharedService, private activatedRouter: ActivatedRoute, private messageService: MessageService,
-                private tvshowService: TvshowService, private router: Router, private _titleService: TitleService,
-                public dialog: MatDialog) {
+                private tvshowService: TvshowService,
+                public dialog: MatDialog, imageService: ImageService) {
+        super(imageService);
         this.options = [
             {'value': 'vote_count', 'viewValue': 'Número de votos'},
             {'value': 'vote_average', 'viewValue': 'Puntuación'},
@@ -183,16 +185,6 @@ class SeasonComponent implements OnInit, OnDestroy, OnChanges {
 
         return result;
     }
-    getLinks(e) {
-        const dialogRef = this.dialog.open(LinksComponent, {
-            data: {episodeNumber: e.episode_number, seasonNumber: e.season_number, showName: Movie.getTitle(this.tvshow),
-                episodeName: e.name,
-            showId: this.tvshow._id, episode: e},
-            panelClass: 'dialog',
-            position: {top: '10px'}
-        });
-
-    }
 }
 
 
@@ -202,7 +194,37 @@ class SeasonComponent implements OnInit, OnDestroy, OnChanges {
     styleUrls: ['./tvshowpage.component.css']
 })
 class TvInfoComponent extends TvshowpageComponent {
+
+    departments = {
+        'Writing': 'Guionista',
+        'Costume & Make-Up': 'Disfraz y maquillaje',
+        'Co-Executive Producer': 'Co-Productor Ejecutivo',
+        'Production': 'Productor'
+    };
+    public creatorsShown = 4;
+
+}
+@Component({
+    selector: 'app-tvimages',
+    templateUrl: './images.component.html',
+    styleUrls: ['./tvshowpage.component.css']
+})
+class TvImagesComponent implements OnInit {
+    private tvshow$ = new BehaviorSubject<Movie>(new Movie());
+    private tvshow: any;
+    private sucriptions$: Subscription;
+    constructor(private sharedService: SharedService, private messageService: MessageService) {
+    }
+    ngOnInit(): void {
+        this.messageService.add('mode', 'images');
+        this.tvshow$.asObservable().subscribe((data) => {
+            this.tvshow = data;
+        });
+        this.sucriptions$ = this.sharedService.observer.subscribe((data) => {
+            this.tvshow$.next(data['tvshows']);
+        });
+}
 }
 
 
-export {SeasonComponent, TvshowpageComponent, TvInfoComponent};
+export {SeasonComponent, TvshowpageComponent, TvInfoComponent, TvImagesComponent};

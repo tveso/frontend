@@ -1,5 +1,6 @@
 <article [class]="(showFilters===false) ? 'expanded': ''">
-    <nav [hidden]="showFilters===false">
+    <nav [class]="(showFilters===false) ? 'hidden' : ''">
+        <div class="filterBlock">
         <h3>Ordenar </h3>
         <mat-form-field>
             <mat-select id="orderBy"  [(ngModel)]="params.sort" placeholder="Ordenar por.." (selectionChange)="filterMovies()">
@@ -9,13 +10,17 @@
                 <mat-option value="popularity">Popularidad ⬇</mat-option>
             </mat-select>
         </mat-form-field>
+        </div>
+        <div class="filterBlock">
         <h3>Géneros</h3>
-        <mat-form-field>
+        <mat-form-field >
             <mat-select placeholder="Géneros" [(ngModel)]="params.genres" (selectionChange)="filterMovies()"  multiple>
                 <mat-option value="{{genre.id}}" *ngFor="let genre of configService.getGenres('movie')">{{genre.name}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <h3>Otros</h3>
+        </div>
+            <div class="filterBlock">
+            <h3>Duración</h3>
         <mat-form-field>
             <mat-select placeholder="Duración" [(ngModel)]="params.duration" (selectionChange)="filterMovies()">
                 <mat-option [value]="undefined">Todas</mat-option>
@@ -24,6 +29,8 @@
                 <mat-option value=">180"> Larga Duración (+180 min)</mat-option>
             </mat-select>
         </mat-form-field>
+            </div>
+        <div class="filterBlock">
         <mat-slide-toggle [(ngModel)]="params.famous" (change)="changeFamous()">Solo películas más conocidas</mat-slide-toggle>
         <h3>Año de lanzamiento</h3>
         <mat-form-field>
@@ -43,11 +50,13 @@
                 <mat-option [value]="v" *ngFor="let v of range(1900,'currentYear',true)">{{v}}</mat-option>
             </mat-select>
         </mat-form-field>
+        </div>
     </nav>
     <section>
         <h2>Películas <button style="float:right" mat-flat-button="" (click)="showFilters=!showFilters">Filtrar</button></h2>
         <app-listnavbar [(params)]="params"></app-listnavbar>
-    <ul class="movies" infiniteScroll [infiniteScrollDistance]="0.2" [infiniteScrollThrottle]="500" (scrolled)="getMovies()">
+    <ul class="movies" infiniteScroll [infiniteScrollDistance]="0.2" [infiniteScrollThrottle]="500"
+        (scrolled)="getMovies()" [class]="changiParams === true ? 'loadingMoviesOpacity' : 'movies'">
         <li *ngFor="let movie of movies" >
             <app-movieitem [movie]="movie"></app-movieitem>
         </li>

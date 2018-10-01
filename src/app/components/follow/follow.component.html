@@ -1,0 +1,9 @@
+<div class="tag" [matMenuTriggerFor]="tagMenu" [matMenuTriggerData]="{'movie': movie}"
+     [class]="'tag ' + getUserCurrentTag().icon">
+  <mat-icon>{{getUserCurrentTag().icon}}</mat-icon> {{getUserCurrentTag().show}}</div>
+<mat-menu #tagMenu="matMenu">
+  <ng-template matMenuContent  let-movie="movie">
+    <button mat-menu-item *ngFor="let type of getTypes()" [class]="getClass(type)" (click)="follow(type)">
+      <mat-icon>{{type.icon}}</mat-icon>{{type.name}}</button>
+  </ng-template>
+</mat-menu>

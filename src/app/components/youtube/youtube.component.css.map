@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AACE,gBAAiB;EACf,QAAQ,EAAC,QAAQ;EACjB,cAAc,EAAC,MAAM;EACrB,WAAW,EAAC,IAAI;EAChB,MAAM,EAAC,CAAC;EACR,QAAQ,EAAC,MAAM;;AAGjB,wEAAyE;EACvE,QAAQ,EAAC,QAAQ;EACjB,GAAG,EAAC,CAAC;EACL,IAAI,EAAC,CAAC;EACN,KAAK,EAAC,IAAI;EACV,MAAM,EAAC,IAAI",
+"sources": ["youtube.component.scss"],
 "names": [],
 "file": "youtube.component.css"
 }

@@ -5,17 +5,26 @@ import {Movie} from '../../entities/movie';
 import {ImageService} from '../../services/image.service';
 import {FindService} from '../../services/find.service';
 import {UtilService} from '../../services/util.service';
+import {PageAbstract} from '../../entities/page.abstract';
 
 @Component({
   selector: 'app-moviepage',
   templateUrl: './moviepage.component.html',
-  styleUrls: ['./moviepage.component.css']
+  styleUrls: ['../tvshowpage/tvshowpage.component.css']
 })
-export class MoviepageComponent implements OnInit {
+export class MoviepageComponent extends PageAbstract implements OnInit {
     m: Movie;
-    recommendedMovies: Movie[] = [];
-  constructor(private movieService: MoviesService, private activatedRouter: ActivatedRoute, private imageService: ImageService,
-              private findService: FindService, public utilService: UtilService) { }
+    recommendedMovies: Movie[];
+    departments = {
+        'Writing': 'Guionista',
+        'Costume & Make-Up': 'Disfraz y maquillaje',
+        'Co-Executive Producer': 'Co-Productor Ejecutivo',
+        'Production': 'Productor'
+    };
+    constructor(private movieService: MoviesService, private activatedRouter: ActivatedRoute, imageService: ImageService,
+                private findService: FindService, public utilService: UtilService) {
+        super(imageService);
+    }
   ngOnInit() {
       this.activatedRouter.data.subscribe((data) => {
           this.m = data['movies'];
@@ -25,10 +34,6 @@ export class MoviepageComponent implements OnInit {
           });
       });
   }
-    getBackground() {
-      const poster = this.imageService.getImageUrl(this.m.backdrop_path, 'w1280' );
-        return `url(${poster})`;
-    }
 
     sortByVoteAverage(posters: Array<any>) {
       if (typeof posters === 'undefined' || posters === null) {
@@ -41,12 +46,21 @@ export class MoviepageComponent implements OnInit {
       });
       return posters;
     }
+    getJob(creator) {
+        if (creator.department in this.departments) {
+            return this.departments[creator.department];
+        }
 
+        return creator.department;
+    }
     getTrailer(m) {
+      if (typeof m.videos === 'undefined') {
+          return null;
+      }
         const videos = m.videos.results;
         let result = null;
         videos.forEach((a) => {
-            if (a.type == 'Trailer' && a.site == 'YouTube') {
+            if (a.type === 'Trailer' && a.site === 'YouTube') {
                 result = a.key;
             }
         });

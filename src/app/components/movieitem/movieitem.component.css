@@ -10,12 +10,13 @@ small {
 article {
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  position: relative;
   padding: 0;
   box-sizing: border-box;
   background-color: #333333;
   transition: 0.2s all ease-in-out;
   border-radius: 4px; }
+  article .poster {
+    position: relative; }
   article h1 {
     padding: 5px;
     margin: 0;
@@ -36,5 +37,30 @@ article {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
   article img {
     border-radius: 4px; }
+  article .tags {
+    position: absolute;
+    bottom: 15px;
+    left: 5px; }
+  article:hover .util {
+    opacity: 1; }
+  article .util {
+    position: absolute;
+    bottom: 15px;
+    right: 5px;
+    opacity: 0;
+    transition: all 0.2s ease-in-out; }
+    @media (min-width: 200px) and (max-width: 991px) {
+      article .util {
+        opacity: 1; } }
+    article .util .tools {
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      background-color: transparent;
+      text-shadow: 1px 1px 1px black;
+      border-radius: 50%;
+      font-size: 1.7em;
+      color: #e6e6e6;
+      z-index: 5;
+      transition: all 0.2s ease-in-out; }
 
 /*# sourceMappingURL=movieitem.component.css.map */

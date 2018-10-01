@@ -1,0 +1,16 @@
+@import "../../../assets/src/abstracts/abstract";
+
+.logo {
+  padding:15px;
+  background-color: rgba($color_2_base,0.15);
+  box-shadow: box-shadow('medium');
+  width:100%;
+  height: min-content;
+  margin: auto;
+  h2{
+    color: tint($color_2_base,10);
+  }
+  .spinner{
+    display: grid;
+  }
+}

@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
                 public securityService: SecurityService, private routerHandlerInterceptor: RouterHandlerInterceptor ) { }
 
     ngOnInit() {
-        this.securityService.checkAuth().subscribe((data) => {
+        this.configService.init().subscribe(null, null, () => {
             this.dataLoaded = true;
+
         });
-        this.configService.init();
     }
 }

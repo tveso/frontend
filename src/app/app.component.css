@@ -94,10 +94,10 @@
   color: inherit; }
 
 .btn-alert {
-  background-color: #cd664d;
+  background-color: #f76854;
   color: white; }
   .btn-alert:hover {
-    background-color: #cd664d;
+    background-color: #f76854;
     color: white; }
 
 .btn-grey {
@@ -193,5 +193,16 @@ main {
 .panel {
   margin-top: 20px;
   margin-bottom: 20px; }
+
+.container {
+  display: grid;
+  color: white;
+  padding: 15px; }
+  .container > * {
+    margin: auto; }
+  .container img {
+    width: 300px;
+    max-width: max-content;
+    margin: 0 auto; }
 
 /*# sourceMappingURL=app.component.css.map */

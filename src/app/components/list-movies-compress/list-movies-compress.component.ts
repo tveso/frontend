@@ -13,6 +13,7 @@ export class ListMoviesCompressComponent implements  OnInit, OnChanges {
     @Input() title;
     private movieService: MoviesService;
     @Input() listSize = 6;
+    @Input() class = 'g-2';
     constructor(movieService: MoviesService) {
         this.movieService = movieService;
     }

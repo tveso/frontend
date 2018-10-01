@@ -6,7 +6,8 @@ import {
     MatSelectModule,
     MatSliderModule,
     MatSnackBarModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTabsModule, MatIconModule,
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -25,7 +26,9 @@ import {MatSortModule} from '@angular/material/sort';
         MatSlideToggleModule,
         MatDialogModule,
         MatTableModule,
-        MatSortModule
+        MatSortModule,
+        MatTabsModule,
+        MatIconModule
 
     ],
     exports: [
@@ -39,7 +42,9 @@ import {MatSortModule} from '@angular/material/sort';
         MatSlideToggleModule,
         MatDialogModule,
         MatTableModule,
-        MatSortModule
+        MatSortModule,
+        MatTabsModule,
+        MatIconModule
     ]
 })
 

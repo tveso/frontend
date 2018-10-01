@@ -4,19 +4,20 @@
 
 
 form{
- @extend .panel;
+  padding:15px;
+  background-color: rgba($color_2_base,0.15);
+  box-shadow: box-shadow('medium');
+  width:100%;
+  height: min-content;
+  margin: auto;
 }
 label{
   display: block;
 }
 
-input[type=text]
- {
-   width:95%;
- }
-input[type=password]
-{
-  width:95%;
+.input {
+  width: 90%;
+  box-sizing: border-box;
 }
 
 button{
@@ -25,4 +26,26 @@ button{
   color:white;
   margin:10px;
   width:95%;
+}
+
+.red{
+  color: tint($color_5_base, 20);
+  font-size:0.8em;
+}
+img{
+  width:300px;
+  max-width: max-content;
+  margin:0 auto;
+}
+
+.new{
+  border-radius:3px;
+  border:1px solid tint($color_4_base,70);
+  padding:10px;
+  background-color: rgba($color_2_base,0.15);
+  width: 100%;
+  margin: 10px auto auto!important;
+  a{
+    color:$color_2_base;
+  }
 }

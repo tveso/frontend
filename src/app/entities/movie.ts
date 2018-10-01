@@ -17,9 +17,12 @@ export class Movie {
     primaryTitle: any;
     next_episode_to_air: any;
     static  getTitle(tvshow): any {
-        if (typeof tvshow.titles === 'undefined') {
-            return tvshow.primaryTitle;
+        if (typeof tvshow.name !== 'undefined') {
+            return tvshow.name;
         }
-        return tvshow.titles.ES;
+        if (typeof tvshow.title !== 'undefined') {
+            return tvshow.title;
+        }
+        return tvshow.title;
     }
 }

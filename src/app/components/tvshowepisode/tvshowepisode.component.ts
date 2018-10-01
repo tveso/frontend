@@ -10,6 +10,7 @@ export class TvshowepisodeComponent implements OnInit {
 
    @Input() public episode;
     spoiler = true;
+    @Input() public alternativePosterPath;
     public Math = Math;
   constructor(private imageService: ImageService) { }
 
@@ -18,8 +19,16 @@ export class TvshowepisodeComponent implements OnInit {
 
 
     getBackground() {
-        const poster = this.imageService.getImageUrl(this.episode.still_path, 'w1280');
+      const path = (this.episode.still_path === null || typeof this.episode.still_path === 'undefined') ?
+          this.alternativePosterPath : this.episode.still_path;
+        const poster = this.imageService.getImageUrl(path, 'w1280');
         return `url(${poster})`;
     }
 
+    getVotes() {
+      if (typeof this.episode.vote_average === 'undefined') {
+          return 'NR';
+      }
+        return Math.round(this.episode.vote_average * 100) / 100;
+    }
 }

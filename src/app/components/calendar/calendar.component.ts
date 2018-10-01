@@ -86,7 +86,6 @@ export class CalendarComponent implements OnInit {
       if (!this.isBusyDay(day)) {
           return;
       }
-      console.log('ey');
         this.handler.call(this.object, day);
     }
 }

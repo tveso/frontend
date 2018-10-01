@@ -138,4 +138,8 @@ h1 {
     h1 {
       display: none; } }
 
+.menu-icon {
+  font-size: 1.2em;
+  margin: 15px; }
+
 /*# sourceMappingURL=header.component.css.map */

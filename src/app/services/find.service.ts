@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Movie} from '../entities/movie';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Api} from '../entities/api';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -24,4 +25,9 @@ export class FindService {
     recommend(id) {
         return this.http.get<any[]>(`${this.apiuri}recommend/${id}`);
     }
+
+    search(query: Observable<string>, limit): Observable<Movie[]> {
+        return this.http.get<Movie[]>(`${this.apiuri}search?query=${query}&limit=${limit}`);
+    }
+
 }

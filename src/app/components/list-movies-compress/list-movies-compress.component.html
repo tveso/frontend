@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
 <ul class="movies">
-    <li *ngFor="let movie of movies|slice:0:listSize">
+    <li *ngFor="let movie of movies|slice:0:listSize" [class]="class">
         <app-movieitem [movie]="movie"></app-movieitem>
     </li>
 </ul>

@@ -16,6 +16,9 @@ section{
    order:2;
   }
 }
+.hidden{
+  display: none;
+}
 nav{
   background-color: tint($color_3_base,91);
   color:$color_1_base;
@@ -25,6 +28,11 @@ nav{
     order:1;
   }
   padding:10px;
+  @include respond-between('phone','tablet'){
+    grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-template-rows: min-content;
+  }
   h3{
     margin:0;
     font-size: 1rem;
@@ -39,11 +47,14 @@ nav{
   }
 }
 .movies{
-  @extend %gridable;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 1%;
+  @include respond-between('phone','tablet'){
+    grid-template-columns: 1fr 1fr;
+  }
   margin-top: 30px!important;
   li {
-    @extend .g-2;
     width: 100%;
     height: 150px;
     display: inline-table;;
@@ -67,4 +78,7 @@ select{
 .loadingMoviesOpacity{
   @extend .movies;
   opacity: 0.34;
+}
+
+.filterBlock{
 }

@@ -1,22 +1,25 @@
 <div class="content">
 <article class="sidebar">
-    <h2>Datos</h2>
-    <ul>
-        <li><h3>Primera fecha de emisión</h3> {{tvshow.first_air_date}}</li>
-        <li><h3>Duración por capítulo</h3> {{tvshow.duration}}</li>
-        <li><h3>Género/s</h3>
-            <app-genre *ngFor="let g of tvshow.genres" [genre]="g" [type]="tvshow.type"></app-genre>
-        </li>
-    </ul>
-    <h2>Imágenes</h2>
-    <div class="images">
-        <ul>
-            <li *ngFor="let i of tvshow.images?.posters|slice:0:8">
-                <app-tmdbimage size="w500" [image]="i.file_path"></app-tmdbimage>
-            </li>
-        </ul>
+    <ng-container *ngIf="tvshow.credits.crew.length>0">
+    <h2>Creadores</h2>
+    <div class="creators">
+        <div class="creator" *ngFor="let creator of tvshow.credits?.crew|slice:0:creatorsShown">
+            <h4>{{creator.name}}</h4>
+            <small>{{getJob(creator)}}</small>
+            <div class="creator-image">
+                <app-tmdbimage image="{{creator.profile_path}}"></app-tmdbimage>
+            </div>
+        </div>
     </div>
-    <h2>Otros enlaces</h2>
+    </ng-container>
+    <button mat-flat-button="" [routerLink]="['credits']">Mostrar todos</button>
+    <h2>Series Recomendadas</h2>
+    <ng-container *ngIf="!recommendedTvshows">
+        Cargando series recomendadas...
+        <div><app-spinner></app-spinner></div>
+    </ng-container>
+    <app-list-movies-compress [movies]="recommendedTvshows" [listSize]="6" [class]="'g-4'"></app-list-movies-compress>
+    <h2>Enlaces</h2>
     <a target="_blank" href="https://imdb.com/title/{{tvshow._id}}">
         <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/512/IMDb-icon.png" width="50"/>
     </a>
@@ -24,12 +27,7 @@
 <article>
     <h2>Sinopsis</h2>
     <p>{{tvshow.overview}}</p>
-    <h2>Series Recomendadas</h2>
-    <ng-container *ngIf="!recommendedTvshows">
-        Cargando series recomendadas...
-        <div><app-spinner></app-spinner></div>
-    </ng-container>
-
-    <app-list-movies-compress [movies]="recommendedTvshows" [listSize]="12"></app-list-movies-compress>
+    <h2 *ngIf="getTrailer(tvshow)"></h2>
+    <app-youtube [id]="getTrailer(tvshow)"></app-youtube>
 </article>
 </div>
