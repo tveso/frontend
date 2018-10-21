@@ -1,0 +1,17 @@
+<article>
+    <div class="poster">
+
+        <a routerLink="/{{movie.type}}/{{movie._id}}">
+            <app-tmdbimage image="{{movie?.poster_path}}"></app-tmdbimage>
+        </a>
+        <h2>
+            <app-rating [resource]="movie"></app-rating>
+        </h2>
+        <div class="tags">
+            <app-follow [movie]="movie"></app-follow>
+        </div>
+    </div>
+    <h1>{{movie|moviename}}
+        <small>({{utilService.getReleaseDate(movie)}})</small>
+    </h1>
+</article>

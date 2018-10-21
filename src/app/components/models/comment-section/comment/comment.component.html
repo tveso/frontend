@@ -1,0 +1,82 @@
+<div class="comment" *ngIf="comment !== null">
+    <div class="comment-info">
+        <ng-container *ngIf="comment.deleted!==true">
+            <div class="likes">
+                <div class="like"><a [class]="getClassLike('like')" (click)="like()">
+                    <mat-icon>thumb_up</mat-icon>
+                </a></div>
+                <div class="dislike"><a [class]="getClassLike('dislike')" (click)="dislike()">
+                    <mat-icon>thumb_down</mat-icon>
+                </a></div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="comment.deleted!==true">
+            <a [routerLink]="['/user',comment.author._id.$oid]">
+                <mat-icon>person</mat-icon>
+                {{comment.author.username}}</a>
+            ·
+            <small>{{comment.likes - comment.dislikes}} puntos · {{comment.date|timeago}}</small>
+        </ng-container>
+        <ng-container *ngIf="comment.deleted===true">
+            [Borrado]-
+            <small>{{comment.date|timeago}}</small>
+        </ng-container>
+    </div>
+    <div class="comment-text">
+        <ng-container *ngIf="comment.deleted!==true">
+            <ng-container *ngFor="let str of getCommentText()">
+                <ng-container *ngIf="str.type==='text'">
+                    <span [innerHtml]="str.text"></span>
+                </ng-container>
+                <ng-container *ngIf="str.type==='spoiler' && str.text.length>0">
+                    <app-spoiler [text]="str.text"></app-spoiler>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="comment.deleted===true">
+            - Borrado -
+        </ng-container>
+    </div>
+
+    <div class="comment-toolbar">
+        <ng-container *ngIf="comment.deleted!==true">
+            <a (click)="showReply=!showReply">Contestar
+                <mat-icon>reply</mat-icon>
+            </a>
+            <a (click)="showReply=!showReply">Denunciar
+                <mat-icon>report_problem</mat-icon>
+            </a>
+            <a (click)="delete()" *ngIf="securityService.hasAccess('ROLE_ADMIN')">Borrar
+                <mat-icon>delete</mat-icon>
+            </a>
+        </ng-container>
+    </div>
+    <div class="comment-replybox" [hidden]="showReply===false">
+        <div class="comment-replybox-preview" *ngIf="commentForm.value">
+            <h3 *ngIf="commentForm.value.text.length>0">Texto previo</h3>
+            <span [innerHtml]="commentForm.value.text|markdown"></span>
+        </div>
+        <form [formGroup]="commentForm" (ngSubmit)="post(commentForm.value, comment._id)">
+            <div class="textarea">
+                <td-text-editor formControlName="text" [options]="options" minlength="3" maxlength="10000"
+                                required=""></td-text-editor>
+            </div>
+            <button mat-flat-button [disabled]="!commentForm.valid">
+                <app-spinner *ngIf="loading===true" type="bars"></app-spinner>
+                <ng-container *ngIf="loading===false">
+                    Comentar
+                </ng-container>
+            </button>
+            <button mat-button="" (click)="showReply=false">Cancelar</button>
+        </form>
+    </div>
+    <ng-container *ngIf="depth<5">
+        <div *ngFor="let com of getCurrentComments(comment._id)">
+            <app-comment [comment]="com" [comments]="comments" [depth]="depth+1"></app-comment>
+        </div>
+    </ng-container>
+    <div *ngIf="depth>4">
+        <a [routerLink]="[]" [queryParams]="{comment_id :comment._id}" [queryParamsHandling]="'merge'">Leer más
+            comentarios</a>
+    </div>
+</div>

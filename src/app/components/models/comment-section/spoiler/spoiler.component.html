@@ -1,0 +1,10 @@
+<div class="spoilerBox">
+    <a (click)="showSpoiler=!showSpoiler">
+        <div class="spoilerTitle">Spoiler
+            <small>
+                ({{(showSpoiler===true) ? 'Ocultar' : 'Mostrar'}})
+            </small>
+        </div>
+    </a>
+    <div [innerHtml]="text" *ngIf="showSpoiler===true" class="spoilerText"></div>
+</div>

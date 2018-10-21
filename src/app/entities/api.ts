@@ -1,6 +1,6 @@
 
 class Api {
-    static API_URL = 'http://localhost:4200/api/';
+    static API_URL = 'http://tveso.tv:4200/api/';
 }
 
 export {Api};

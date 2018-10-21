@@ -1,0 +1,52 @@
+<section [style.background-image]="getBackground(show)">
+    <header>
+        <div class="puntuation">
+            <app-rating [resource]="show"></app-rating>
+            <small>{{utilService.getVoteCount(show)}} votos</small>
+        </div>
+        <div class="title">
+            <a routerLink="/tvshow/{{show._id}}">
+                <h1>{{show | moviename}}
+                    <small>
+                        ({{utilService.getReleaseDate(show)}})
+                    </small>
+                </h1>
+            </a>
+            <span class="follow"> <app-follow [movie]="show"></app-follow></span>
+            <div class="info">
+                {{show.duration}} min | {{show.first_air_date}} |
+                <app-genre *ngFor="let g of show.genres|slice:0:genreNumbers" [genre]="g"
+                           [type]="show.type"></app-genre>
+                <a *ngIf="genreNumbers<show.genres.length" (click)="genreNumbers=show.genres.length">+</a>
+            </div>
+        </div>
+    </header>
+    <article class="main">
+        <nav class="navigation">
+            <nav mat-tab-nav-bar>
+                <a mat-tab-link
+                   [routerLink]="['/tvshow',show._id]"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{exact:true}">
+                    Info
+                </a>
+                <a mat-tab-link [class.active]="mode==='season'" [matMenuTriggerFor]="seasonMenu"> Temporadas
+                    <mat-menu #seasonMenu="matMenu">
+                        <ng-container *ngFor="let s of show.seasons">
+                            <ng-container *ngIf="s.episodes?.length>0">
+                                <button mat-menu-item
+                                        [routerLink]="['/tvshow',show._id,'season']"
+                                        [queryParams]="{'number': s.season_number }">{{s.name}}
+                                </button>
+                            </ng-container>
+                        </ng-container>
+                    </mat-menu>
+                </a>
+                <a mat-tab-link [routerLink]="['/tvshow',show._id,'casting']" routerLinkActive="active"> Cast</a>
+                <a mat-tab-link [routerLink]="['/tvshow',show._id,'images']" routerLinkActive="active">Videos e
+                    Imágenes</a>
+            </nav>
+        </nav>
+        <router-outlet></router-outlet>
+    </article>
+</section>

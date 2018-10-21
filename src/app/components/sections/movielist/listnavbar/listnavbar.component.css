@@ -1,0 +1,22 @@
+/* Black*/
+/* white */
+/** Ink */
+/* Posy */
+/* Embers */
+/** Media query */
+@import url(../../../../../assets/src/layouts/_grids.css);
+.buttons {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 1%; }
+  @media (min-width: 200px) and (max-width: 799px) {
+    .buttons {
+      grid-template-columns: 1fr; } }
+  .buttons a {
+    background-color: #9a5f8e;
+    color: white; }
+  .buttons [data-active=true] {
+    background-color: #672c5b;
+    color: white; }
+
+/*# sourceMappingURL=listnavbar.component.css.map */

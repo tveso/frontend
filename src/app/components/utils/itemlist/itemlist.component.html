@@ -1,0 +1,21 @@
+<ng-container *ngIf="!firstLoad">
+    <app-placeholderitems></app-placeholderitems>
+</ng-container>
+<ul class="items" infiniteScroll [infiniteScrollDistance]="0.2" [infiniteScrollThrottle]="500"
+    (scrolled)="callback()" [class]="class">
+    <li *ngFor="let item of items">
+        <ng-container *ngIf="type==='movie'">
+            <app-movieitem [movie]="item"></app-movieitem>
+        </ng-container>
+        <ng-container *ngIf="type==='people'">
+            <app-personitem *ngIf="item" [person]="item"></app-personitem>
+        </ng-container>
+    </li>
+</ul>
+<h3 *ngIf="items.length===0 && firstLoad===true && loading===false">No hay resultados para los filtros definidos :(</h3>
+<div class="loading" [hidden]="loading===false || noLoadMore===true">
+    <app-spinner></app-spinner>
+</div>
+<div class="loading" [hidden]="loading!==false || noLoadMore===true ">
+    <button (click)="callback()" mat-raised-button>Cargar más</button>
+</div>

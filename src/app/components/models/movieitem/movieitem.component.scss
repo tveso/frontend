@@ -1,0 +1,65 @@
+@import "../../../../assets/src/abstracts/abstract";
+
+small{
+  font-size:0.7rem;
+}
+article{
+  margin-bottom: 10px;
+    box-shadow: box-shadow("soft");
+    padding: 0;
+    box-sizing: border-box;
+  background-color:tint($color_1_base,20);
+  transition: 0.2s all ease-in-out;
+  border-radius: 4px;
+  .poster{
+    position: relative;
+  }
+    h1{
+      padding: 5px;
+      margin: 0;
+      box-sizing: border-box;
+      color: $color_2_base;
+      font-size: 0.75rem;
+    }
+  h2{
+    position: absolute;
+    padding: 5px;
+    background-color: rgba($color_1_base,0.5);
+    margin: 0;
+    color: $color_2_base;
+    top:0;
+    width: fit-content;
+    right:0;
+    font-size: 0.75rem;
+  }
+  &:hover{
+    box-shadow: box-shadow("medium");
+  }
+  img{
+    border-radius: 4px;
+  }
+  .tags{
+    position: absolute;
+    bottom:15px;
+    left:5px;
+
+  }
+  .util{
+    position: absolute;
+    bottom:15px;
+    right:5px;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+    .tools{
+      cursor: pointer;
+      box-shadow: box-shadow('medium');
+      background-color: rgba($color_2_base, 1);
+      border-radius:50%;
+      font-size: 1.5em;
+      color: tint($color_1_base, 20);
+      z-index: 5;
+      transition: all 0.2s ease-in-out;
+    }
+
+  }
+}

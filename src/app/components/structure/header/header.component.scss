@@ -1,0 +1,88 @@
+@import "../../../../assets/src/abstracts/placeholders";
+@import "../../../../assets/src/abstracts/functions";
+@import "../../../../assets/src/abstracts/variables";
+@import "../../../../assets/src/layouts/_grids.css";
+@import "../../../../assets/src/abstracts/mixins";
+%shadow-text-effect{
+  text-shadow: 2px 2px 18px shade($color_4_base,80);
+  transition: 0.15s all ease-in-out;
+  &:hover{
+    text-shadow: 2px 2px 20px shade($color_2_base,10);
+  }
+}
+nav{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  a{
+  }
+}
+
+.header-container {
+  display: grid;
+  grid-template-columns: min-content min-content 2fr auto auto;
+  max-width: 100%;
+  box-shadow: box-shadow('soft');
+  margin: 0;
+  color: $color_2_base;
+  align-items: center;
+  background-color: shade($color_3_base, 20);
+}
+
+.menu-button{
+  @extend %shadow-text-effect;
+  width: 100%;
+  padding: 12px 24px;
+  display: inline-block;
+  font-size:1.4em;
+  cursor: pointer;
+  margin:0 auto;
+  
+}
+
+a{
+  @extend %shadow-text-effect;
+  color:inherit;
+  margin: 0;
+  padding: 20px;
+  display: inline-table;
+  @include respond-between('phone','tablet'){
+    display: none;
+  }
+  &:hover{
+    border-radius: 4px;
+    background-color: rgba($color_1_base,0.2);
+  }
+  a {
+    text-shadow: none;
+    display: block;
+  }
+}
+.active{
+  border-radius: 4px;
+  background-color: rgba($color_1_base,0.2);
+}
+
+
+h1{
+  @extend %shadow-text-effect;
+  display: inline-block;
+  font-size: 1.5em;
+  margin: 0;
+  @include respond-between('phone','tablet'){
+    display: none;
+  }
+}
+.menu-icon{
+  font-size:1.2em;
+  margin:15px;
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.floatMenu-link {
+  text-shadow: none;
+  display: block;
+}

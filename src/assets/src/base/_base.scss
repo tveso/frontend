@@ -4,8 +4,7 @@ body{
   font-family: $font_family;
   margin:0;
   font-size:1.120em;
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
-  background-attachment: fixed;
+  background: linear-gradient(60deg, #29323c 0%, #485563 100%) fixed;
   color: tint($color_1_base,6);
 }
 

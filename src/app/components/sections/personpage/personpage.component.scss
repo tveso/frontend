@@ -1,0 +1,71 @@
+@import "../../../../assets/util";
+
+section {
+  box-shadow: box-shadow('medium');
+  padding: 0 !important;
+  background: $color_2_base fixed 0 0;
+  background-size: 100% auto;
+  header {
+    padding: 0;
+    height: 250px;
+    position: relative;
+    @include respond-between('phone', 'tablet') {
+      height: 130px;
+      background-position: 0 0;
+      background-size: 100% auto;
+    }
+  }
+}
+
+.main {
+  padding: 0;
+}
+
+.portrait {
+  width: 112px;
+  height: 200px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  @include respond-between('phone', 'tablet') {
+    display: block;
+  }
+  article {
+    background-color: $color_2_base;
+    p {
+      font-size: 0.9rem;
+    }
+    h1 small {
+      font-size: 0.9rem;
+      color: tint($color_3_base, 30);
+      font-weight: normal;
+      cursor: pointer;
+    }
+  }
+  .sidebar {
+    position: relative;
+    color: $color_1_base;
+    font-size: 0.9em;
+    @include respond-between('phone', 'tablet') {
+      max-height: 100px;
+      overflow: hidden;
+    }
+    background-color: tint($color_3_base, 93);
+    & > ul {
+      @include respond-between('phone', 'tablet') {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+    }
+    h3 {
+      font-size: 1em;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

@@ -26,8 +26,13 @@
     min-width: 100%;
   }
 }
-.mat-flat-button.mat-primary{
-  background-color: $color_4_base;
+.dialog-overlay-black{
+  background-color: rgba($color_1_base,0.7);
+}
+
+.mat-flat-button{
+  background-color: $color_4_base!important;
+  color:$color_2_base!important;
 }
 .mat-tab-links{
   a{
@@ -85,4 +90,9 @@ background-color: $color_2_base;
 .CodeMirror{
   min-height: 100px!important;
   max-height: 250px!important;
+}
+.spoile-icon{
+  &:after{
+    content:'Spoiler'
+  }
 }

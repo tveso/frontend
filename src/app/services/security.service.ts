@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Api} from '../entities/api';
 import {User} from '../entities/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, Subject, Subscriber} from 'rxjs';
+import {Subject} from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
@@ -33,19 +33,10 @@ export class SecurityService {
     }
 
     login(user: User) {
-        return this.http.post<any[]>(`${this.apiuri}login`, user, this.httpOptions);
+        return this.http.post<any>(`${this.apiuri}login`, user, this.httpOptions);
     }
     checkAuth() {
-        const sessionId = this.cookieService.get('PHPSESSID');
-        if (sessionId !== '') {
-            this.user = JSON.parse(localStorage.getItem('user'));
-        }
-        this.http.get<any[]>(`${this.apiuri}islogged`, this.httpOptions).subscribe((data: any) => {
-            this.user = data.user;
-            localStorage.setItem('user', JSON.stringify(data.user));
-            this._user.next(this.user);
-        });
-        return this.isLogged();
+        return this.http.get<any[]>(`${this.apiuri}islogged`, this.httpOptions);
     }
     public isLogged() {
         return this._user.asObservable();
@@ -61,9 +52,6 @@ export class SecurityService {
         return (this.user.roles instanceof Array) ? this.user.roles : [];
     }
     hasAccess(role) {
-        if (!(role in this.rolesHyperarchy)) {
-            return false;
-        }
         const userRoles = this.getUserRoles();
         if (userRoles.length === 0 ) {
             return false;
@@ -71,19 +59,32 @@ export class SecurityService {
         if (typeof this.rolesHyperarchy[role] === 'undefined') {
             return true;
         }
-        const rolesAvailables = this.getChildrenRoles(role);
+        const rolesAvailables = this.getChildrenRoles(userRoles);
         let result = false;
-        userRoles.forEach((a) => {
-            if (rolesAvailables.indexOf(a) !== -1) {
+        rolesAvailables.forEach((a) => {
+            if (role === a) {
                 result = true;
                 return;
             }
         });
+
         return result;
     }
 
+    googleLogin(param) {
+        return this.http.post<any>(`${this.apiuri}auth/google`, param, this.httpOptions);
+    }
+
+    logout() {
+        return this.http.get<any>(`${this.apiuri}logout`, this.httpOptions);
+    }
+
+    register(model: User) {
+        return this.http.post<any>(`${this.apiuri}register`, model, this.httpOptions);
+    }
+
     private getChildrenRoles(role: any) {
-        const result = [role];
+        const result = [].concat(role);
         let actualRol = role;
         while (true) {
             actualRol = this.rolesHyperarchy[actualRol];

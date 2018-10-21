@@ -1,0 +1,50 @@
+@import "../../../../assets/util";
+
+article {
+  box-shadow: box-shadow("medium");
+  background-color: $color_2_base;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  @include respond-between('phone', 'tablet') {
+    display: block;
+  }
+  padding: 0;
+}
+
+section {
+  order: 1;
+  @include respond-between('phone', 'tablet') {
+    order: 2;
+  }
+}
+
+nav {
+  background-color: tint($color_3_base, 90);
+  color: $color_1_base;
+  font-size: 0.8rem;
+  order: 2;
+  @include respond-between('phone', 'tablet') {
+    order: 1;
+  }
+  padding: 10px;
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    padding: 15px;
+  }
+  mat-slide-toggle {
+    margin: 15px;
+  }
+  h4 {
+    padding: 15px;
+    border-bottom: 1px solid tint($color_3_base, 41);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.expanded {
+  grid-template-columns: 100% 0;
+}

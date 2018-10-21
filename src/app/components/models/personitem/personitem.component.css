@@ -1,0 +1,53 @@
+/* Black*/
+/* white */
+/** Ink */
+/* Posy */
+/* Embers */
+/** Media query */
+.person {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.person .person-image {
+    box-sizing: border-box;
+}
+
+.person .person-name {
+    position: absolute;
+    bottom: 2px;
+    font-weight: bold;
+    width: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 0.8em;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.person .person-rol {
+    font-size: 0.8em;
+    padding: 8px;
+    border-radius: 4pt;
+    position: absolute;
+    font-weight: bold;
+    right: 5px;
+    top: 5px;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: white;
+}
+
+.example-viewport {
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+}
+
+.example-item {
+    height: 50px;
+}
+
+/*# sourceMappingURL=personitem.component.css.map */

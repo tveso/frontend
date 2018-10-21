@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient,  HttpParams } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {Movie} from '../entities/movie';
-import {Observable, Subject} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Api} from '../entities/api';
-
 
 
 @Injectable({
@@ -36,13 +35,6 @@ export class MoviesService {
 
     getRecommended(id: any): Observable<Movie[]> {
         return this.http.get<Movie[]>(`${this.apiuri}${id}/recommended`);
-    }
-    getDummyMovies(number): Movie[] {
-        const result = Array<Movie>();
-        for (let i = 0; i < number; i++) {
-            result.push(new Movie);
-        }
-        return result;
     }
 
 }

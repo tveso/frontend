@@ -2,5 +2,5 @@
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
     <ShortName>Tvesame Open Search</ShortName>
     <Description>Búsqueda de series y películas con OpenSearch</Description>
-    <Url type="application/rss+xml" template="http://localhost:4200/search?query={searchTerms}"/>
+    <Url type="application/rss+xml" template="http://tveso.tv:4200/search?query={searchTerms}"/>
 </OpenSearchDescription>

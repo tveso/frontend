@@ -1,0 +1,16 @@
+<h1>Series recomendadas para: {{show | moviename}}</h1>
+
+<div class="shows" infiniteScroll [infiniteScrollDistance]="0.2" [infiniteScrollThrottle]="5000" [scrollWindow]="false"
+     (scrolled)="moreRecommendedShows()">
+    <app-movieitem [movie]="s" *ngFor="let s of shows"></app-movieitem>
+</div>
+<div class="loadMore">
+    <button mat-flat-button="" (click)="moreRecommendedShows()">Cargar Más</button>
+</div>
+
+<ng-container *ngIf="loading">
+    Cargando series recomendadas...
+    <div>
+        <app-spinner></app-spinner>
+    </div>
+</ng-container>

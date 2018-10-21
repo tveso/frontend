@@ -8,7 +8,7 @@ $color_3_base: hsl(193, 71%, 19%);
 /* Posy */
 $color_4_base: hsl(312, 40%, 36%);
 /* Embers */
-$color_5_base: hsl(7, 91%, 50%);
+$color_5_base: hsla(0, 68%, 45%, 0.85);
 
 $font_family: 'Open Sans', sans-serif;
 
@@ -18,6 +18,6 @@ $c_complementary_2: tint($color_3_base,10);
 
 $breakpoints: (
         'phone':  200px,
-        'tablet':  992px,
+        'tablet':  800px,
         'pc':  1200px,
 ) !default;

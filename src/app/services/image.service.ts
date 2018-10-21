@@ -1,4 +1,4 @@
-import {Injectable, Input} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ export class ImageService {
     size = 'w154';
   constructor() { }
   getImageUrl(image: string, size = 'w154') {
-      if (typeof image === 'undefined' || image === '' ) {
+      if (typeof image === 'undefined' || image === ''  || image === 'null' || image === null) {
          return 'http://l.yimg.com/os/mit/media/m/entity/images/movie_placeholder-103642.png';
       }
       if (typeof size !== 'undefined') {

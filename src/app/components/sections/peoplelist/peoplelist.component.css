@@ -1,0 +1,78 @@
+/* Black*/
+/* white */
+/** Ink */
+/* Posy */
+/* Embers */
+/** Media query */
+.only-mobile {
+    display: none;
+}
+
+@media (min-width: 200px) and (max-width: 799px) {
+    .only-mobile {
+        display: block;
+    }
+}
+
+article {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    background-color: white;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    padding: 0;
+}
+
+@media (min-width: 200px) and (max-width: 799px) {
+    article {
+        display: block;
+    }
+}
+
+section {
+    order: 1;
+}
+
+@media (min-width: 200px) and (max-width: 799px) {
+    section {
+        order: 2;
+    }
+}
+
+nav {
+    background-color: #e7ecee;
+    color: black;
+    font-size: 0.8rem;
+    order: 2;
+    padding: 10px;
+}
+
+@media (min-width: 200px) and (max-width: 799px) {
+    nav {
+        order: 1;
+    }
+}
+
+nav h3 {
+    margin: 0;
+    font-size: 1rem;
+    padding: 15px;
+}
+
+nav mat-slide-toggle {
+    margin: 15px;
+}
+
+nav h4 {
+    padding: 15px;
+    border-bottom: 1px solid #71919a;
+}
+
+.hidden {
+    display: none;
+}
+
+.expanded {
+    grid-template-columns: 100% 0;
+}
+
+/*# sourceMappingURL=peoplelist.component.css.map */

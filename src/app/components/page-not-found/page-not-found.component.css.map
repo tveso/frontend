@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACA,UAAU;AAEV,WAAW;AAEX,UAAU;AAEV,UAAU;AAEV,YAAY;AAOZ,kBAAkB;ACdlB,OAAQ;EACN,UAAU,ECoBA,4DAAsD;EDnBhE,gBAAgB,EDAH,KAAoB;ECCjC,MAAM,EAAE,IAAI",
-"sources": ["../../../assets/src/abstracts/_variables.scss","page-not-found.component.scss","../../../assets/src/abstracts/_functions.scss"],
-"names": [],
-"file": "page-not-found.component.css"
-}

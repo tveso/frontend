@@ -1,0 +1,66 @@
+<article [class]="(showFilters===false) ? 'expanded': ''">
+    <nav [class]="(showFilters===false) ? 'hidden' : ''">
+        <div class="filterBlock">
+        <h3>Ordenar </h3>
+        <mat-form-field>
+            <mat-select id="orderBy"  [(ngModel)]="params.sort" placeholder="Ordenar por.." (selectionChange)="filterMovies()">
+                <mat-option value="first_air_date">Fecha de estreno ⬇</mat-option>
+                <mat-option value="duration">Duración ⬇</mat-option>
+                <mat-option value="rating.averageRating">Puntuación ⬇</mat-option>
+                <mat-option value="popularity">Popularidad ⬇</mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+        <div class="filterBlock">
+        <h3>Géneros</h3>
+        <mat-form-field >
+            <mat-select placeholder="Géneros" [(ngModel)]="params.genres" (selectionChange)="filterMovies()"  multiple>
+                <mat-option value="{{genre.id}}" *ngFor="let genre of configService.getGenres('movie')">{{genre.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+            <div class="filterBlock">
+            <h3>Duración</h3>
+        <mat-form-field>
+            <mat-select placeholder="Duración" [(ngModel)]="params.duration" (selectionChange)="filterMovies()">
+                <mat-option [value]="undefined">Todas</mat-option>
+                <mat-option value="<=90"> Corta Duración (<90 min)</mat-option>
+                <mat-option value=">90;<=180">Media Duración (<180 min)</mat-option>
+                <mat-option value=">180"> Larga Duración (+180 min)</mat-option>
+            </mat-select>
+        </mat-form-field>
+            </div>
+        <div class="filterBlock">
+        <mat-slide-toggle [(ngModel)]="params.famous" (change)="changeFamous()">Solo películas más conocidas</mat-slide-toggle>
+        <h3>Año de lanzamiento</h3>
+        <mat-form-field>
+            <mat-select placeholder="Año exacto" [(ngModel)]="params.year" (selectionChange)="filterMovies()" multiple>
+                <mat-option [value]="v" *ngFor="let v of range(1900,'currentYear',true)">{{v}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Posterior a" [(ngModel)]="params.yearmin" (selectionChange)="filterMovies()" >
+                <mat-option [value]="undefined">-</mat-option>
+                <mat-option [value]="v" *ngFor="let v of range(1900,'currentYear',true)">{{v}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Anterior a" [(ngModel)]="params.yearmax" (selectionChange)="filterMovies()" >
+                <mat-option [value]="undefined">-</mat-option>
+                <mat-option [value]="v" *ngFor="let v of range(1900,'currentYear',true)">{{v}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+    </nav>
+    <section>
+        <h2>Películas <button style="float:right" mat-flat-button="" (click)="showFilters=!showFilters">Filtrar</button></h2>
+        <app-listnavbar [(params)]="params"></app-listnavbar>
+        <app-itemlist [type]="'movie'" [(items)]="movies" [firstLoad]="firstLoad" [method]="getMovies"
+                      [object]="this" class="items" [loading]="loadingMovies"
+                      [class]="changiParams === true ? 'items loadingMoviesOpacity' : 'items'"
+                      [noLoadMore]="noMoreData">
+        </app-itemlist>
+
+    </section>
+
+</article>

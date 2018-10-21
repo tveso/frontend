@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'typeOfShow'
@@ -11,6 +11,9 @@ export class TypeOfShowPipe implements PipeTransform {
       }
       if (value === 'tvshow') {
         return 'Serie';
+      }
+      if (value === 'person') {
+          return 'Persona';
       }
         return value;
     }

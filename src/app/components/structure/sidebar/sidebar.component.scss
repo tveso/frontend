@@ -1,0 +1,89 @@
+@import "../../../../assets/src/abstracts/abstract";
+:host{
+  box-sizing: border-box;
+}
+.navbar{
+  height: 100vh; /* 100% Full-height */
+  position: fixed;
+  box-shadow: box-shadow('large');
+  z-index:2;
+  color:white;
+  top: 0;
+  left:-25%;
+  background-color:  $c_complementary_2;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  transition: 0.3s left ease-in-out;
+  width: 25%;
+  font-size: 1.1rem;
+  @include respond-between("phone","tablet"){
+    width: 80%;
+  }
+  @include respond-between("tablet","pc") {
+    width: 40%;
+  }
+  h1{
+    font-size: inherit;
+    padding:20px;
+    text-align:  center;
+    margin:0;
+  }
+  ul{
+    li{
+
+      i{
+        margin-right: 5px;
+      }
+      a{
+        display: block;
+        padding:15px;
+        background-color:  tint($color_3_base,20);
+        border-bottom: 1px solid tint($color_3_base,10);
+        transition: all 0.2s ease-in-out;
+        &:hover{
+          background-color:  tint($color_3_base,40);
+
+        }
+      }
+    }
+  }
+  a{
+    color: $color_2_base;
+  }
+}
+.close{
+  cursor: pointer;
+  box-sizing: border-box;
+  float:right;
+  font-size:1.5em;
+  margin:10px;
+}
+
+.show{
+  display: block;
+  left:0;
+}
+.hidden{
+  left:-100%;
+}
+.overlay{
+  position: absolute;
+  top:0;
+  left:0;
+  width:  100%;
+  height: 100%;
+  box-sizing: border-box;
+  z-index:1;
+}
+
+.searchbox{
+  padding:15px;
+  width: 70%;
+}
+
+h2 {
+  font-size: inherit;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
+}

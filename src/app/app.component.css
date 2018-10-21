@@ -20,73 +20,73 @@
 
 .g-1, .select a i {
   grid-column: span 1; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-1, .select a i {
       grid-column: span 4; } }
 
 .g-2 {
   grid-column: span 2; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-2 {
       grid-column: span 4; } }
 
 .g-3 {
   grid-column: span 3; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-3 {
       grid-column: span 4; } }
 
 .g-4 {
   grid-column: span 4; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-4 {
       grid-column: span 4; } }
 
 .g-5 {
   grid-column: span 5; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-5 {
       grid-column: span 6; } }
 
 .g-6 {
   grid-column: span 6; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-6 {
       grid-column: span 6; } }
 
 .g-7 {
   grid-column: span 7; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-7 {
       grid-column: span 6; } }
 
 .g-8 {
   grid-column: span 8; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-8 {
       grid-column: span 6; } }
 
 .g-9 {
   grid-column: span 9; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-9 {
       grid-column: span 12; } }
 
 .g-10 {
   grid-column: span 10; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-10 {
       grid-column: span 12; } }
 
 .g-11, .select a .first {
   grid-column: span 11; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-11, .select a .first {
       grid-column: span 12; } }
 
 .g-12 {
   grid-column: span 12; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  @media (min-width: 200px) and (max-width: 799px) {
     .g-12 {
       grid-column: span 12; } }
 
@@ -94,10 +94,10 @@
   color: inherit; }
 
 .btn-alert {
-  background-color: #f76854;
+  background-color: rgba(216, 117, 117, 0.895);
   color: white; }
   .btn-alert:hover {
-    background-color: #f76854;
+    background-color: rgba(216, 117, 117, 0.895);
     color: white; }
 
 .btn-grey {
@@ -176,12 +176,17 @@
 main {
   margin-left: 3%;
   margin-right: 3%;
-  box-sizing: border-box; }
-  @media (min-width: 200px) and (max-width: 991px) {
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin-bottom: 3%;
+  padding-bottom: 20px; }
+  @media (min-width: 200px) and (max-width: 799px) {
     main {
-      margin-right: 0;
+      margin-right: 0%;
       margin-left: 0;
       padding: 0; } }
+  main > * {
+    box-sizing: border-box; }
 
 .logginPanel {
   width: 25%;

@@ -6,10 +6,16 @@ main{
   margin-left:3%;
   margin-right:3%;
   box-sizing: border-box;
+  min-height: 100vh;
   @include respond-between("phone","tablet"){
-    margin-right: 0;
+    margin-right: 0%;
     margin-left: 0;
     padding: 0;
+  }
+  margin-bottom: 3%;
+  padding-bottom:20px;
+  >*{
+    box-sizing: border-box;
   }
 }
 

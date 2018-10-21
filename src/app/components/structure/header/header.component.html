@@ -1,0 +1,31 @@
+<app-sidebar #show></app-sidebar>
+<div class="header-container">
+    <div class="menu-icon" (click)="show.open()">
+        <mat-icon>menu</mat-icon>
+    </div>
+    <h1><a routerLink=""><img src="assets/images/logo_web.png" width="100px"></a></h1>
+    <nav>
+        <a *ngFor="let m of menuService.main" [routerLink]="m.link" routerLinkActive="active">
+            <mat-icon>{{m.icon}}</mat-icon>
+            {{m.name}}
+        </a>
+    </nav>
+    <nav>
+        <a class="pointer" [matMenuTriggerFor]="userMenu">
+            <mat-icon>person</mat-icon>
+            {{userService.getUserName()}}
+            <mat-menu #userMenu="matMenu" class="floatMenu">
+                <a *ngFor="let m of menuService.user" class="floatMenu-link" [routerLink]="m.link"
+                   routerLinkActive="active">
+                    <mat-icon>{{m.icon}}</mat-icon>
+                    {{m.name}}
+                </a>
+            </mat-menu>
+
+        </a>
+
+    </nav>
+    <app-searchbox></app-searchbox>
+
+</div>
+

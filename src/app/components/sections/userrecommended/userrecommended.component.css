@@ -1,0 +1,23 @@
+.recommendedShows {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 5%;
+}
+
+.recommendedShows div {
+    box-sizing: border-box;
+}
+
+.cast {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: 2%;
+    box-sizing: border-box;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+/*# sourceMappingURL=userrecommended.component.css.map */

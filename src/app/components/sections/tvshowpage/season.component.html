@@ -1,0 +1,50 @@
+<div class="content">
+    <article [class]="'sidebar '+showInfo">
+         <span class="showInfo"><button mat-flat-button (click)="showInfo=(showInfo==='') ? 'show_side_bar' : ''">
+        {{(showInfo!=='') ? 'Ocultar' : 'Mostrar más'}}
+    </button></span>
+        <h2>Fecha estreno</h2>
+        {{selectedSeason.air_date}}
+        <h2>Puntuación</h2>
+        {{getSeasonAverageRating()}} <i class="fa fa-star"></i>
+        <div><small>{{getTotalNumVotes()}} votos totales</small></div>
+        <h2>Temporadas</h2>
+        <ul class="seasonsInfo">
+            <li *ngFor="let s of show.seasons">
+                <ng-container *ngIf="s.episodes?.length>0">
+                    <a [routerLink]="['/tvshow',show._id,'season']"
+                       [queryParams]="{'number': s.season_number }"
+                       [queryParamsHandling]="'merge'" routerLinkActive="active">{{s.name}}</a>
+                </ng-container>
+            </li>
+
+        </ul>
+        <h2>Otros</h2>
+        <ul class="sidebarUtils">
+            <li><a [routerLink]="['/tvshow/episodes']" >Lista de todos los episodios</a></li>
+        </ul>
+    </article>
+    <article>
+        <h1>{{selectedSeason.name}}</h1>
+        <ng-container *ngIf="selectedSeason.overview">
+        <h2>Sinopsis</h2>
+        <app-readmore [text]="selectedSeason.overview"></app-readmore>
+        </ng-container>
+        <h1>Episodios <small (click)="showFilter=!showFilter">Más</small></h1>
+        <div [hidden]="showFilter!=true" class="filterEpisodes">
+            <h2>Ordenar</h2>
+            <mat-form-field style="margin-right: 10px;">
+                <mat-select placeholder="Ordenar por" (selectionChange)="order()" [(value)]="orderType">
+                    <mat-option *ngFor="let option of options" [value]="option.value">
+                        {{option.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <ul class="episodeList">
+            <li *ngFor="let e of selectedSeason.episodes">
+                <app-tvshowepisode [episode]="e" [alternativePosterPath]="show.backdrop_path"></app-tvshowepisode>
+            </li>
+        </ul>
+    </article>
+</div>

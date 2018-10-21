@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import {Movie} from '../entities/movie';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {Api} from '../entities/api';
-import {Observable, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 import {SecurityService} from './security.service';
+import {StorageService} from './persistence/storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ import {SecurityService} from './security.service';
 export class ConfigService {
     private genres: any;
     private _config = new Subject<any>();
-    constructor(private http: HttpClient, private securityService: SecurityService) { }
+    constructor(private http: HttpClient, private securityService: SecurityService, private storage: StorageService) { }
     private apiuri = `${Api.API_URL}config/`;
 
     init() {
@@ -22,15 +22,17 @@ export class ConfigService {
                 this._config.complete();
             }
         };
-        this.getGenresResources().subscribe((a) => {
+        this.storage.get('genres', this.getGenresResources()).subscribe((a) => {
             this.genres = a;
             finished  += 1;
             checkDone();
         });
-        this.securityService.checkAuth().subscribe((a) => {
+        this.storage.get('user', this.securityService.checkAuth()).subscribe((a) => {
+            this.securityService.user = a.user;
             finished  += 1;
             checkDone();
         });
+        this.storage.init();
         return this._config.asObservable();
 
     }

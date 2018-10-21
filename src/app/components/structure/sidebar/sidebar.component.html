@@ -1,0 +1,27 @@
+<div class="navbar" [ngClass]="(show === true) ? 'show' : 'hidden'">
+    <div class="close" (click)="show=false"><i class="fa fa-close"></i></div>
+    <h1><a routerLink="/"> TVesame</a></h1>
+    <div class="searchbox">
+        <h2>Buscar</h2>
+        <app-searchbox></app-searchbox>
+    </div>
+    <ul>
+        <li *ngFor="let m of menuService.main">
+            <a [routerLink]="m.link" routerLinkActive="active">
+                <mat-icon>{{m.icon}}</mat-icon>
+                {{m.name}}
+            </a>
+        </li>
+    </ul>
+    <h2><a routerLink="/user/profile"> {{userService.getUserName()}}</a></h2>
+    <ul>
+        <li *ngFor="let m of menuService.user">
+            <a [routerLink]="m.link" routerLinkActive="active">
+                <mat-icon>{{m.icon}}</mat-icon>
+                {{m.name}}
+            </a>
+        </li>
+    </ul>
+
+</div>
+<div class="overlay" (click)="show=false" [hidden]="show!==true"></div>

@@ -1,0 +1,44 @@
+@import "../../../../assets/src/abstracts/abstract";
+
+.person {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 80%;
+  max-height: 80%;
+  .person-image {
+    box-sizing: border-box;
+  }
+  .person-name {
+    position: absolute;
+    bottom: 2px;
+    font-weight: bold;
+    width: 100%;
+    left: 0;
+    background-color: rgba($color_1_base, 0.5);
+    color: $color_2_base;
+    font-size: 0.8em;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+  .person-rol {
+    font-size: 0.8em;
+    padding: 8px;
+    border-radius: 4pt;
+    position: absolute;
+    font-weight: bold;
+    right: 5px;
+    top: 5px;
+    background-color: rgba($color_1_base, 0.55);
+    color: $color_2_base;
+  }
+}
+
+.example-viewport {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+}
+
+.example-item {
+  height: 50px;
+}

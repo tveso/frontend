@@ -1,0 +1,26 @@
+<article class="panel">
+    <h1>Tus recomendaciones</h1>
+    <div class="container">
+        <div class="info">
+            <ng-container *ngIf="!firstLoad">
+                <app-placeholderitems></app-placeholderitems>
+            </ng-container>
+            <ng-container *ngIf="recommended.length>0">
+                Te recomendamos estas series por los siguientes atributos:
+                <h3>Géneros</h3>
+                <app-genre [genre]="genre" *ngFor="let genre of genres|slice:0:5"></app-genre>
+                <h3>Actores y actrices</h3>
+                <div class="cast">
+                    <app-personitem *ngFor="let c of casts" [person]="c"></app-personitem>
+                </div>
+            </ng-container>
+        </div>
+        <div class="shows">
+            <h2>Películas recomendadas</h2>
+            <app-itemlist [type]="'movie'" [(items)]="recommended" [firstLoad]="firstLoad" [method]="updatePage"
+                          [object]="this" class="items"
+                          [noLoadMore]="noMoreData">
+            </app-itemlist>
+        </div>
+    </div>
+</article>

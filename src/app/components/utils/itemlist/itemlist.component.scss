@@ -1,0 +1,26 @@
+@import "../../../../assets/src/abstracts/abstract";
+@import "../../../../assets/src/layouts/_grids.css";
+
+.items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 1%;
+  @include respond-between('phone', 'tablet') {
+    grid-template-columns: 1fr 1fr;
+  }
+  margin-top: 30px !important;
+  li {
+    width: 100%;
+    height: 150px;
+    display: inline-table;;
+  }
+}
+
+.loading {
+  margin: 15px 15px 15px 40%;
+  padding: 15px;
+}
+
+.loadingMoviesOpacity {
+  opacity: 0.34;
+}

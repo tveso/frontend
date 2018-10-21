@@ -4,8 +4,8 @@
 <app-header></app-header>
 <main>
 <router-outlet></router-outlet>
+    <app-footer></app-footer>
 </main>
-<app-footer></app-footer>
 </ng-container>
 </ng-container>
 <div class="container" *ngIf="securityService.loggedIn()===false || dataLoaded===false">
@@ -14,8 +14,8 @@
     <ng-container *ngIf="dataLoaded===false">
         <app-loading></app-loading>
     </ng-container>
-    <ng-container *ngIf="securityService.loggedIn()===false && dataLoaded===true">
-        <app-login></app-login>
-    </ng-container>
+        <ng-container *ngIf="dataLoaded===true">
+            <router-outlet></router-outlet>
+        </ng-container>
     </div>
 </div>

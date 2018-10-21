@@ -1,0 +1,13 @@
+<a routerLink="/person/{{person?.id}}">
+    <div class="person">
+        <div class="person-image">
+            <app-tmdbimage [image]="person?.profile_path"></app-tmdbimage>
+        </div>
+        <div class="person-name">
+            {{person?.name}}
+        </div>
+        <div class="person-rol" *ngIf="getKnownAs()">
+            {{getKnownAs()}}
+        </div>
+    </div>
+</a>

@@ -1,0 +1,122 @@
+@import "../../../../../assets/src/abstracts/abstract";
+@import "../../../../../assets/src/layouts/_grids.css";
+@import "../../../../../assets/src/components/components.css";
+
+form {
+  border: none;
+}
+
+.form {
+  padding: 15px;
+  background-color: rgba($color_2_base, 0.15);
+  box-shadow: box-shadow('medium');
+  width: 90%;
+  height: min-content;
+  margin: auto;
+}
+
+label {
+  display: block;
+}
+
+.input {
+  width: 90%;
+  box-sizing: border-box;
+}
+
+button {
+  display: block;
+  background-color: $color_3_base;
+  color: white;
+  margin: 10px;
+  width: 95%;
+}
+
+.red {
+  color: tint($color_5_base, 20);
+  font-size: 0.8em;
+}
+
+img {
+  width: 300px;
+  max-width: max-content;
+  margin: 0 auto;
+}
+
+.new {
+  border-radius: 3px;
+  border: 1px solid tint($color_4_base, 70);
+  padding: 10px;
+  background-color: rgba($color_2_base, 0.15);
+  width: 90%;
+  margin: 10px auto auto !important;
+  a {
+    color: $color_2_base;
+  }
+}
+
+.social-button {
+  height: 40px;
+  border-width: 0;
+  background: $color_2_base;
+  cursor: pointer;
+  color: #737373;
+  border-radius: 5px;
+  white-space: nowrap;
+  box-shadow: box-shadow('soft');
+  transition-property: background-color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  padding: 0;
+
+  &:focus,
+  &:hover {
+    box-shadow: box-shadow('medium');
+  }
+
+  &:active {
+    background-color: #e5e5e5;
+    box-shadow: none;
+    transition-duration: 10ms;
+  }
+}
+
+.twitter-icon {
+  img {
+    width: 40px;
+    vertical-align: middle;
+  }
+}
+
+.google-button__icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 8px 0 8px 8px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+}
+
+.google-button__icon--plus {
+  width: 27px;
+}
+
+.google-button__text {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Roboto', arial, sans-serif;
+}
+
+.twitter-button {
+  @extend .social-button;
+  background-color: rgba(0, 172, 237, 1);
+  color: white;
+  &:active {
+    background-color: rgba(0, 172, 237, 1);
+    box-shadow: none;
+    transition-duration: 10ms;
+  }
+}

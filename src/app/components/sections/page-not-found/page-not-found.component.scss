@@ -1,0 +1,7 @@
+@import "../../../../assets/src/abstracts/abstract";
+
+article {
+  box-shadow: box-shadow("medium");
+  background-color: $color_2_base;
+  margin: 15px;
+}

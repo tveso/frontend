@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Movie} from '../entities/movie';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Api} from '../entities/api';
@@ -22,8 +22,12 @@ export class FindService {
         return this.http.get<Movie[]>(`${this.apiuri}all`, {params: params});
     }
 
-    recommend(id) {
-        return this.http.get<any[]>(`${this.apiuri}recommend/${id}`);
+    recommend(id, page = 1) {
+        return this.http.get<any[]>(`${this.apiuri}recommend/${id}?page=${page}`);
+    }
+
+    getRecommendedUser(page = 1) {
+        return this.http.get<any>(`${this.apiuri}recommend/user?page=${page}`);
     }
 
     search(query: Observable<string>, limit): Observable<Movie[]> {
