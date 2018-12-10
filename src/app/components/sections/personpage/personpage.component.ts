@@ -6,80 +6,53 @@ import {ImageService} from '../../../services/image.service';
 @Component({
     selector: 'app-personpage',
     templateUrl: './personpage.component.html',
-    styleUrls: ['./personpage.component.css']
+    styleUrls: ['./personpage.component.scss']
 })
 export class PersonpageComponent implements OnInit {
-    noMoreData = false;
-    private person: any;
-    private poster = '';
-    private page = 1;
-    private showShows = [];
-    private shows = [];
+    person: any;
+    poster = '';
+    public callback;
+    private jobs: any;
 
-    constructor(private activatedRouter: ActivatedRoute, private router: Router, private imageService: ImageService) {
+    constructor(private activatedRouter: ActivatedRoute, private router: Router, private imageService: ImageService,
+                private peopleService: PeopleService) {
     }
 
     ngOnInit() {
+        this.getShows();
         this.activatedRouter.data.subscribe((data) => {
-            if (Object.keys(data).length === 0 && data.constructor === Object) {
-                this.router.navigate(['/home']);
-            }
             this.person = data['person'];
-            this.person.shows = this.person.crew.concat(this.person.cast);
             this.poster = '';
-            this.getBackground();
-            this.getTypeShows('movie');
+            this.getShows();
         });
     }
-
-    getBackground() {
-        if (this.person.shows.length === 0 || this.poster !== '') {
-            return;
-        }
-        const randomShow = this.person.shows[Math.floor(Math.random() * this.person.shows.length)];
-        console.log(randomShow);
-        const path = randomShow.backdrop_path;
-        const poster = this.imageService.getImageUrl(path, 'w1280');
-        this.poster = `url(${poster})`;
-    }
-
-    getProfileImage(profile_path: any) {
+    getProfileImage() {
         const poster = this.imageService.getImageUrl(this.person.profile_path, 'w1280');
         return `url(${poster})`;
     }
-
-    getTypeShows(typeShows) {
-        this.page = 1;
-        this.shows = [];
-        this.noMoreData = false;
-        console.log(this.person.shows);
-        this.showShows = this.person.shows.filter((a) => {
-            return a.type === typeShows;
-        });
-        this.getShows();
-    }
-
-    changeTab(typeOfShow) {
-        typeOfShow = (typeOfShow === 0) ? 'movie' : 'tvshow';
-        this.getTypeShows(typeOfShow);
-    }
-
-    nextPage() {
-        this.page += 1;
-        this.getShows();
+    private load(params) {
+       return this.peopleService.getShowsByPerson(this.person.id, params);
     }
 
     private getShows() {
-        const page = this.page;
-        const limit = 30;
-        const skip = page * limit;
-        if (this.showShows.length <= skip + limit) {
-            this.noMoreData = true;
-            this.shows = this.showShows;
-            return;
-        }
-        this.shows = this.showShows.slice(0, skip);
+        this.callback = this.load.bind(this);
     }
+    getMoreInfo(show) {
+        if (show.typecredit === 'cast') {
+            return show.character;
+        }
+        if (show.typecredit === 'crew') {
+            return `${show.job}<br>${show.department}`;
+        }
+    }
+
+    getAge() {
+        const birthday = new Date(this.person.birthday);
+        const ageDifMs = Date.now() - birthday.getTime();
+        const ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
 }
 
 @Injectable()

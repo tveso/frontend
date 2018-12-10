@@ -1,0 +1,6 @@
+<input class="input" type="file" #fileInput accept="image/*" (change)="onFilesAdded()"  maxlength="5120" />
+<button mat-flat-button="" (click)="addFile()">{{bottonText}}</button>
+<img #imgPreview/>
+<ul class="errors" *ngFor="let error of errors">
+    <li>{{error}}</li>
+</ul>

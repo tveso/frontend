@@ -3,17 +3,19 @@
 <ng-container  *ngIf="securityService.loggedIn()===true">
 <app-header></app-header>
 <main>
-<router-outlet></router-outlet>
+    <ng-container *ngIf="loading===true">
+        <article class="mat-card">
+            <app-spinner> Estamos cargando el contenido...</app-spinner>
+        </article>
+    </ng-container>
+<router-outlet *ngIf="loading===false"></router-outlet>
     <app-footer></app-footer>
 </main>
 </ng-container>
 </ng-container>
-<div class="container" *ngIf="securityService.loggedIn()===false || dataLoaded===false">
-    <div>
+<div class="container" *ngIf="securityService.loggedIn()===false && dataLoaded===true">
+    <div class="container-main">
         <img src="assets/images/logo_web.png" title="Logo de Tveso">
-    <ng-container *ngIf="dataLoaded===false">
-        <app-loading></app-loading>
-    </ng-container>
         <ng-container *ngIf="dataLoaded===true">
             <router-outlet></router-outlet>
         </ng-container>

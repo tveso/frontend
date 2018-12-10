@@ -1,0 +1,35 @@
+@import "../../../../assets/src/abstracts/abstract";
+
+.badges{
+  margin:10px;
+  position: relative;
+  >*{
+    cursor: pointer;
+  }
+}
+.shows{
+  display: grid!important;
+  grid-template-columns: repeat(auto-fill, 16%);
+  @include respond-between('phone', 'tablet') {
+    grid-template-columns: auto auto;
+  }
+  grid-column-gap: 2%;
+  .show{
+    position: relative;
+  }
+}
+
+.selected{
+  background-color: rgba($color_2_base, 0.65);
+}
+.no-selected{
+
+}
+.selectMovie{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index:2;
+}

@@ -1,4 +1,8 @@
-<input type="search" [class]="wclass" (focus)="focused=true" (blur)="focused=false" placeholder="Buscar"
+<div class="container">
+<button class="mobile-button" (click)="openSearchBox()">
+    <mat-icon>search</mat-icon></button>
+<div class="searchContainer" [class]="(opened === true) ? 'searchContainer' : 'searchContainer hide'">
+<input type="search" [class]="wclass" (focus)="focused=true" (blur)="focused=false" placeholder="Buscar películas, series o personas..."
        [formControl]="searchControl" #searchText (keyup.enter)="searchBox()"/>
 <button class="button" (click)="searchBox()" [disabled]="searchText.value.length===0">
     <mat-icon>search</mat-icon>
@@ -13,9 +17,8 @@
         No se han encontrado resultados
     </span>
     <ul>
-        <li *ngIf="getResultsByType('movie').length>0" class="sub-menu">Películas</li>
-        <li *ngFor="let m of getResultsByType('movie')|slice:0:3">
-            <a routerLink="{{m.type}}/{{m._id}}">
+        <li *ngFor="let m of results">
+            <a routerLink="{{Movie.getUrl(m)}}">
                 <div class="imageWrapper">
                     <app-tmdbimage image="{{m.poster_path}}" size="w92"></app-tmdbimage>
                 </div>
@@ -23,27 +26,9 @@
                     <small>{{m.type|typeOfShow}}</small>
                 </h1>
             </a></li>
-        <li *ngIf="getResultsByType('tvshow').length>0" class="sub-menu">Series</li>
-        <li *ngFor="let m of getResultsByType('tvshow')|slice:0:3">
-            <a routerLink="{{m.type}}/{{m._id}}">
-                <div class="imageWrapper">
-                    <app-tmdbimage image="{{m.poster_path}}" size="w92"></app-tmdbimage>
-                </div>
-                <h1>{{m | moviename}}
-                    <small>{{m.type|typeOfShow}}</small>
-                </h1>
-            </a></li>
-        <li *ngIf="getResultsByType('person').length>0" class="sub-menu">Personas</li>
-        <li *ngFor="let m of getResultsByType('person')|slice:0:3">
-            <a routerLink="{{m.type}}/{{m._id}}">
-                <div class="imageWrapper">
-                    <app-tmdbimage image="{{m.profile_path}}" size="w92"></app-tmdbimage>
-                </div>
-                <h1>{{m | moviename}}
-                    <small>{{m.type|typeOfShow}}</small>
-                </h1>
-            </a></li>
-        <li *ngIf="results.length>0"><a routerLink="/search" [queryParams]="{query: searchControl.value}">Más
-            resultados</a></li>
     </ul>
+        <div *ngIf="results.length>0" class="more-results"><a routerLink="/search" [queryParams]="{query: searchControl.value}">Más
+            resultados</a></div>
+</div>
+</div>
 </div>

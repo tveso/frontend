@@ -10,7 +10,8 @@
   color:white;
   top: 0;
   left:-25%;
-  background-color:  $c_complementary_2;
+  background-color: #29323c;
+  border-right: 1px solid shade($color_3_base,50);
   box-sizing: border-box;
   overflow-x: hidden;
   transition: 0.3s left ease-in-out;
@@ -37,11 +38,11 @@
       a{
         display: block;
         padding:15px;
-        background-color:  tint($color_3_base,20);
-        border-bottom: 1px solid tint($color_3_base,10);
-        transition: all 0.2s ease-in-out;
+        text-transform: uppercase;
+        font-weight: lighter;
+
         &:hover{
-          background-color:  tint($color_3_base,40);
+          background-color: rgba($color_2_base,0.1) ;
 
         }
       }

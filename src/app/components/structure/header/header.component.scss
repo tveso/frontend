@@ -11,21 +11,42 @@
   }
 }
 nav{
-  display: grid;
-  grid-template-columns: auto auto auto auto;
   a{
   }
 }
 
+.header-container-mobile{
+  @extend .header-container;
+  display: block!important;
+  a{
+    padding:20px;
+    margin:0 auto;
+  }
+  .first-row{
+    display: grid;
+    grid-template-columns: min-content 1fr auto;
+    a{
+      padding:5px;
+    }
+  }
+  .second-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+.right-menu{
+  display:grid;
+  grid-template-columns:  auto auto;
+}
+
 .header-container {
   display: grid;
-  grid-template-columns: min-content min-content 2fr auto auto;
+  grid-template-columns: min-content min-content auto auto;
   max-width: 100%;
-  box-shadow: box-shadow('soft');
   margin: 0;
   color: $color_2_base;
   align-items: center;
-  background-color: shade($color_3_base, 20);
 }
 
 .menu-button{
@@ -45,9 +66,6 @@ a{
   margin: 0;
   padding: 20px;
   display: inline-table;
-  @include respond-between('phone','tablet'){
-    display: none;
-  }
   &:hover{
     border-radius: 4px;
     background-color: rgba($color_1_base,0.2);
@@ -68,9 +86,6 @@ h1{
   display: inline-block;
   font-size: 1.5em;
   margin: 0;
-  @include respond-between('phone','tablet'){
-    display: none;
-  }
 }
 .menu-icon{
   font-size:1.2em;
@@ -85,4 +100,16 @@ h1{
 .floatMenu-link {
   text-shadow: none;
   display: block;
+}
+
+.only-mobile{
+  display: none!important;
+  @include respond-between('phone','tablet'){
+    display: inherit!important;;
+  }
+}
+.only-pc{
+  @include respond-between('phone','tablet'){
+    display: none;
+  }
 }

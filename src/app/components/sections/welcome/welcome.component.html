@@ -1,3 +1,37 @@
-<article style="width: 30%">
-    <app-calendar [object]="object" [handler]="openDay" [filteredFunction]="filterEpisodesOnAir"></app-calendar>
-</article>
+<section>
+    <article>
+        <h1>Películas de moda
+            <small><a [routerLink]="['/movies']"  [queryParams]="{sort: 'popularity'}">Ver mas</a> </small>
+        </h1>
+        <div class="mainShows">
+            <div class="col-{{i}}"  *ngFor="let m of popularMovies; let i = index">
+                <app-movieitem [movie]="m" [mode]="'backdrop'"></app-movieitem>
+            </div>
+
+        </div>
+    </article>
+    <article>
+        <small><a [routerLink]="['/calendar','mycalendar']">Ver mas</a> </small>
+        <app-mycalendar></app-mycalendar>
+        <h1>Mis capítulos pendientes
+            <small><a [routerLink]="['/movies']"  [queryParams]="{sort: 'popularity'}">Ver mas</a> </small>
+        </h1>
+        <div class="episodes">
+            <div  *ngFor="let e of pendingEpisodes">
+                <app-tvshowepisode [episode]="e" [mode]="'compact'"></app-tvshowepisode>
+            </div>
+        </div>
+    </article>
+    <article>
+        <h1>Series en emisión hoy</h1>
+        <div class="mainShows">
+            <div class="col-{{j}}"  *ngFor="let m of playingTvshows; let j = index">
+                <app-movieitem [movie]="m" [mode]="'backdrop'"></app-movieitem>
+            </div>
+
+        </div>
+    </article>
+    <article>
+        <h1>Tus amigos</h1>
+    </article>
+</section>

@@ -4,10 +4,10 @@ import {MessageService} from '../../../services/message.service';
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css']
+  styleUrls: ['./spinner.component.scss']
 })
 export class SpinnerComponent implements OnInit {
-    private error = false;
+    error = false;
    @Input() public className = '';
    @Input() numSpin = 5;
    @Input() type = 'circles';

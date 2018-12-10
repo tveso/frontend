@@ -1,0 +1,20 @@
+@import "../../../../../assets/src/abstracts/abstract";
+
+
+.spoilerBox{
+  border: 1px solid shade($color_2_base,15);
+  background-color: shade($color_2_base,5);
+  padding:5px;
+  margin-top:5px;
+  margin-bottom:5px;
+  .spoilerText{
+    margin:6px;
+  }
+  .spoilerTitle{
+    font-weight: bold;
+  }
+}
+a{
+  cursor: pointer;
+  color:inherit;
+}

@@ -3,5 +3,31 @@
 article {
   box-shadow: box-shadow("medium");
   background-color: $color_2_base;
-  margin: 15px;
+  margin:0 auto;
+  text-align: center
+}
+q {
+  quotes: "“" "”" "‘" "’";
+  font-size:2em;
+  color:tint($color_1_base, 30);
+  margin: 30px;
+  display: block;
+}
+.reference{
+  font-size:1.5em;
+  margin:15px;
+}
+q:before {
+  content: open-quote;
+}
+q:after {
+  content: close-quote;
+}
+h1{
+  font-size:4em;
+}
+img {
+  display:block;
+  margin:0 auto;
+  width: 50%;
 }

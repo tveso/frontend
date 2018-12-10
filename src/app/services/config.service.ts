@@ -28,7 +28,7 @@ export class ConfigService {
             checkDone();
         });
         this.storage.get('user', this.securityService.checkAuth()).subscribe((a) => {
-            this.securityService.user = a.user;
+            this.securityService.setUser(a.user);
             finished  += 1;
             checkDone();
         });

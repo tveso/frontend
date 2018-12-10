@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommentService} from '../../../services/comment.service';
 import {MatSnackBar} from '@angular/material';
 import {Commentable} from '../../../entities/commentable';
@@ -9,11 +9,12 @@ import {UserService} from '../../../services/user.service';
 @Component({
     selector: 'app-comment-section',
     templateUrl: './comment-section.component.html',
-    styleUrls: ['./comment-section.component.css']
+    styleUrls: ['./comment-section.component.scss']
 })
 export class CommentSectionComponent extends Commentable implements OnInit {
     loadingComments: boolean;
     seeComment = null;
+    @Input() entity;
     private originalResource: any;
     private originalComments: Array<any>;
     private page = 1;

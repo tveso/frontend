@@ -3,7 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 @Component({
   selector: 'app-listnavbar',
   templateUrl: './listnavbar.component.html',
-  styleUrls: ['./listnavbar.component.css']
+  styleUrls: ['./listnavbar.component.scss']
 })
 export class ListnavbarComponent implements OnInit {
 
@@ -25,6 +25,10 @@ export class ListnavbarComponent implements OnInit {
     }
 
     getDateObject() {
-        return (this.params.type === 'movie') ? {sort: 'release_date'} : {sort: 'first_air_date'} ;
+        let sortBy: any = {};
+        sortBy = (this.params.type === 'movie') ? {sort: 'release_date'} : {sort: 'first_air_date'} ;
+        sortBy.released_shows = true;
+
+        return sortBy;
     }
 }

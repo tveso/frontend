@@ -1,0 +1,14 @@
+@import "../../../../assets/util";
+
+.input {
+  display: none;
+}
+
+img{
+  width: 200px;
+  display: none;
+}
+
+.errors{
+  color:$color_5_base;
+}

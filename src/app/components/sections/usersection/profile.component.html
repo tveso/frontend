@@ -1,0 +1,92 @@
+<article class="profile" *ngIf="user">
+    <header>
+        <img  class="avatar" [src]="user?.getAvatar()" />
+        <div class="userInfo">
+            <h2><a routerLink="/user/{{user?.username}}/profile">{{user.username|capitalize}}</a></h2>
+            <div class="badges" *ngIf="profileInfo">
+                <a [routerLink]="['/user', user?.username, 'tvshows']" [queryParams]="{'mode': ['following', 'finalized']}">
+                <span class="badge" matRipple>
+                    <mat-icon>tv</mat-icon> Series vistas
+                    <span class="badge-number">
+                    {{profileInfo.count.tvshow_following_count + profileInfo.count.tvshow_finalized_count}}
+                        </span>
+                </span>
+                </a>
+                <a [routerLink]="['/user', user?.username, 'movies']" [queryParams]="{'mode': ['watched']}">
+                <span class="badge" matRipple>
+                    <mat-icon>movie</mat-icon> Películas vistas
+                    <span class="badge-number">
+                    {{profileInfo.count.movie_watched_count}}
+                        </span>
+                </span>
+                </a>
+                <span class="badge" matRipple>
+                    <mat-icon>visibility</mat-icon> Episodios vistos
+                    <span class="badge-number">
+                    {{profileInfo.count.episode_watched_count}}
+                        </span>
+                </span>
+                <a [routerLink]="['/user', user?.username, 'movies']" [queryParams]="{'mode': ['pending']}">
+                <span class="badge" matRipple>
+                    <mat-icon>movie</mat-icon> Películas pendientes
+                    <span class="badge-number">
+                    {{profileInfo.count.movie_pending_count}}
+                        </span>
+                </span>
+                </a>
+                    <a [routerLink]="['/user', user?.username, 'tvshows']" [queryParams]="{'mode': ['pending']}">
+                <span class="badge" matRipple>
+                    <mat-icon>tv</mat-icon> Series pendientes
+                    <span class="badge-number">
+                    {{profileInfo.count.tvshow_pending_count}}
+                        </span>
+                </span>
+                    </a>
+            </div>
+        </div></header>
+    <h2>Series favoritas</h2>
+    <div *ngIf="profileInfo">
+        <div *ngIf="profileInfo.tvshow_favorites.length === 0">
+            El usuario no tiene ninguna serie favorita seleccionada
+        </div>
+    <div class="items">
+
+        <div class="item" *ngFor="let show of profileInfo.tvshow_favorites">
+            <app-movieitem [movie]="show"></app-movieitem>
+        </div>
+    </div>
+    </div>
+    <h2>Películas favoritas</h2>
+    <div *ngIf="profileInfo">
+        <div *ngIf="profileInfo.movie_favorites.length === 0">
+            El usuario no tiene ninguna película favorita seleccionada
+        </div>
+    <div class="items">
+        <div class="item" *ngFor="let show of profileInfo.movie_favorites">
+            <app-movieitem [movie]="show"></app-movieitem>
+        </div>
+    </div>
+    </div>
+    <h2>Últimas películas vistas</h2>
+    <div *ngIf="profileInfo">
+        <div *ngIf="profileInfo.movie_last_watched.length === 0">
+            El usuario no ha visto ninguna película
+        </div>
+    <div class="items">
+        <div class="item" *ngFor="let show of profileInfo.movie_last_watched">
+            <app-movieitem [movie]="show"></app-movieitem>
+        </div>
+    </div>
+    </div>
+    <h2>Últimos capítulos de series vistos</h2>
+    <div *ngIf="profileInfo">
+    <div *ngIf="profileInfo.episode_last_watched.length === 0">
+        El usuario no ha visto ningún episodio
+    </div>
+    <div class="items">
+        <div class="item" *ngFor="let show of profileInfo.episode_last_watched">
+            <app-movieitem [movie]="show"></app-movieitem>
+        </div>
+    </div>
+    </div>
+</article>

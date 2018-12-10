@@ -1,12 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {ErrorHandler, LOCALE_ID, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './components/structure/header/header.component';
 import {FooterComponent} from './components/structure/footer/footer.component';
 import {PageNotFoundComponent} from './components/sections/page-not-found/page-not-found.component';
-import {DialogEpisodeToWatchComponent, WelcomeComponent} from './components/sections/welcome/welcome.component';
+import { WelcomeComponent} from './components/sections/welcome/welcome.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TmdbimageComponent} from './components/models/tmdbimage/tmdbimage.component';
 import {MovieitemComponent} from './components/models/movieitem/movieitem.component';
@@ -15,27 +15,18 @@ import {MovienamePipe} from './pipes/moviename.pipe';
 import {RequestCache, RequestCacheWithMap} from './services/request-cache.service';
 import {MessageService} from './services/message.service';
 import {SidebarComponent} from './components/structure/sidebar/sidebar.component';
-import {ListMoviesCompressComponent} from './components/models/list-movies-compress/list-movies-compress.component';
 import {TypeOfShowPipe} from './pipes/type-of-show.pipe';
 import {SpinnerComponent} from './components/utils/spinner/spinner.component';
-import {MoviepageComponent} from './components/sections/moviepage/moviepage.component';
-import {MovieInfoPageResolver} from './components/sections/moviepage/moviepageResolver';
 import {GenreComponent} from './components/models/genre/genre.component';
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import {PopularResolver} from './components/sections/welcome/WelcomeResolver';
-import {
-    SeasonComponent,
-    TvImagesComponent,
-    TvInfoComponent,
-    TvshowpageComponent
-} from './components/sections/tvshowpage/tvshowpage.component';
-import {TvShowInfoPageResolver} from './components/sections/tvshowpage/TvShowpageResolver';
 import {RoutesList} from './routes';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReadmoreComponent} from './components/utils/readmore/readmore.component';
 import {MovielistComponent} from './components/sections/movielist/movielist.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
-import {ErrorHandlerInterceptor} from './interceptors/error.handler-interceptor';
+import {ErrorHandlerInterceptor, MyErrorHandler} from './interceptors/error.handler-interceptor';
 import {TvshowlistComponent} from './components/sections/tvshowlist/tvshowlist.component';
 import {MaterialModule} from './modules/material.module';
 import {SearchResultResolver, SearchResultsComponent} from './components/sections/search-results/search-results.component';
@@ -70,8 +61,36 @@ import {PersonitemComponent} from './components/models/personitem/personitem.com
 import {ItemlistComponent} from './components/utils/itemlist/itemlist.component';
 import {PlaceholderitemsComponent} from './components/utils/placeholderitems/placeholderitems.component';
 import {PersonpageComponent, PersonpageResolver} from './components/sections/personpage/personpage.component';
-
-
+import { SafePipe } from './pipes/safe.pipe';
+import { RandomPipe } from './pipes/random.pipe';
+import { ShowSelectorComponent } from './components/utils/show-selector/show-selector.component';
+import { ItembadgeComponent } from './components/models/itembadge/itembadge.component';
+import {
+    SeasonComponent, ShowCastComponent,
+    ShowpageComponent,
+    TvImagesComponent,
+    TvInfoComponent
+} from './components/sections/showpage/showpage-component.service';
+import {MovieInfoPageResolver, TvShowInfoPageResolver} from './components/sections/showpage/ShowPageResolver';
+import { ItemsComponent } from './components/models/items/items.component';
+import {
+    UserLoggedResolver,
+    UserMoviesComponent,
+    UserProfileComponent, UserProfileResolver,
+    UsersectionComponent,
+    UserTvshowsComponent
+} from './components/sections/usersection/usersection.component';
+import { UploadfileComponent } from './components/utils/uploadfile/uploadfile.component';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { ScrollDirective } from './directives/scroll.directive';
+import {
+    CalendarMoviesComponent,
+    CalendarsectionComponent,
+    CalendarTvshowsComponent, MyCalendarComponent
+} from './components/sections/calendarsection/calendarsection.component';
+import localeEs from '@angular/common/locales/es';
+import {registerLocaleData} from '@angular/common';
+registerLocaleData(localeEs, 'es');
 // Configs
 export function getAuthServiceConfigs() {
     return new AuthServiceConfig(
@@ -89,22 +108,20 @@ const appRoutes: Routes = RoutesList;
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    PageNotFoundComponent,
-    WelcomeComponent,
-      ListMoviesCompressComponent,
-    TmdbimageComponent,
-    MovieitemComponent,
-    SearchboxComponent,
-    MovienamePipe,
-    SidebarComponent,
-    TypeOfShowPipe,
-    SpinnerComponent,
-      MoviepageComponent,
+      AppComponent,
+      HeaderComponent,
+      FooterComponent,
+      PageNotFoundComponent,
+      WelcomeComponent,
+      TmdbimageComponent,
+      MovieitemComponent,
+      SearchboxComponent,
+      MovienamePipe,
+      SidebarComponent,
+      TypeOfShowPipe,
+      SpinnerComponent,
       GenreComponent,
-      TvshowpageComponent,
+      ShowpageComponent,
       SeasonComponent,
       TvInfoComponent,
       ReadmoreComponent,
@@ -118,7 +135,6 @@ const appRoutes: Routes = RoutesList;
       HomeComponent,
       CalendarComponent,
       YoutubeComponent,
-      DialogEpisodeToWatchComponent,
       TvImagesComponent,
       FollowComponent,
       CommentSectionComponent,
@@ -128,6 +144,7 @@ const appRoutes: Routes = RoutesList;
       ConfirmDialogComponent,
       ExtraMdTagsPipe,
       SpoilerComponent,
+      ShowCastComponent,
       RatingComponent,
       LogoutComponent,
       RegisterComponent,
@@ -138,6 +155,22 @@ const appRoutes: Routes = RoutesList;
       ItemlistComponent,
       PlaceholderitemsComponent,
       PersonpageComponent,
+      SafePipe,
+      RandomPipe,
+      ShowSelectorComponent,
+      ItembadgeComponent,
+      MyCalendarComponent,
+      ItemsComponent,
+      UsersectionComponent,
+      UserProfileComponent,
+      UserMoviesComponent,
+      UserTvshowsComponent,
+      UploadfileComponent,
+      CapitalizePipe,
+      ScrollDirective,
+      CalendarsectionComponent,
+      CalendarMoviesComponent,
+      CalendarTvshowsComponent
   ],
   imports: [
     BrowserModule,
@@ -146,6 +179,7 @@ const appRoutes: Routes = RoutesList;
       FormsModule,
       ContentLoaderModule,
       LoadingBarRouterModule,
+      LoadingBarHttpClientModule,
       BrowserAnimationsModule,
       MaterialModule,
       CovalentTextEditorModule,
@@ -161,7 +195,7 @@ const appRoutes: Routes = RoutesList;
       }),
       RouterModule.forRoot(
           appRoutes,
-          { enableTracing: false }
+          { enableTracing: false,  useHash: false, anchorScrolling: 'enabled'}
       )
   ],
   providers: [
@@ -177,15 +211,18 @@ const appRoutes: Routes = RoutesList;
       TvShowInfoPageResolver,
       SearchResultResolver,
       PersonpageResolver,
+      UserLoggedResolver,
+      UserProfileResolver,
       CookieService,
+      {provide: ErrorHandler, useClass: MyErrorHandler},
       WINDOW_PROVIDERS,
       {
           provide: AuthServiceConfig,
           useFactory: getAuthServiceConfigs
-      }
+      },
   ],
   bootstrap: [AppComponent],
-    entryComponents: [LinksComponent, DialogEpisodeToWatchComponent, ConfirmDialogComponent, SpinnerComponent, ShowRecommendedComponent]
+    entryComponents: [LinksComponent,  SpinnerComponent, ShowRecommendedComponent, ConfirmDialogComponent]
 })
 
 export class AppModule { }

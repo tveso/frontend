@@ -4,11 +4,12 @@ import {RatingService} from '../../../services/rating.service';
 @Component({
     selector: 'app-rating',
     templateUrl: './rating.component.html',
-    styleUrls: ['./rating.component.css']
+    styleUrls: ['./rating.component.scss']
 })
 export class RatingComponent implements OnInit {
     @Input() resource;
     emojis = ['😖', '😟', '😐', '🙂', '😍'];
+    text = ['Malisimo', 'Malo', 'Meh', 'Bueno', 'Flipante'];
     value = 5;
     rating = false;
     userRate: boolean | number | any;
@@ -29,7 +30,7 @@ export class RatingComponent implements OnInit {
 
     getRating() {
         const rating = this.resource.rating;
-        if (typeof rating === 'undefined') {
+        if (typeof rating === 'undefined' || rating === null) {
             return this.resource.vote_average;
         }
         if (rating.averageRating === '\N') {
@@ -39,7 +40,6 @@ export class RatingComponent implements OnInit {
     }
 
     getClass(i) {
-        const length = this.emojis.length;
         const val = i * 2;
         if (this.value < val) {
             return 'opacity';

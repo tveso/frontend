@@ -30,5 +30,15 @@ export class PeopleService {
     getById(id: any) {
         return this.http.get<any[]>(`${this.apiuri}${id}`);
     }
+
+    getShowsByPerson(id: any, options) {
+        let params = new HttpParams();
+        for (const o in options) {
+            if (options.hasOwnProperty(o)) {
+                params = params.append(o, options[o]);
+            }
+        }
+        return this.http.get<any[]>(`${this.apiuri}${id}/shows`, {params: params});
+    }
 }
 

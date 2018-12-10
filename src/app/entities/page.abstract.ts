@@ -10,6 +10,8 @@ import {TitleService} from '../services/title.service';
 import {Observable} from 'rxjs';
 import {MessageService} from '../services/message.service';
 import {TvshowService} from '../services/tvshow.service';
+import {RecommendatorService} from '../services/recommendator.service';
+import {EventsService} from '../services/events.service';
 
 @Injectable({
     providedIn: 'root'
@@ -28,17 +30,17 @@ export class PageAbstract implements OnInit {
         'Co-Executive Producer': 'Co-Productor Ejecutivo',
         'Production': 'Productor'
     };
-    public genreNumbers =  2;
-    public showInfo = '';
     loadingRecommnededMovies = false;
-    public recommendedShows: any[];
+    public recommendedShows: any;
     public show: any;
     protected recommendShowsPage = 1;
+    public poster;
 
     constructor(protected imageService: ImageService, protected findService: FindService,
                 protected activatedRouter: ActivatedRoute,
-                public dialog: MatDialog, protected titleService: TitleService, protected utilService: UtilService,
-                protected  sharedService: SharedService, protected messageService: MessageService, protected tvshowService: TvshowService) {}
+                public dialog: MatDialog, protected titleService: TitleService, public utilService: UtilService,
+                protected  sharedService: SharedService, protected messageService: MessageService,
+                protected tvshowService: TvshowService, protected recommendatorService: RecommendatorService, protected eventsService: EventsService) {}
 
     ngOnInit() {
         this.activatedRouter.data.subscribe((data) => {
@@ -59,10 +61,16 @@ export class PageAbstract implements OnInit {
     getRecommendedShows(page) {
         this.loadingRecommnededMovies = false;
         this.recommendedShows = [];
-        this.findService.recommend(this.show._id, page).subscribe((a) => {
+        this.recommendatorService.byShow(this.show._id, page).subscribe((a) => {
             this.recommendedShows = a;
             this.loadingRecommnededMovies = true;
         });
+    }
+    getReleaseDate() {
+        if (this.show.type === 'movie') {
+            return this.show.release_date;
+        }
+        return this.show.first_air_date;
     }
     getTrailer(m) {
         if (typeof m.videos === 'undefined') {
@@ -77,10 +85,6 @@ export class PageAbstract implements OnInit {
         });
 
         return result;
-    }
-    getBackground(resource) {
-        const poster = this.imageService.getImageUrl(resource.backdrop_path, 'w1280');
-        return `url(${poster})`;
     }
     moreRecommendedShows() {
         this.dialog.open(ShowRecommendedComponent, {

@@ -1,11 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {DialogEpisodeToWatchComponent} from '../../sections/welcome/welcome.component';
 
 @Component({
     selector: 'app-confirm-dialog',
     templateUrl: './confirm-dialog.component.html',
-    styleUrls: ['./confirm-dialog.component.css']
+    styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent {
     public title: any = 'Confirmar acción';
@@ -14,7 +13,6 @@ export class ConfirmDialogComponent {
     public cancelButton: 'Cancelar';
 
     constructor(
-        public dialogRef: MatDialogRef<DialogEpisodeToWatchComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.title = (typeof data.title !== 'undefined') ? data.title : this.title;
         this.message = (typeof data.message !== 'undefined') ? data.message : this.message;
@@ -23,11 +21,9 @@ export class ConfirmDialogComponent {
     }
 
     onNoClick(): void {
-        this.dialogRef.close();
     }
 
     closeDialog() {
-        this.dialogRef.close();
     }
 
 

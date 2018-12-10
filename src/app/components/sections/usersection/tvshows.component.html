@@ -1,0 +1,22 @@
+<article class="content" *ngIf="user">
+  <h1>Series {{getCurrentMode()}}</h1>
+  <div class="filter-links">
+    <a [routerLink]="[]" [class]="((mode.indexOf('following')>-1) ? 'active ' : '') + 'following'"
+       [queryParams]="{'mode': 'following', 'filter': true}" class="following">
+        <mat-icon>arrow_right_alt</mat-icon> Siguiendo
+    </a>
+    <a [routerLink]="[]"  [class]="((mode.indexOf('pending')>-1) ? 'active ' : '') + 'pending'"
+       [queryParams]="{'mode': 'pending', 'filter': true}" class="pending">
+        <mat-icon>hourglass_empty</mat-icon> Pendiente
+    </a>
+    <a [routerLink]="[]"  [class]="((mode.indexOf('finalized')>-1) ? 'active ' : '') + 'watched'"
+       [queryParams]="{'mode': 'finalized', 'filter': true}">
+        <mat-icon>done</mat-icon> Finalizada
+    </a>
+      <a [routerLink]="[]"  [class]="((mode.indexOf('favorite')>-1) ? 'active ' : '') + 'favorite'"
+         [queryParams]="{'mode': 'favorite', 'filter': true}" class="pending"><mat-icon>favorite</mat-icon> Favoritas</a>
+  </div>
+  <app-items [changeQueryParams]="true" type="movie" [options]="{mode: 'following'}" [loadItemsCallback]="callback"
+             [filters]="{showSort:true, years: true, genres: true,
+ famous: true, releasedShows: true, durationMovie: true, searchShow: true, userTv: true}" (paramsOutput)="setMode($event)"></app-items>
+</article>

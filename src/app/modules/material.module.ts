@@ -10,17 +10,18 @@ import {
     MatSnackBarModule,
     MatTabsModule,
 } from '@angular/material';
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NgModule} from '@angular/core';
+import {MatRippleModule} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
     imports: [
         MatMenuModule,
+        MatRippleModule,
         MatButtonModule,
         MatSelectModule,
         MatRadioModule,
@@ -35,7 +36,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         MatIconModule,
         MatTooltipModule,
         MatAutocompleteModule,
-        ScrollDispatchModule
+        MatExpansionModule,
     ],
     exports: [
         MatMenuModule,
@@ -50,10 +51,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         MatTableModule,
         MatSortModule,
         MatTabsModule,
+        MatRippleModule,
         MatIconModule,
         MatTooltipModule,
         MatAutocompleteModule,
-        ScrollDispatchModule
+        MatExpansionModule,
     ]
 })
 

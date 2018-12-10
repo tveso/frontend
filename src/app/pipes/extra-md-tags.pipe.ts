@@ -6,7 +6,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class ExtraMdTagsPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-      const re = /-([a-zA-Z]*)-(.*)-end-/gmi;
+      const re = /-([a-zA-Z]*)-(.*?)-end-/gmiu;
       let m;
       const result: any = [];
       let currentIndex = 0;

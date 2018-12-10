@@ -14,6 +14,14 @@ section {
       background-position: 0 0;
       background-size: 100% auto;
     }
+    .name {
+      position: absolute;
+      left:25%;
+      font-size: 2.6em;
+      text-shadow: 1px 1px 1px $color_1_base;
+      color:$color_2_base;
+      bottom: 0;
+    }
   }
 }
 
@@ -22,8 +30,8 @@ section {
 }
 
 .portrait {
-  width: 112px;
-  height: 200px;
+  width: 172px;
+  height: 250px;
 }
 
 .content {
@@ -48,10 +56,6 @@ section {
     position: relative;
     color: $color_1_base;
     font-size: 0.9em;
-    @include respond-between('phone', 'tablet') {
-      max-height: 100px;
-      overflow: hidden;
-    }
     background-color: tint($color_3_base, 93);
     & > ul {
       @include respond-between('phone', 'tablet') {
@@ -63,9 +67,27 @@ section {
       }
     }
     h3 {
-      font-size: 1em;
-      margin: 0;
-      padding: 0;
+      font-size: 1.5em;
+      margin: 15px;
     }
   }
+}
+
+.showsContainer{
+  h3{
+    a{
+      padding:15px;
+      background-color: tint($color_3_base, 90);
+      cursor: pointer;
+      display: block;
+      color:$color_1_base;
+    }
+  }
+  .activeShows{
+    max-height: 500px;
+  }
+}
+
+.mat-expansion-panel{
+  margin:10px;
 }

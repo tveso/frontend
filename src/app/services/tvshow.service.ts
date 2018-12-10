@@ -20,8 +20,8 @@ export class TvshowService {
         return this.http.get<Movie>(`${this.apiuri}/${_id}/update/${season_number}`);
     }
 
-    getAllLinkByEpisodeSeason(episodeNumber, seasonNumber, id): Observable<any> {
-        return this.http.get<any>(`${this.apiuri}/${id}/links?season=${seasonNumber}&episode=${episodeNumber}`);
+    getSeasonEpisodes(id, seasonNumber): Observable<any> {
+        return this.http.get<any>(`${this.apiuri}/${id}/episodes?season=${seasonNumber}`);
     }
 
     popular(): Observable<any> {

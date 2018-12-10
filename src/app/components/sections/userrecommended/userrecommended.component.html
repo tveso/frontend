@@ -1,26 +1,44 @@
 <article class="panel">
-    <h1>Tus recomendaciones</h1>
+    <h1>Recomendaciones</h1>
     <div class="container">
-        <div class="info">
-            <ng-container *ngIf="!firstLoad">
-                <app-placeholderitems></app-placeholderitems>
-            </ng-container>
-            <ng-container *ngIf="recommended.length>0">
-                Te recomendamos estas series por los siguientes atributos:
-                <h3>Géneros</h3>
-                <app-genre [genre]="genre" *ngFor="let genre of genres|slice:0:5"></app-genre>
-                <h3>Actores y actrices</h3>
-                <div class="cast">
-                    <app-personitem *ngFor="let c of casts" [person]="c"></app-personitem>
-                </div>
-            </ng-container>
+        <div>
+            <h4>Quiero que me recomiendes</h4>
+
+        <mat-form-field style="width: 25%;">
+            <mat-select placeholder="Peliculas o Series" [(ngModel)]="params.type" (valueChange)="update()">
+                <mat-option value="movie">Películas</mat-option>
+                <mat-option value="tvshow">Series</mat-option>
+            </mat-select>
+        </mat-form-field>
         </div>
-        <div class="shows">
-            <h2>Películas recomendadas</h2>
-            <app-itemlist [type]="'movie'" [(items)]="recommended" [firstLoad]="firstLoad" [method]="updatePage"
-                          [object]="this" class="items"
-                          [noLoadMore]="noMoreData">
-            </app-itemlist>
+        <div>
+            <h4>Escoge como quieres que te recomendemos: </h4>
+            <mat-radio-group [(ngModel)]="params.mode" (change)="update()">
+                <mat-radio-button class="radio" value="automatic">
+                   Recomiendame por mis gustos
+                </mat-radio-button>
+                <mat-radio-button class="radio" value="chose">
+                    Recomiendame escogiendo las pelis o series
+                </mat-radio-button>
+            </mat-radio-group>
         </div>
     </div>
+    <button class="button" mat-flat-button="" [disabled]="setDisabled()" (click)="executeFilter()">
+        <ng-container *ngIf="loading===false">Recomiéndame!</ng-container>
+        <ng-container *ngIf="loading===true"><app-spinner type="bars"></app-spinner></ng-container>
+    </button>
+    <mat-expansion-panel *ngIf="params.mode==='chose'" [expanded]="choseShowsExpanded">
+        <mat-expansion-panel-header>
+            Escoge las pelis o series
+        </mat-expansion-panel-header>
+            <app-show-selector (output)="updateSelectedShows($event)" [selecteds]="selectedShows"></app-show-selector>
+    </mat-expansion-panel>
+    <h1>Recomendaciones</h1>
+    <ng-container *ngIf="loading===false && recommended.length===0">
+        Seleccionas los filtros para que te recomendemos series o películas y luego pulsa el botón "Recomiéndame" de arriba
+    </ng-container>
+    <app-itemlist [type]="'movie'" [(items)]="recommended" [firstLoad]="true" [method]="getMoreShows"
+                  [object]="this" class="items" [loading]="loading"
+                  [noLoadMore]="noMoreData" *ngIf="recommended.length>0">
+    </app-itemlist>
 </article>

@@ -1,3 +1,10 @@
-<article>
-    <h1>Upss... La página no existe, lo sentimos mucho</h1>
+
+<article style="margin:0 auto;text-align: center">
+    <h1>ERROR 404</h1>
+    <q>{{quote.quote}}</q>
+    <div class="reference">
+        <a [routerLink]="['/'+quote.type, quote.show]">
+            {{quote.showName}}
+        </a>
+    </div>
 </article>

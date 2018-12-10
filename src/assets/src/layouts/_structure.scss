@@ -4,7 +4,13 @@ main{
 }
 article{
   padding:18px;
+  @include respond-between('phone', 'tablet') {
+    padding:5px;
+  }
 }
 section{
   padding:18px;
+  @include respond-between('phone', 'tablet') {
+    padding:5px;
+  }
 }

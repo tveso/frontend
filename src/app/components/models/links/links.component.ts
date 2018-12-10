@@ -33,10 +33,6 @@ export class LinksComponent implements OnInit {
     }
   ngOnInit() {
         this.loading = true;
-        this.tvshowService.getAllLinkByEpisodeSeason(this.episodeNumber, this.seasonNumber, this.showId).subscribe((data) => {
-            this.links = data;
-            this.loading = false;
-        });
   }
     sortData(sort: Sort) {
         const type = (sort.direction === 'asc') ? -1 : 1;
@@ -46,7 +42,6 @@ export class LinksComponent implements OnInit {
             if ( property === 'quality') {
                 const aq = qualities[a[property]];
                 const bq = qualities[b[property]];
-                console.log((bq - aq) * type);
                 return (bq - aq) * type;
             }
             if ( property === 'language') {

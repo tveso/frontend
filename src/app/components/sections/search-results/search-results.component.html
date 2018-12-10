@@ -9,22 +9,30 @@
             <ng-container *ngIf="getMovies().length===0">
                 No hay resultados de películas de la búsqueda.
             </ng-container>
-            <app-list-movies-compress  [movies]="getMovies()" [listSize]="30" [class]="'g-4'"></app-list-movies-compress>
+            <div class="searchResults">
+                <div *ngFor="let m of getMovies()">
+                    <app-movieitem [movie]="m"></app-movieitem>
+                </div>
+            </div>
         </article>
         <article>
             <h3>Series</h3>
             <ng-container *ngIf="getTvshows().length===0">
                 No hay resultados de series de la búsqueda.
             </ng-container>
-            <app-list-movies-compress  [movies]="getTvshows()" [listSize]="30" [class]="'g-4'"></app-list-movies-compress>
+            <div class="searchResults">
+            <div *ngFor="let m of getTvshows()">
+                <app-movieitem [movie]="m"></app-movieitem>
+            </div>
+        </div>
         </article>
         <article>
             <h3>Personas</h3>
             <ng-container *ngIf="getPeople().length===0">
                 No hay resultados de series de la búsqueda.
             </ng-container>
-            <div class="grid">
-                <div class="g-4" *ngFor="let p of getPeople()">
+            <div class="searchResults">
+                <div *ngFor="let p of getPeople()">
                     <app-personitem [person]="p"></app-personitem>
                 </div>
             </div>

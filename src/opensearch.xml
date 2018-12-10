@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>Tvesame Open Search</ShortName>
-    <Description>Búsqueda de series y películas con OpenSearch</Description>
-    <Url type="application/rss+xml" template="http://tveso.tv:4200/search?query={searchTerms}"/>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+<ShortName>Tvesame Open Search</ShortName>
+<Description>Búsqueda de series y películas con OpenSearch</Description>
+<Url type="text/html" method="get" template="https://www.yarnpkg.com/en/packages?q={searchTerms}"/>
+<InputEncoding>UTF-8</InputEncoding>
 </OpenSearchDescription>

@@ -2,6 +2,7 @@
 
 .grid{
   @extend %gridable;
+  grid-column-gap: 2%;
 }
 
 

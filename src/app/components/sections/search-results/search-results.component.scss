@@ -3,10 +3,12 @@
 article {
   box-shadow: box-shadow("medium");
   background-color: $color_2_base;
+  padding: 30px;
   @include respond-between('phone','tablet'){
     display: block;
+    padding:10px;
   }
-  padding: 30px;
+
 }
 
 section{
@@ -23,4 +25,12 @@ section{
 }
 small{
   font-size:0.9rem;
+}
+.searchResults{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1%;
+  @include respond-between('phone','pc'){
+    grid-template-columns: auto auto;
+  }
 }

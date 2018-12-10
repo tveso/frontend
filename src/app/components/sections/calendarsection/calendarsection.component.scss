@@ -1,0 +1,39 @@
+@import "~src/assets/src/abstracts/abstract";
+.container{
+  background-color: $color_2_base;
+  display: grid;
+  padding: 15px;
+  grid-template-columns: 3fr 1fr;
+  @include respond-between('phone', 'tablet') {
+    display: block;
+  }
+  .content{
+    order:1;
+  }
+  .sidebar{
+    order: 2;
+
+  }
+}
+h1{
+  padding:15px;
+}
+.active{
+  background-color: shade($color_2_base, 4)!important;
+}
+.group{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 2%;
+  @include respond-between('phone', 'tablet') {
+    grid-template-columns: 1fr 1fr ;
+  }
+}
+.controls{
+  padding:5px;
+}
+
+.main{
+  background-color: $color_2_base;
+  padding:0;
+}

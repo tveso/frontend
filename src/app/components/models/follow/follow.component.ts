@@ -4,14 +4,17 @@ import {MatSnackBar} from '@angular/material';
 import {FollowService} from '../../../services/follow.service';
 import {UtilService} from '../../../services/util.service';
 import {UserService} from '../../../services/user.service';
+import {CacheProxyService} from '../../../services/cache-proxy.service';
+import {EventsService} from '../../../services/events.service';
+import {Movie} from '../../../entities/movie';
 
 @Component({
   selector: 'app-follow',
   templateUrl: './follow.component.html',
-  styleUrls: ['./follow.component.css']
+  styleUrls: ['./follow.component.scss']
 })
 export class FollowComponent implements OnInit {
-  @Input() movie;
+  @Input() movie: Movie;
     movieTypes = [
         {
             'name' : 'Pendiente',
@@ -26,10 +29,17 @@ export class FollowComponent implements OnInit {
             'tag': 'watched',
         },
         {
+            'name': 'Favorita',
+            'icon': 'favorite',
+            'show': 'Favorita',
+            'tag': 'favorite'
+        },
+        {
             'name': 'Cancelar',
             'icon': 'cancel',
             'tag': 'cancel'
-        }];
+        },
+        ];
     tvshowTypes = [
         {
             'name' : 'Pendiente',
@@ -50,16 +60,26 @@ export class FollowComponent implements OnInit {
             'tag': 'finalized',
         },
         {
+            'name': 'Favorita',
+            'icon': 'favorite',
+            'show': 'Favorita',
+            'tag': 'favorite'
+        },
+        {
             'name': 'Cancelar',
             'icon': 'cancel',
             'tag': 'cancel'
-        }
+        },
     ];
 
     constructor(public utilService: UtilService, private userService: UserService, private followService: FollowService,
-                public snackbar: MatSnackBar) { }
+                public snackbar: MatSnackBar, private cacheProxyService: CacheProxyService, private eventsService: EventsService) { }
 
   ngOnInit() {
+      const eventEmitter = this.eventsService.listen(`follow_${this.movie._id}`);
+      eventEmitter.subscribe((a) => {
+            this.frontFollow(a);
+        });
   }
 
     getTypes() {
@@ -83,18 +103,22 @@ export class FollowComponent implements OnInit {
         return this.movie.userFollow.mode;
     }
     follow(type) {
+        const follow = this.doesFollow();
+        if (follow === type.tag ) {
+            return;
+        }
       this.frontFollow(type);
-        const tag = type.tag;
-        const typeName = type.name;
-        const user = this.userService.getUser();
-        const name = (typeof this.movie.name !== 'undefined') ? this.movie.name : this.movie.title;
-        this.followService.follow(this.movie._id, tag).subscribe((a) => {
-            if (tag === 'cancel') {
-                this.snackbar.open(`${name} ha sido quitada de la lista de seguimiento`, 'CERRAR', {duration: 2000});
-                return;
-            }
-            this.snackbar.open(`${name} ha sido añadida a la lista '${typeName}'`, 'CERRAR', {duration: 2000});
-        });
+      const tag = type.tag;
+      const typeName = type.name;
+      const user = this.userService.getUser();
+      const name = (typeof this.movie.name !== 'undefined') ? this.movie.name : this.movie.title;
+      this.followService.follow(this.movie._id, tag, this.movie.type).subscribe((a) => {
+          if (tag === 'cancel') {
+              this.snackbar.open(`${name} ha sido quitada de la lista de seguimiento`, 'CERRAR', {duration: 2000});
+              return;
+          }
+          this.snackbar.open(`${name} ha sido añadida a la lista '${typeName}'`, 'CERRAR', {duration: 2000});
+      });
     }
 
     getUserCurrentTag() {
@@ -110,12 +134,12 @@ export class FollowComponent implements OnInit {
 
     private frontFollow(type) {
         const tag = type.tag;
-        const user = this.userService.getUser();
         if (tag === 'cancel') {
             this.movie.userFollow = null;
             return;
         }
         this.movie.userFollow = {};
         this.movie.userFollow.mode = tag;
+        this.cacheProxyService.update(this.movie._id, this.movie);
     }
 }

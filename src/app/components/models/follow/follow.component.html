@@ -3,7 +3,10 @@
   <mat-icon>{{getUserCurrentTag().icon}}</mat-icon> {{getUserCurrentTag().show}}</div>
 <mat-menu #tagMenu="matMenu">
   <ng-template matMenuContent  let-movie="movie">
-    <button mat-menu-item *ngFor="let type of getTypes()" [class]="getClass(type)" (click)="follow(type)">
-      <mat-icon>{{type.icon}}</mat-icon>{{type.name}}</button>
+    <ng-container  *ngFor="let type of getTypes()">
+      <button mat-menu-item [class]="getClass(type)" *ngIf="!(type.tag === 'cancel' && doesFollow() === null)" (click)="follow(type)">
+        <mat-icon>{{type.icon}}</mat-icon>{{type.name}}</button>
+    </ng-container>
+
   </ng-template>
 </mat-menu>

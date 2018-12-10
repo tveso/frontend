@@ -1,0 +1,13 @@
+/* Black*/
+/* white */
+/** Ink */
+/* Posy */
+/* Embers */
+/** Media query */
+.only-mobile {
+  display: none; }
+  @media (min-width: 200px) and (max-width: 991px) {
+    .only-mobile {
+      display: block; } }
+
+/*# sourceMappingURL=util.css.map */

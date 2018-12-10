@@ -1,0 +1,16 @@
+<section class="main">
+    <nav class="navigation">
+        <nav mat-tab-nav-bar>
+            <a mat-tab-link
+               [routerLink]="['/calendar', 'mycalendar']"
+               routerLinkActive="active"
+               [routerLinkActiveOptions]="{exact:true}">
+               Mi Calendario
+            </a>
+            <a mat-tab-link  [routerLink]="['/calendar','tvshows']"  routerLinkActive="active"> Calendario de series
+            </a>
+            <a mat-tab-link [routerLink]="['/calendar', 'movies']" routerLinkActive="active">Calendario de películas</a>
+        </nav>
+    </nav>
+    <router-outlet></router-outlet>
+</section>

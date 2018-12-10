@@ -20,6 +20,9 @@ article{
       box-sizing: border-box;
       color: $color_2_base;
       font-size: 0.75rem;
+      a{
+        color:inherit;
+      }
     }
   h2{
     position: absolute;
@@ -62,4 +65,7 @@ article{
     }
 
   }
+}
+.pointer{
+  cursor: pointer;
 }

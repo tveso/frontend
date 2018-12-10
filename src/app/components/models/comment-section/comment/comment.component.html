@@ -11,9 +11,10 @@
             </div>
         </ng-container>
         <ng-container *ngIf="comment.deleted!==true">
-            <a [routerLink]="['/user',comment.author._id.$oid]">
+            <a [routerLink]="['/user',comment.author._id.$oid]" *ngIf="comment.author">
                 <mat-icon>person</mat-icon>
                 {{comment.author.username}}</a>
+            <span *ngIf="!comment.author">Borrado</span>
             ·
             <small>{{comment.likes - comment.dislikes}} puntos · {{comment.date|timeago}}</small>
         </ng-container>
@@ -52,10 +53,6 @@
         </ng-container>
     </div>
     <div class="comment-replybox" [hidden]="showReply===false">
-        <div class="comment-replybox-preview" *ngIf="commentForm.value">
-            <h3 *ngIf="commentForm.value.text.length>0">Texto previo</h3>
-            <span [innerHtml]="commentForm.value.text|markdown"></span>
-        </div>
         <form [formGroup]="commentForm" (ngSubmit)="post(commentForm.value, comment._id)">
             <div class="textarea">
                 <td-text-editor formControlName="text" [options]="options" minlength="3" maxlength="10000"

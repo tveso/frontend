@@ -16,6 +16,14 @@
   }
 }
 
+.extra{
+  color:$color_1_base;
+  padding:4px;
+  font-size:0.8em;
+  margin-bottom: 5px;
+  border-radius: 4pt;
+}
+
 .loading {
   margin: 15px 15px 15px 40%;
   padding: 15px;
@@ -24,3 +32,86 @@
 .loadingMoviesOpacity {
   opacity: 0.34;
 }
+
+.comment {
+  border: 1px solid shade($color_2_base, 15);
+  padding: 10px;
+  font-size: 0.8rem;
+  margin-left: 1%;
+  margin-top: 10px;
+  p {
+    margin: 0;
+    padding: 0;
+    display: inline;
+  }
+  .comment-info {
+    font-size: 0.9em;
+    small {
+      color: shade($color_2_base, 30);
+      font-size: 0.95em;
+    }
+    .likes {
+      display: inline-table;
+      font-size: 1.2em;
+      color: tint($color_1_base, 60);
+      a {
+        color: inherit;
+        cursor: pointer;
+      }
+      .like {
+        .active {
+          color: tint($color_5_base, 20);
+        }
+        a:hover {
+          color: tint($color_5_base, 20);
+        }
+      }
+      .dislike {
+        .active {
+          color: tint($color_3_base, 20);
+        }
+        a:hover {
+          color: tint($color_3_base, 20);
+        }
+      }
+    }
+  }
+  .comment-toolbar {
+    font-size: 0.9em;
+    color: shade($color_2_base, 15);
+    font-weight: bold;
+    a {
+      cursor: pointer;
+      margin-right: 1.5%;
+    }
+  }
+  .comment-replybox {
+    .comment-replybox-preview {
+      font-size: 0.9em;
+      padding: 5px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+    form {
+      border: 0;
+      padding: 5px;
+      .textarea {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+
+  }
+  a {
+    color: tint($color_4_base, 30);
+    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+button {
+  margin-right: 5px;
+}
+

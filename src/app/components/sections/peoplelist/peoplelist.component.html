@@ -1,43 +1,5 @@
-<article [class]="(showFilters===false) ? 'expanded': ''">
-    <nav [class]="(showFilters===false) ? 'hidden' : ''">
-        <h3>Ordenar </h3>
-        <mat-form-field>
-            <mat-select id="orderBy" [(ngModel)]="params.sort" placeholder="Ordenar por.."
-                        (selectionChange)="filterPeople()">
-                <mat-option value="name">Alfabéticamente ⬇</mat-option>
-                <mat-option value="id">Novedades ⬇</mat-option>
-                <mat-option value="popularity">Popularidad ⬇</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <h3>Género</h3>
-        <mat-form-field>
-            <mat-select placeholder="Géneros" [(ngModel)]="params.gender" (selectionChange)="filterPeople()" multiple>
-                <mat-option value="1">Mujer</mat-option>
-                <mat-option value="2">Hombre</mat-option>
-                <mat-option value="0">Desconocido</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <h3>Lugar de nacimiento</h3>
-        <mat-form-field>
-            <input type="text" [(ngModel)]="params.place_of_birth" placeholder="Lugar de nacimiento..."
-                   aria-label="Lugar de nacimiento..." (keyup.enter)="filterPeople()"
-                   matInput [formControl]="control" [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let option of birthPlaces|slice:0:5" [value]="option" (click)="filterPeople()">
-                    {{option}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </nav>
-    <section>
-        <h2>Personas
-            <button style="float:right" mat-flat-button="" (click)="showFilters=!showFilters">Filtrar</button>
-        </h2>
-        <app-itemlist [type]="'people'" [(items)]="people" [firstLoad]="firstLoad" [method]="getPeople"
-                      [object]="this" class="items" [loading]="loadingPeople"
-                      [class]="changiParams === true ? 'items loadingMoviesOpacity' : 'items'"
-                      [noLoadMore]="noMoreData">
-        </app-itemlist>
-    </section>
-
+<article class="panel">
+    <h1>Personas</h1>
+    <app-items [changeQueryParams]="true" [type]="'people'"  [options]="{type:'people', sort:'popularity'}" [loadItemsCallback]="callback"
+               [filters]="{peopleSort:true, gender: true, placeOfBirth: true, textSearch: true}"></app-items>
 </article>

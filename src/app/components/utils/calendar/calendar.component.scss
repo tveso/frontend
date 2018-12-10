@@ -17,28 +17,64 @@
 .calendar{
   box-shadow: box-shadow('medium');
   font-size:0.9em;
+  .calendar-header{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    h1 {
+      padding:5px;
+      font-size:1.4em;
+      border-radius: 4pt;
+      cursor: pointer;
+      &:hover{
+        background-color: shade($color_2_base,2);
+      }
+    }
+    .calendar-header-controll{
+      div{
+        display: inline-block;
+        font-size:2.2em;
+        cursor: pointer;
+        padding:5px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  padding:5px;
   >*{
     box-sizing: border-box;
   }
-  background-color: shade($color_2_base, 6) ;
+  background-color: $color_2_base;
   color: $color_1_base;
-  .days{
+  .header{
+    border-bottom: solid 1px shade($color_2_base, 10);
     display:grid;
-    grid-template-columns: repeat(7, 14.27%);
+    grid-template-columns: repeat(7, 1fr);
     justify-items: center;
     div{
-      padding:12%;
-      margin:10px;
+      font-size:1.2em;
       justify-items: center;
+      color:  shade($color_2_base, 20);
       box-sizing: border-box;
     }
-    .header{
-      font-size:1.2em;
-      font-weight: bold;
-    }
-    .day{
 
+  }
+  .days{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center;
+    .day{
+      padding: 7px;
+      cursor: pointer;
+      box-sizing: border-box;
+      border-radius: 50%;
+      a{
+        width: 100%;
+        color: inherit;
+        display: block;
+      }
     }
+
   }
 
   .monthBefore, .monthAfter{
@@ -47,11 +83,11 @@
 }
 
 .busyDay{
-  background-color: shade($color_2_base, 20) ;
+  background-color: shade($color_2_base, 5) ;
   border-radius:50%;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   &:hover{
-    background-color: tint($color_3_base, 65) ;
+    background-color: shade($color_2_base, 5) ;
   }
 }

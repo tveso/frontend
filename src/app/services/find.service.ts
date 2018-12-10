@@ -3,13 +3,14 @@ import {Movie} from '../entities/movie';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Api} from '../entities/api';
 import {Observable} from 'rxjs';
+import {CacheProxyService} from './cache-proxy.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FindService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private cacheProxyService: CacheProxyService) { }
     private apiuri = `${Api.API_URL}find/`;
     all(options) {
         let params = new HttpParams();
@@ -18,20 +19,14 @@ export class FindService {
                 params = params.append(o, options[o]);
             }
         }
-
-        return this.http.get<Movie[]>(`${this.apiuri}all`, {params: params});
+        const key = `${this.apiuri}all` + JSON.stringify(params);
+        return this.cacheProxyService.proxy(key,
+            this.http.get<Movie[]>(`${this.apiuri}all`, {params: params}));
     }
 
-    recommend(id, page = 1) {
-        return this.http.get<any[]>(`${this.apiuri}recommend/${id}?page=${page}`);
-    }
 
-    getRecommendedUser(page = 1) {
-        return this.http.get<any>(`${this.apiuri}recommend/user?page=${page}`);
-    }
-
-    search(query: Observable<string>, limit): Observable<Movie[]> {
-        return this.http.get<Movie[]>(`${this.apiuri}search?query=${query}&limit=${limit}`);
+    search(query: Observable<string>, limit, full = false): Observable<any> | (() => Observable<any>) {
+            return this.http.get<Movie[]>(`${this.apiuri}search?query=${query}&limit=${limit}&full=${full}`);
     }
 
 }

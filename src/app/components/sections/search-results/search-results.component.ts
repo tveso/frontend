@@ -7,21 +7,21 @@ import {Observable} from 'rxjs';
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+  styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit {
-    private query: any;
+    query: any;
     results: Movie[] = [];
 
   constructor(private activatedRouter: ActivatedRoute, private findService: FindService) {
   }
 
   ngOnInit() {
+      this.activatedRouter.data.subscribe((a) => {
+          this.results = a['results'];
+      });
       this.activatedRouter.queryParams.subscribe((data) => {
           this.query = data.query;
-          this.findService.search(this.query, 30).subscribe((data2) => {
-              this.results = data2;
-          });
       });
   }
   getMovies() {
@@ -56,7 +56,7 @@ export class SearchResultResolver implements Resolve<Movie> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<any>|Promise<any>|any {
-        return this.findService.search(route.queryParams.query, 30);
+        return this.findService.search(route.queryParams.query, 30, true);
     }
 }
 

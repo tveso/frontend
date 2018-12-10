@@ -4,7 +4,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 @Component({
   selector: 'app-youtube',
   templateUrl: './youtube.component.html',
-  styleUrls: ['./youtube.component.css']
+  styleUrls: ['./youtube.component.scss']
 })
 export class YoutubeComponent implements OnInit {
 

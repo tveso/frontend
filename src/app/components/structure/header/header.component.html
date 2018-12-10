@@ -1,5 +1,5 @@
 <app-sidebar #show></app-sidebar>
-<div class="header-container">
+<div class="header-container only-pc">
     <div class="menu-icon" (click)="show.open()">
         <mat-icon>menu</mat-icon>
     </div>
@@ -10,12 +10,12 @@
             {{m.name}}
         </a>
     </nav>
-    <nav>
+    <nav class="right-menu">
         <a class="pointer" [matMenuTriggerFor]="userMenu">
             <mat-icon>person</mat-icon>
             {{userService.getUserName()}}
             <mat-menu #userMenu="matMenu" class="floatMenu">
-                <a *ngFor="let m of menuService.user" class="floatMenu-link" [routerLink]="m.link"
+                <a *ngFor="let m of menuUser" class="floatMenu-link" [routerLink]="m.link"
                    routerLinkActive="active">
                     <mat-icon>{{m.icon}}</mat-icon>
                     {{m.name}}
@@ -23,9 +23,32 @@
             </mat-menu>
 
         </a>
-
+        <app-searchbox></app-searchbox>
     </nav>
-    <app-searchbox></app-searchbox>
-
 </div>
+<div class="header-container-mobile only-mobile">
+    <div class="first-row">
+    <div class="menu-icon" (click)="show.open()">
+        <mat-icon>menu</mat-icon>
+    </div>
+        <h1><a routerLink=""><img src="assets/images/logo_web.png" width="100px"></a></h1>
+    <app-searchbox></app-searchbox>
+    </div>
+    <nav class="second-row">
+        <a *ngFor="let m of menuService.main" [routerLink]="m.link" routerLinkActive="active">
+            <mat-icon>{{m.icon}}</mat-icon>
+        </a>
+        <a class="pointer" [matMenuTriggerFor]="userMenu">
+            <mat-icon>person</mat-icon>
+            <mat-menu #userMenu="matMenu" class="floatMenu">
+                <a *ngFor="let m of menuUser" class="floatMenu-link" [routerLink]="m.link"
+                   routerLinkActive="active">
+                    <mat-icon>{{m.icon}}</mat-icon>
+                    {{m.name}}
+                </a>
+            </mat-menu>
+        </a>
+    </nav>
+</div>
+
 

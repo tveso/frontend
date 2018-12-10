@@ -8,8 +8,9 @@ form {
 
 .form {
   padding: 15px;
-  background-color: rgba($color_2_base, 0.15);
+  background-color: rgba($color_2_base, 1);
   box-shadow: box-shadow('medium');
+  color: $color_1_base;
   width: 90%;
   height: min-content;
   margin: auto;
@@ -34,7 +35,7 @@ button {
 
 .red {
   color: tint($color_5_base, 35);
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 img {
@@ -118,5 +119,18 @@ img {
     background-color: rgba(0, 172, 237, 1);
     box-shadow: none;
     transition-duration: 10ms;
+  }
+}
+
+.form-control{
+  position: relative;
+  input{
+    padding-left:30px;
+  }
+  .icon{
+    position: absolute;
+    left:15px;
+    color:tint($color_1_base, 50);
+    top:21px;
   }
 }

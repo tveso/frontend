@@ -1,15 +1,6 @@
-import {MovieInfoPageResolver} from './components/sections/moviepage/moviepageResolver';
-import {
-    SeasonComponent,
-    TvImagesComponent,
-    TvInfoComponent,
-    TvshowpageComponent
-} from './components/sections/tvshowpage/tvshowpage.component';
 import {PageNotFoundComponent} from './components/sections/page-not-found/page-not-found.component';
 import {PopularResolver} from './components/sections/welcome/WelcomeResolver';
 import {WelcomeComponent} from './components/sections/welcome/welcome.component';
-import {MoviepageComponent} from './components/sections/moviepage/moviepage.component';
-import {TvShowInfoPageResolver} from './components/sections/tvshowpage/TvShowpageResolver';
 import {MovielistComponent} from './components/sections/movielist/movielist.component';
 import {TvshowlistComponent} from './components/sections/tvshowlist/tvshowlist.component';
 import {SearchResultResolver, SearchResultsComponent} from './components/sections/search-results/search-results.component';
@@ -20,32 +11,68 @@ import {UserrecommendedComponent} from './components/sections/userrecommended/us
 import {AuthGuard} from './auth/auth.guard';
 import {PeoplelistComponent} from './components/sections/peoplelist/peoplelist.component';
 import {PersonpageComponent, PersonpageResolver} from './components/sections/personpage/personpage.component';
+import {
+    SeasonComponent, ShowCastComponent,
+    ShowpageComponent,
+    TvImagesComponent,
+    TvInfoComponent
+} from './components/sections/showpage/showpage-component.service';
+import {MovieInfoPageResolver, TvShowInfoPageResolver} from './components/sections/showpage/ShowPageResolver';
+import {
+    UserLoggedResolver,
+    UserMoviesComponent,
+    UserProfileComponent, UserProfileResolver,
+    UsersectionComponent,
+    UserTvshowsComponent
+} from './components/sections/usersection/usersection.component';
+import {
+    CalendarMoviesComponent,
+    CalendarsectionComponent,
+    CalendarTvshowsComponent, MyCalendarComponent
+} from './components/sections/calendarsection/calendarsection.component';
+
 
 const RoutesList = [
-    {path : '', canActivate: [AuthGuard], children: [
-            { path: '', component: WelcomeComponent,  data: {title: 'Novedades', needAuth: 'ROLE_USER'}, resolve: {
+    {path : '', children: [
+            { path: '', canActivate: [AuthGuard], component: WelcomeComponent,  data: {title: 'Novedades', needAuth: 'ROLE_USER'}, resolve: {
                     popular: PopularResolver
                 }
             },
-            { path: 'home', component: WelcomeComponent,   data: {title: 'Novedades', needAuth: 'ROLE_USER'}, resolve: {
+            { path: 'home',  canActivate: [AuthGuard], component: WelcomeComponent,   data: {title: 'Novedades', needAuth: 'ROLE_USER'}, resolve: {
                     popular: PopularResolver
                 }
             },
-            {path: 'movies', component: MovielistComponent, data: {title: 'Películas', needAuth: 'ROLE_USER'}},
-            {path: 'people', component: PeoplelistComponent, data: {title: 'Personas', needAuth: 'ROLE_USER'}},
-            {path: 'search', component: SearchResultsComponent, data: {needAuth: 'ROLE_USER'}, resolve: {
+            {path: 'movies', canActivate: [AuthGuard],  component: MovielistComponent, data: {title: 'Películas', needAuth: 'ROLE_USER'}},
+            {path: 'people',  canActivate: [AuthGuard], component: PeoplelistComponent, data: {title: 'Personas', needAuth: 'ROLE_USER'}},
+            {path: 'search',  canActivate: [AuthGuard], component: SearchResultsComponent,
+                data: {needAuth: 'ROLE_USER'}, resolve: {
                     results: SearchResultResolver
                 }},
-            {path: 'tvshows',  component: TvshowlistComponent, data: {title: 'Series',  needAuth: 'ROLE_USER'}},
-            {path: 'recommendations',  component: UserrecommendedComponent,
+            {path: 'tvshows',   canActivate: [AuthGuard],  component: TvshowlistComponent, data: {title: 'Series',  needAuth: 'ROLE_USER'}},
+            {path: 'recommendations',   canActivate: [AuthGuard],  component: UserrecommendedComponent,
                 data: {title: 'Recomendaciones',  needAuth: 'ROLE_USER'}},
-            {path: 'movie/:id', component: MoviepageComponent, resolve: {
-                    show: MovieInfoPageResolver,
-                }, data: { needAuth: 'ROLE_USER'}},
-            {path: 'person/:id', component: PersonpageComponent, resolve: {
+            {path: 'calendar',   canActivate: [AuthGuard],  component: CalendarsectionComponent,
+                data: {title: 'Calendario',  needAuth: 'ROLE_USER'}, children: [
+                    {path: '', redirectTo: '/calendar/mycalendar',  pathMatch: 'full'},
+                    {path: 'movies', component: CalendarMoviesComponent,  canActivate: [AuthGuard],
+                        data: { title: 'Calendario de estrenos de Películas', needAuth: 'ROLE_USER'}},
+                    {path: 'mycalendar', component: MyCalendarComponent,  canActivate: [AuthGuard],
+                        data: { title: 'Mi calendario', needAuth: 'ROLE_USER'}},
+                    {path: 'tvshows', component: CalendarTvshowsComponent,  canActivate: [AuthGuard],
+                        data: { title: 'Calendario de estrenos de Series', needAuth: 'ROLE_USER'}},
+                ]},
+            {path: 'movie/:name/:id', component: ShowpageComponent,   canActivate: [AuthGuard],  resolve: {
+                    show: MovieInfoPageResolver},  data: { needAuth: 'ROLE_USER'}, children: [
+                    {path: '', component: TvInfoComponent
+                    },
+                    {path: 'recommended', component: TvInfoComponent},
+                    {path: 'images', component: TvImagesComponent},
+                    {path: 'cast', component: ShowCastComponent}
+                ]},
+            {path: 'person/:id', component: PersonpageComponent,   canActivate: [AuthGuard], resolve: {
                     person: PersonpageResolver,
                 }, data: { needAuth: 'ROLE_USER'}},
-            {path: 'tvshow/:id', component: TvshowpageComponent,  resolve: {
+            {path: 'tvshow/:name/:id', component: ShowpageComponent,  canActivate: [AuthGuard],   resolve: {
                     show: TvShowInfoPageResolver},  data: { needAuth: 'ROLE_USER'}, children: [
                     {path: 'season', component: SeasonComponent
                     },
@@ -53,10 +80,17 @@ const RoutesList = [
                     },
                     {path: 'recommended', component: TvInfoComponent},
                     {path: 'images', component: TvImagesComponent},
+                    {path: 'cast', component: ShowCastComponent}
+                ]},
+            {path: 'user/:user', component: UsersectionComponent, resolve: {user: UserLoggedResolver},   canActivate: [AuthGuard],  data: { needAuth: 'ROLE_USER'}, children: [
+                    {path: '', redirectTo: 'profile', pathMatch: 'full'},
+                    {path: 'profile', component: UserProfileComponent, resolve: {userInfo: UserProfileResolver},  data: {title: 'Perfil de usuario'}},
+                    {path: 'movies', component: UserMoviesComponent,   data: {title: 'Películas'}},
+                    {path: 'tvshows', component: UserTvshowsComponent,  data: {title: 'Series'}},
                 ]},
             {path: 'login', component: LoginComponent, data: {title: 'Entrar'}},
             {path: 'register', component: RegisterComponent, data: {title: 'Registro'}},
-            {path: 'logout', component: LogoutComponent, data: {needAuth: 'ROLE_USER'}},
+            {path: 'logout', component: LogoutComponent,  canActivate: [AuthGuard],  data: {needAuth: 'ROLE_USER'}},
             { path: '**', component: PageNotFoundComponent }
         ]}
 ];

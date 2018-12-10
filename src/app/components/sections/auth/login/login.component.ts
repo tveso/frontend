@@ -9,11 +9,11 @@ import {WINDOW} from '../../../../provider/windowProvider';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-    public model: User = new User();
+    public model: User = new User({});
     public loading = false;
     public errors = [];
 
@@ -30,6 +30,12 @@ export class LoginComponent implements OnInit {
             }
             if (typeof a.denied !== 'undefined') {
                 this.window.close();
+            }
+        });
+        this.securityService.isLogged().subscribe((a) => {
+            if (a !== null) {
+                this.router.navigate(['/home']);
+                return;
             }
         });
     }

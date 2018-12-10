@@ -1,0 +1,33 @@
+<div class="content">
+    <article class="sidebar" [class]="'sidebar '+showInfo">
+    <span class="showInfo"><button mat-flat-button (click)="showInfo=(showInfo==='') ? 'show_side_bar' : ''">
+        {{(showInfo!=='') ? 'Ocultar' : 'Mostrar más'}}
+    </button></span>
+        <h2>Series Recomendadas</h2>
+        <ng-container *ngIf="!loadingRecommnededMovies">
+            Cargando series recomendadas...
+            <div>
+                <app-spinner></app-spinner>
+            </div>
+        </ng-container>
+        <div class="recommendedShows">
+            <div class="show" *ngFor="let show of recommendedShows|slice:0:6">
+                <app-movieitem [movie]="show"></app-movieitem>
+            </div>
+        </div>
+        <ng-container *ngIf="recommendedShows.length>0 && loadingRecommnededMovies===true">
+            <button mat-flat-button="" style="margin:15px;display:block" (click)="moreRecommendedShows()">Cargar más</button>
+        </ng-container>
+        <h2>Enlaces</h2>
+        <a target="_blank" href="https://imdb.com/title/{{show._id}}">
+            <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/512/IMDb-icon.png" width="50"/>
+        </a>
+    </article>
+    <article>
+        <h2>Sinopsis</h2>
+        <p>{{show.overview}}</p>
+        <h2 *ngIf="getTrailer(show)"></h2>
+        <!--<app-youtube [id]="getTrailer(tvshow)"></app-youtube>-->
+        <app-comment-section [entity]="show" [resource]="show._id" [comments]="show.comments"></app-comment-section>
+    </article>
+</div>

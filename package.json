@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --proxy-config proxy.conf.json --disable-host-check",
+    "start": "ng serve  --open --proxy-config proxy.conf.json --disable-host-check  --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +24,8 @@
     "@angular/router": "^7.0.0",
     "@covalent/text-editor": "^2.0.0-beta.2",
     "@netbasal/content-loader": "^2.0.0",
+    "@ngx-loading-bar/http": "latest",
+    "@ngx-loading-bar/http-client": "latest",
     "@ngx-loading-bar/router": "^2.1.1",
     "@rxjs/rx": "^4.1.0",
     "angular-6-social-login-v2": "^1.0.5",
@@ -35,6 +37,7 @@
     "ngx-infinite-scroll": "^6.0.1",
     "ngx-markdown": "^6.3.0",
     "rxjs": "^6.3.3",
+    "ts-md5": "^1.2.4",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -44,7 +47,7 @@
     "@angular/language-service": "^7.0.0",
     "@types/jasmine": "^2.8.9",
     "@types/jasminewd2": "^2.0.5",
-    "@types/node": "~8.9.4",
+    "@types/node": "^8.9.5",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

@@ -1,0 +1,35 @@
+<div class="content">
+    <article class="sidebar"  [class]="'sidebar '+showInfo">
+            <span class="showInfo"><button mat-flat-button (click)="showInfo=(showInfo==='') ? 'show_side_bar' : ''">
+        {{(showInfo!=='') ? 'Ocultar' : 'Mostrar más'}}
+    </button></span>
+        <h2>Personas</h2>
+        <ul class="menu">
+            <li><a (click)="anchorLink(crew)">Equipo de producción</a> </li>
+            <li><a (click)="anchorLink(cast)">Actores y Actrices</a> </li>
+        </ul>
+        <h2>Productoras</h2>
+        <div class="production_companie" *ngFor="let comp of show.production_companies">
+            <h4>{{comp.name}}</h4>
+            <div class="logo" *ngIf="comp.logo_path !=='' && comp.logo_path!==null">
+                <app-tmdbimage image="{{comp.logo_path}}"></app-tmdbimage>
+            </div>
+
+        </div>
+    </article>
+    <article>
+        <h2 #crew>Equipo de producción</h2>
+        <div class="cast">
+            <div  *ngFor="let i of show.credits.crew" >
+                    <app-personitem  [extras]="true" [person]="i"></app-personitem>
+            </div>
+        </div>
+
+    <h2 #cast>Actores y Actrices</h2>
+        <div class="cast">
+            <div  *ngFor="let i of show.credits.cast"  >
+            <app-personitem [extras]="true" [person]="i"></app-personitem>
+            </div>
+        </div>
+    </article>
+</div>

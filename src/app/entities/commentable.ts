@@ -14,7 +14,7 @@ export class Commentable {
     showReply = false;
     @Input() comment;
     public options: any;
-    protected   commentForm = new FormGroup({
+    public  commentForm = new FormGroup({
         text: new FormControl('')
     });
 
@@ -25,12 +25,10 @@ export class Commentable {
     }
 
     post(data, parent) {
-        console.log(data);
         this.loading = true;
         this.model = {};
         data.parent =  parent;
         data.author = this.userService.getUser();
-        console.log(data.author);
         data.likes = 0;
         data.dislikes = 0;
         data.author._id = data.author.id;

@@ -1,0 +1,19 @@
+@import "../../../../assets/util";
+:host{
+  display: inline-table;
+  margin: 6px;
+}
+.badge{
+  display: grid;
+  grid-column-gap: 5px;
+  font-size:0.9em;
+  grid-template-columns: auto auto;
+  padding:6px;
+  border-radius: 4px;
+  box-shadow: box-shadow('soft');
+  background-color: $color_2_base;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    background-color: shade($color_2_base, 7);
+  }
+}

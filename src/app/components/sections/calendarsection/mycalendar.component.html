@@ -1,0 +1,44 @@
+
+<h1>Mi calendario</h1>
+<div class="container">
+
+
+<div class="calendar">
+    <div class="calendar-header">
+        <h1 matRipple (click)="content = (content==='calendar') ? 'yearSelector' : 'calendar'">{{getCurrentMonthInWord()}}
+            <mat-icon>arrow_drop_down</mat-icon></h1>
+        <div class="calendar-header-controll">
+            <div matRipple (click)="controlLess()"><mat-icon>chevron_left</mat-icon></div>
+            <div matRipple (click)="controlMore()"><mat-icon>chevron_right</mat-icon></div>
+        </div>
+    </div>
+    <div class="content" *ngIf="content==='calendar'">
+        <div class="header">
+            <div class="header" *ngFor="let weekDay of ['Lun','Mar','Mie','Jue','Vie','Sab','Dom']">{{weekDay}}
+            </div>
+        </div>
+        <div class="days">
+            <div *ngFor="let day of this.days"  class="day" >
+                <span [ngStyle]="getBgColor(day)" matRipple="" [matRippleTrigger]="trigger">
+                    <a (click)="clickHandler(day)" #trigger   >{{day.day}}</a>
+                </span>
+                <ul class="day-events">
+                    <li [style.background-color]="bgColour(episode.show.name)" matTooltip="{{episode.show.name}}
+                        {{getNumericalEpisode(episode)}}" *ngFor="let episode of getEpisodesFromDate(day.date)">
+                       {{episode.show.name}}
+                        {{getNumericalEpisode(episode)}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content" *ngIf="content==='yearSelector'">
+        <div class="days">
+            <div  *ngFor="let year of this.years" class="day">
+                <span matRipple="" [matRippleTrigger]="trigger">
+                      <a (click)="changeYear(year)" #trigger  >{{year}}</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

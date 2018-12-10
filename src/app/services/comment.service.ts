@@ -28,4 +28,8 @@ export class CommentService {
     delete(id: any) {
         return this.http.get<any>(`${this.apiuri}${id}/delete?time=${new Date().getTime()}`);
     }
+
+    getTmdbReviews(id: any, type: any, page = 1) {
+        return this.http.get<any>(`${this.apiuri}${id}/tmdbreviews?page=${page}&type=${type}`);
+    }
 }

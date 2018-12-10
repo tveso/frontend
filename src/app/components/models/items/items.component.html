@@ -1,0 +1,163 @@
+<article [class]="(showFilters===false) ? 'expanded': ''">
+  <nav [class]="(showFilters===false) ? 'hidden' : ''">
+    <button style="float:right" mat-icon-button="" (click)="showFilters=!showFilters"><mat-icon>close</mat-icon></button>
+      <div class="filterBlock" *ngIf="filters.userMovie === true">
+          <h3>Películas que...</h3>
+          <mat-form-field>
+              <mat-select  [(ngModel)]="params.mode" placeholder="Películas que..." (selectionChange)="filter()" multiple="true">
+                  <mat-option value="pending">Tiene pendienes</mat-option>
+                  <mat-option value="watched">Ha visto</mat-option>
+                  <mat-option value="favorite">Son sus favoritas</mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="filterBlock" *ngIf="filters.userTv === true">
+          <h3>Series que...</h3>
+          <mat-form-field>
+              <mat-select  [(ngModel)]="params.mode" placeholder="Series que..." (selectionChange)="filter()" multiple="true">
+                  <mat-option value="pending">Tiene pendientes</mat-option>
+                  <mat-option value="following">Que sigue</mat-option>
+                  <mat-option value="finalized">Que ha finalizado</mat-option>
+                  <mat-option value="favorite">Son favoritas</mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="filterBlock" *ngIf="filters.textSearch === true">
+          <mat-form-field>
+              <input matInput type="text" [(ngModel)]="params.text" placeholder="Buscar por nombre o título"
+                     aria-label="Buscar por nombre o título..." (keyup.enter)="filter()">
+          </mat-form-field>
+      </div>
+      <div class="filterBlock" *ngIf="filters.patternSearch === true">
+          <mat-form-field>
+              <input matInput type="text" [(ngModel)]="params.patterntext" placeholder="Buscar por nombre o título"
+                     aria-label="Buscar por nombre o título..." (keyup.enter)="filter()">
+          </mat-form-field>
+      </div>
+    <div class="filterBlock" *ngIf="filters.showSort === true">
+      <h3>Ordenar </h3>
+      <mat-form-field>
+        <mat-select id="orderBy"  [(ngModel)]="params.sort" placeholder="Ordenar por.." (selectionChange)="filter()">
+          <mat-option value="release_date">Fecha de estreno ⬇</mat-option>
+          <mat-option value="duration">Duración ⬇</mat-option>
+          <mat-option value="rating.averageRating">Puntuación ⬇</mat-option>
+          <mat-option value="popularity">Popularidad ⬇</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+      <div class="filterBlock" *ngIf="filters.peopleSort=== true">
+      <mat-form-field>
+          <mat-select [(ngModel)]="params.sort" placeholder="Ordenar por.."
+                      (selectionChange)="filter()">
+              <mat-option value="name">Alfabéticamente ⬇</mat-option>
+              <mat-option value="id">Novedades ⬇</mat-option>
+              <mat-option value="popularity">Popularidad ⬇</mat-option>
+          </mat-select>
+      </mat-form-field>
+      </div>
+      <div class="filterBlock" *ngIf="filters.tvOrMovie === true">
+          <h1>Películas o series</h1>
+          <mat-form-field>
+              <mat-select placeholder="Serie o película..." [(ngModel)]="params.type" (selectionChange)="filter()">
+                  <mat-option value="movie" >Películas</mat-option>
+                  <mat-option value="tvshow" >Series</mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="filterBlock" *ngIf="filters.gender === true">
+          <h3>Género</h3>
+          <mat-form-field>
+              <mat-select placeholder="Géneros" [(ngModel)]="params.gender" (selectionChange)="filter()" multiple>
+                  <mat-option value="1">Mujer</mat-option>
+                  <mat-option value="2">Hombre</mat-option>
+                  <mat-option value="0">Desconocido</mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="filterBlock" *ngIf="filters.placeOfBirth === true">
+          <h3>Lugar de nacimiento</h3>
+          <mat-form-field>
+              <input matInput type="text" [(ngModel)]="params.place_of_birth" placeholder="Lugar de nacimiento..."
+                     aria-label="Lugar de nacimiento..." (keyup.enter)="filter()">
+          </mat-form-field>
+      </div>
+    <div class="filterBlock" *ngIf="filters.genres === true">
+      <h3>Géneros</h3>
+      <mat-form-field >
+        <mat-select placeholder="Géneros" [(ngModel)]="params.genres" (selectionChange)="filter()"  multiple>
+          <mat-option value="{{genre.id}}" *ngFor="let genre of configService.getGenres('movie')">{{genre.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+      <div class="filterBlock" *ngIf="filters.durationMovie === true">
+      <h3>Duración</h3>
+      <mat-form-field>
+        <mat-select placeholder="Duración" [(ngModel)]="params.duration" (selectionChange)="filter()">
+          <mat-option [value]="undefined">Todas</mat-option>
+          <mat-option value="<=90"> Corta Duración (<90 min)</mat-option>
+            <mat-option value=">90;<=120"> Corta Duración (<120 min)</mat-option>
+          <mat-option value=">120;<=180"> Media-Larga Duración (<180 min)</mat-option>
+          <mat-option value=">180"> Larga Duración (+180 min)</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+      <div class="filterBlock" *ngIf="filters.durationTvShow === true">
+      <mat-form-field>
+          <mat-select placeholder="Duración" [(ngModel)]="params.duration" (selectionChange)="filter()">
+              <mat-option [value]="undefined">Todas</mat-option>
+              <mat-option value="<30"> Corta Duración (<30 min)</mat-option>
+              <mat-option value=">30;<=60">Media Duración (<60 min)</mat-option>
+              <mat-option value=">60"> Larga Duración (+60 min)</mat-option>
+          </mat-select>
+      </mat-form-field>
+      </div>
+      <div class="filterBlock" *ngIf="filters.famous === true">
+      <mat-slide-toggle [(ngModel)]="params.famous" (change)="purgeIfFalse('famous')">Solo más conocidas</mat-slide-toggle>
+    </div>
+      <div class="filterBlock" *ngIf="filters.releasedShows === true">
+      <mat-slide-toggle [(ngModel)]="params.released_shows" (change)="purgeIfFalse('released_shows')">Solo estrenadas</mat-slide-toggle>
+      </div>
+      <div class="filterBlock" *ngIf="filters.maxSeasonNumber === true">
+          <mat-form-field>
+              <input type="number" [(ngModel)]="params.maxseasons" (change)="filter()" matInput placeholder="Máximo número de temporadas"/>
+          </mat-form-field>
+      </div>
+     <div class="filterBlock" *ngIf="filters.years === true">
+      <h3>Año de lanzamiento</h3>
+      <mat-form-field>
+        <mat-select placeholder="Año exacto" [(ngModel)]="params.year" (selectionChange)="filter()" multiple>
+          <mat-option [value]="v" *ngFor="let v of range(1900,'currentYear',true)">{{v}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Posterior a" [(ngModel)]="params.yearmin" (selectionChange)="filter()" >
+          <mat-option [value]="undefined">-</mat-option>
+          <mat-option [value]="v" *ngFor="let v of range(1900,'currentYear',true)">{{v}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Anterior a" [(ngModel)]="params.yearmax" (selectionChange)="filter()" >
+          <mat-option [value]="undefined">-</mat-option>
+          <mat-option [value]="v" *ngFor="let v of range(1900,'currentYear',true)">{{v}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+      <button style="margin:15px;" mat-flat-button="" (click)="filter()">Aplicar filtro</button>
+  </nav>
+  <section>
+      <div class="filters">
+          <button mat-flat-button="" (click)="showFilters=!showFilters" >
+              <mat-icon>filter_list</mat-icon> {{(showFilters) ? 'Cerrar Filtros' : 'Filtrar'}}
+          </button>
+          <a class="resetFilter" (click)="resetFilters()"><mat-icon>refresh</mat-icon> Reiniciar filtros</a>
+      </div>
+      <div class="clear-both"></div>
+    <app-itemlist [type]="type" [(items)]="items" [firstLoad]="firstLoad" [method]="loadMoreItems"
+                  [object]="this" class="items" [loading]="loading"
+                  [class]="changiParams === true ? 'items loadingMoviesOpacity' : 'items'"
+                  [noLoadMore]="noMoreData" [itemCallback]="itemCallback" [extraDataFunction]="extraDataFn">
+    </app-itemlist>
+
+  </section>
+
+</article>

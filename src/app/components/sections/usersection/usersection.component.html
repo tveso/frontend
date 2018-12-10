@@ -1,0 +1,22 @@
+<article class="main" *ngIf="user">
+    <article class="sidebar">
+        <div class="sidebar-header">
+            <a routerLink="/user/{{user?.username}}/profile">
+            <img  class="avatar" [src]="user?.getAvatar()" />
+            <h2>{{user.username|capitalize}}</h2>
+            </a>
+        </div>
+        <ul class="menu">
+            <li *ngFor="let m of userMenu"><a  [routerLink]="'/'+m.link"
+               routerLinkActive="active">
+                <mat-icon>{{m.icon}}</mat-icon>
+                {{m.name}}
+            </a>
+            </li>
+        </ul>
+    </article>
+    <article class="content">
+        <router-outlet></router-outlet>
+    </article>
+
+</article>

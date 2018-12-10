@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontend",
+            "outputPath": "D:\\xampp\\htdocs\\tveso-project\\public",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -21,10 +21,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/opensearch.xml"
+              "src/opensearch.xml",
+              "src/.htaccess"
             ],
             "styles": [
-              "src/assets/style.scss"
+              "src/assets/style.scss",
+              "src/assets/angular.scss"
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js"

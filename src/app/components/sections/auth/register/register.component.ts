@@ -1,11 +1,18 @@
-import {Component} from '@angular/core';
-import {LoginComponent} from '../login/login.component';
+import {Component, Inject} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import {SecurityService} from '../../../../services/security.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from 'angular-6-social-login-v2';
+import {TwitterService} from '../../../../services/twitter.service';
+import {WINDOW} from '../../../../provider/windowProvider';
+import {User} from '../../../../entities/user';
+import {HttpErrorResponse} from '@angular/common/http';
+import {LoginComponent} from '../login/login.component';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
-    styleUrls: ['./register.component.css']
+    styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent extends LoginComponent {
     registerForm = new FormGroup({
@@ -14,6 +21,14 @@ export class RegisterComponent extends LoginComponent {
         email: new FormControl(''),
         confirmpassword: new FormControl('', [this.confirmPassword])
     });
+    public model: User = new User({});
+    public loading = false;
+    public errors: any[];
+    constructor(public securityService: SecurityService, protected router: Router,
+                protected  socialAuthService: AuthService, protected  twitterService: TwitterService,
+                @Inject(WINDOW) protected  window: Window, protected  route: ActivatedRoute) {
+        super(securityService, router, socialAuthService, twitterService, window, route);
+    }
 
     get username() {
         return this.registerForm.get('username');
@@ -36,7 +51,7 @@ export class RegisterComponent extends LoginComponent {
         if (typeof control.parent === 'undefined') {
             return null;
         }
-        const password = control.parent.controls;
+        const password = control.parent.get('password').value;
         const actual = control.value;
         if (password !== actual) {
             return {'confirmpassword': true};
@@ -53,11 +68,9 @@ export class RegisterComponent extends LoginComponent {
             if (this.securityService.loggedIn()) {
                 this.router.navigate(['/home']);
             }
-        }, (error) => {
+        }, (error: HttpErrorResponse) => {
             this.loading = false;
-            if (error.status === 401 || error.status === 500) {
-                this.errors.push('No se ha podido registrar al usuario, hay errores en el formulario');
-            }
+                this.errors = error.error.errors;
         });
     }
 }

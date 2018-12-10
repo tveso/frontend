@@ -3,7 +3,7 @@ import {Component, Input, OnInit} from '@angular/core';
 @Component({
     selector: 'app-placeholderitems',
     templateUrl: './placeholderitems.component.html',
-    styleUrls: ['./placeholderitems.component.css']
+    styleUrls: ['./placeholderitems.component.scss']
 })
 export class PlaceholderitemsComponent implements OnInit {
 

@@ -9,6 +9,7 @@ import {CookieService} from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class SecurityService {
+    csrfToken = null;
     rolesHyperarchy = {
             'ROLE_ADMIN': 'ROLE_USER',
             'ROLE_USER': null,
@@ -22,10 +23,10 @@ export class SecurityService {
         withCredentials: true,
         headers: new HttpHeaders(this.headers)
     };
-    public user = null;
-    public _user = new Subject<boolean>();
+    public user: User = null;
+    public _user = new Subject<any>();
     private apiuri = `${Api.API_URL}security/`;
-    constructor(private http: HttpClient, private cookieService: CookieService) {
+    constructor(private http: HttpClient) {
         this._user.next(this.user);
         this._user.asObservable().subscribe((a) => {
             this.user = a;
@@ -43,7 +44,7 @@ export class SecurityService {
     }
 
     loggedIn() {
-        return this.user !== null && this.user !== 'null' && this.user !== false;
+        return this.user !== null;
     }
     getUserRoles() {
         if (typeof this.user === 'undefined' || this.user === null) {
@@ -52,6 +53,9 @@ export class SecurityService {
         return (this.user.roles instanceof Array) ? this.user.roles : [];
     }
     hasAccess(role) {
+        if (typeof role === 'undefined') {
+            return true;
+        }
         const userRoles = this.getUserRoles();
         if (userRoles.length === 0 ) {
             return false;
@@ -80,6 +84,8 @@ export class SecurityService {
     }
 
     register(model: User) {
+        const data: any = model;
+        data.csrf_token = this.csrfToken;
         return this.http.post<any>(`${this.apiuri}register`, model, this.httpOptions);
     }
 
@@ -94,5 +100,10 @@ export class SecurityService {
             result.push(actualRol);
         }
         return result;
+    }
+
+    setUser(user) {
+        this.user = user;
+        this._user.next(this.user);
     }
 }

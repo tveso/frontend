@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAGQ,sDAA2C;ACHnD,EAAS;EACP,OAAO,EAAC,IAAI;EACZ,qBAAqB,EAAE,eAAiB;;ACD1C,UAAU;AAEV,WAAW;AAEX,UAAU;AAEV,UAAU;AAEV,YAAY;AAOZ,kBAAkB;AFVlB,EAAG;EAED,eAAe,EAAE,EAAE;EACnB,KAAG;IACD,KAAK,EAAE,IAAI;IACX,OAAO,EAAE,YAAY",
-"sources": ["list-movies-compress.component.scss","../../../../assets/src/abstracts/_placeholders.scss","../../../../assets/src/abstracts/_variables.scss"],
-"names": [],
-"file": "list-movies-compress.component.css"
-}

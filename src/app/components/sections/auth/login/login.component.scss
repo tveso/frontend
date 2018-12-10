@@ -8,9 +8,10 @@ form {
 
 .form {
   padding: 15px;
-  background-color: rgba($color_2_base, 0.15);
+  background-color: rgba($color_2_base, 1);
   box-shadow: box-shadow('medium');
   width: 90%;
+  color: $color_1_base;
   height: min-content;
   margin: auto;
 }

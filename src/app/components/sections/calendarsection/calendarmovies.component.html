@@ -1,0 +1,21 @@
+<h1>Calendario de películas <mat-icon>movie</mat-icon></h1>
+<section class="container">
+
+    <article class="sidebar">
+        <app-calendar [handler]="changeDate.bind(this)" [dayBgColorFn]="getDateBg.bind(this)"
+                      [(calendar$)]="calendar$"></app-calendar>
+    </article>
+    <article class="content">
+        <div *ngIf="loading===true">
+            <app-spinner>Cargando películas ...</app-spinner>
+        </div>
+
+        <div *ngFor="let event of events">
+            <h2>{{event.date|date:'fullDate':undefined:'es'}}</h2>
+            <div class="group">
+                <app-movieitem [movie]="m" *ngFor="let m of event.movies"></app-movieitem>
+            </div>
+        </div>
+    </article>
+
+</section>

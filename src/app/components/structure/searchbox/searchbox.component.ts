@@ -3,11 +3,12 @@ import {debounceTime, switchMap} from 'rxjs/internal/operators';
 import {FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {FindService} from '../../../services/find.service';
+import {Movie} from '../../../entities/movie';
 
 @Component({
   selector: 'app-searchbox',
   templateUrl: './searchbox.component.html',
-  styleUrls: ['./searchbox.component.css']
+  styleUrls: ['./searchbox.component.scss']
 })
 export class SearchboxComponent implements OnInit {
     results = [];
@@ -16,11 +17,13 @@ export class SearchboxComponent implements OnInit {
     @Input() searchText;
     selected = 0;
     showSearchList = false;
+    Movie = Movie;
+    opened = false;
     focused = false;
     searched = false;
   constructor(private findService: FindService, private router: Router) { }
   ngOnInit() {
-      this.searchControl.valueChanges.pipe(debounceTime(150),
+      this.searchControl.valueChanges.pipe(debounceTime(500),
           switchMap((value) => {
               this.searched = false;
               this.results = [];
@@ -29,10 +32,13 @@ export class SearchboxComponent implements OnInit {
                   return [];
               }
               this.searchText = value;
-              return this.findService.search(value, 5);
+              return this.findService.search(value, 10);
           })).subscribe((value) => {
               this.results = value;
               this.searched = true;
+      }, () => {
+              this.searched = false;
+              this.results = [];
       });
   }
 
@@ -71,5 +77,9 @@ export class SearchboxComponent implements OnInit {
         return this.results.filter((a) => {
             return a.type === movie;
         });
+    }
+
+    openSearchBox() {
+        this.opened = !this.opened;
     }
 }

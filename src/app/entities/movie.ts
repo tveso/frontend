@@ -1,3 +1,4 @@
+import {slugify} from '../components/utils/functions';
 
 export class Movie {
     _id: string;
@@ -16,6 +17,8 @@ export class Movie {
     year: any;
     primaryTitle: any;
     next_episode_to_air: any;
+    userFollow: any;
+    name: any;
     static  getTitle(tvshow): any {
         if (typeof tvshow.name !== 'undefined') {
             return tvshow.name;
@@ -24,5 +27,9 @@ export class Movie {
             return tvshow.title;
         }
         return tvshow.title;
+    }
+    static getUrl(movie: Movie): string {
+        if (typeof movie === 'undefined') { return ''; }
+        return `/${movie.type}/${slugify(Movie.getTitle(movie))}/${movie._id}`;
     }
 }

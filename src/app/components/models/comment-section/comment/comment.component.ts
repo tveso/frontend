@@ -13,7 +13,7 @@ import {UserService} from '../../../../services/user.service';
 @Component({
     selector: 'app-comment',
     templateUrl: './comment.component.html',
-    styleUrls: ['./comment.component.css'],
+    styleUrls: ['./comment.component.scss'],
     providers: [ExtraMdTagsPipe],
     preserveWhitespaces: true
 })

@@ -1,6 +1,11 @@
+@import "../../../../assets/util";
+
 .recommendedShows {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  @include respond-between('phone', 'tablet') {
+    grid-template-columns: auto auto;
+  }
   grid-column-gap: 5%;
   div {
     box-sizing: border-box;;
@@ -9,12 +14,26 @@
 
 .cast {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(auto-fill, 16%);
   grid-column-gap: 2%;
   box-sizing: border-box;
+  .cast-item{
+    display: inline-table;
+  }
 }
 
 .container {
-  display: grid;
+  display: grid;;
   grid-template-columns: auto auto;
+  @include respond-between('phone', 'tablet') {
+    grid-template-columns: auto;
+  }
+  .radio{
+    display: block;
+    margin-bottom: 15px;
+  }
+}
+
+.button{
+  margin:10px;
 }

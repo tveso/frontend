@@ -3,7 +3,7 @@ import {AfterContentInit, Component, Input, OnInit} from '@angular/core';
 @Component({
     selector: 'app-itemlist',
     templateUrl: './itemlist.component.html',
-    styleUrls: ['./itemlist.component.css']
+    styleUrls: ['./itemlist.component.scss']
 })
 export class ItemlistComponent implements OnInit, AfterContentInit {
     @Input() class;
@@ -12,7 +12,10 @@ export class ItemlistComponent implements OnInit, AfterContentInit {
     @Input() type = 'movie';
     @Input() loading = false;
     @Input() firstLoad = false;
+    @Input() searchShow = false;
     @Input() noLoadMore = false;
+    @Input() extraDataFunction = undefined;
+    @Input() itemCallback: Function;
     @Input() method: Function = () => {
     };
 
@@ -40,5 +43,12 @@ export class ItemlistComponent implements OnInit, AfterContentInit {
 
     ngAfterContentInit() {
 
+    }
+
+    extraData(item: any) {
+        if (typeof this.extraDataFunction === 'undefined') {
+            return;
+        }
+        return this.extraDataFunction.bind(this.object)(item);
     }
 }

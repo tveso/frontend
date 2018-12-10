@@ -16,17 +16,22 @@ export class AuthGuard implements CanActivate {
         const data = next.data;
         const roles = data.needAuth;
         const url = state.url;
-        if (typeof roles === 'undefined') {
-            if (url === '/login' && this.securityService.loggedIn()) {
-                this.router.navigate(['/home']);
-                return false;
+        const hasAccess = this.securityService.hasAccess(roles);
+        const isLoginUrl = url.indexOf('/login') > -1;
+        const isRegisterUrl = url.indexOf('/register') >- 1;
+        const isLoggedIn = this.securityService.loggedIn();
+        if (!isLoggedIn) {
+            if (!isLoginUrl) {
+                this.router.navigate(['/login']);
+                return true;
             }
             return true;
         }
-        const result = this.securityService.hasAccess(roles);
-        if (result === false) {
-            this.router.navigate(['/login']);
+        if (hasAccess && !(isLoginUrl || isRegisterUrl)) {
+            return true;
         }
-        return result;
+        this.router.navigate(['/home']);
+
+        return false;
     }
 }

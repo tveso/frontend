@@ -7,7 +7,7 @@ export class UtilService {
   constructor() { }
     getRating(movie) {
         const rating = movie.rating;
-        if (typeof rating === 'undefined') {
+        if (typeof rating === 'undefined' || rating === null) {
             return movie.vote_average;
         }
         if (rating.averageRating === '\N') {
@@ -18,7 +18,7 @@ export class UtilService {
 
     getVoteCount(movie) {
         const rating = movie.rating;
-        if (typeof rating === 'undefined') {
+        if (typeof rating === 'undefined' || rating === null) {
             return movie.vote_count;
         }
         if (rating.numVotes === '\N') {

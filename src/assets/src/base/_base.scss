@@ -4,7 +4,8 @@ body{
   font-family: $font_family;
   margin:0;
   font-size:1.120em;
-  background: linear-gradient(60deg, #29323c 0%, #485563 100%) fixed;
+
+  background-color: #29323c;
   color: tint($color_1_base,6);
 }
 

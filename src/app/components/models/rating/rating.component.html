@@ -12,6 +12,7 @@
             <div class="emojis">
                 <div *ngFor="let e of emojis; let i = index" [class]="getClass(i)">
                     {{e}}
+                    <div>{{text[i]}}</div>
                 </div>
             </div>
             <div class="slider">

@@ -1,6 +1,11 @@
-.shows {
+@import "../../../../assets/src/abstracts/abstract";
+
+.showsRecommended {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  @include respond-between('phone','tablet'){
+    grid-template-columns: 1fr 1fr;
+  }
   grid-column-gap: 2%;
   > * {
     box-sizing: border-box;
@@ -10,4 +15,9 @@
 .loadMore {
   display: block;
   margin: 15px auto;
+}
+
+.test{
+  max-height: 100vh;
+  overflow: auto;
 }

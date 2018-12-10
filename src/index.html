@@ -7,12 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer" />
   <link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
+    <meta name="theme-color" content="#29323c"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
   <link rel="search" type="application/opensearchdescription+xml" title="Buscar series y películas en TVesame"
-        href="http://localhost:4200/opensearch.xml" />
+        href="http://tveso.tv:4200/opensearch.xml" />
 </head>
 <body>
-  <app-root> <app-loading></app-loading></app-root>
+  <app-root>
+      <link href="assets/loading.css" rel="stylesheet"/>
+      <div class="container">
+          <img src="assets/images/logo_web.png">
+
+      </div>
+    <app-loading></app-loading></app-root>
 </body>
+
 </html>

@@ -12,7 +12,7 @@
         </ng-container>
     </button>
 </form>
-<h3>Comentarios</h3>
+<h2>Comentarios</h2>
 <a [routerLink]="[]" [queryParams]="{comment_id: null}" *ngIf="seeComment!==null">Volver a todos los comentarios</a>
 <div *ngFor="let comment of getCurrentComments(resource)" infiniteScroll [infiniteScrollDistance]="0.1"
      [infiniteScrollThrottle]="200" (scrolled)="getMoreComments()">

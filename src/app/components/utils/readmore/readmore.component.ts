@@ -4,7 +4,7 @@ import {text} from '@angular/core/src/render3/instructions';
 @Component({
   selector: 'app-readmore',
   templateUrl: './readmore.component.html',
-  styleUrls: ['./readmore.component.css']
+  styleUrls: ['./readmore.component.scss']
 })
 export class ReadmoreComponent implements OnInit, OnChanges {
   @Input() text: any;

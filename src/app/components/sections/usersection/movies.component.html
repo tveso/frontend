@@ -1,0 +1,16 @@
+<article class="content" *ngIf="user">
+  <h1>Películas {{getCurrentMode()}}</h1>
+    <div class="filter-links">
+        <a [routerLink]="[]" [class]="((mode.indexOf('watched')>-1) ? 'active ' : '') + 'watched'"
+           [queryParams]="{'mode': 'watched', 'filter': true}" class="watched"><mat-icon>check</mat-icon> Vista</a>
+        <a [routerLink]="[]"  [class]="((mode.indexOf('pending')>-1) ? 'active ' : '') + 'pending'"
+           [queryParams]="{'mode': 'pending', 'filter': true}" class="pending"><mat-icon>hourglass_empty</mat-icon> Pendientes</a>
+        <a [routerLink]="[]"  [class]="((mode.indexOf('favorite')>-1) ? 'active ' : '') + 'favorite'"
+           [queryParams]="{'mode': 'favorite', 'filter': true}" class="pending"><mat-icon>favorite</mat-icon> Favoritas</a>
+    </div>
+
+  <app-items [changeQueryParams]="true" type="movie" [options]="{mode: 'pending'}" [loadItemsCallback]="callback"
+             [filters]="{showSort:true, years: true, genres: true,
+ famous: true, releasedShows: true, durationTvshows: true, maxSeasonNumber: true, searchShow: true, userMovie: true}"
+             (paramsOutput)="setMode($event)"></app-items>
+</article>
