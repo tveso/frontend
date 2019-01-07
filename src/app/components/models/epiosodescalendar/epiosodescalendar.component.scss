@@ -1,0 +1,128 @@
+@import "../../../../assets/src/abstracts/abstract";
+:host{
+
+  .month{
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    font-size:1.2rem;
+    margin-top:5px;
+    margin-bottom: 5px;
+    h1{
+      margin:0;
+      font-size: inherit;
+      text-align: center;
+      padding:0;
+    }
+  }
+}
+.container{
+  max-width: 100%;
+  overflow: auto;
+}
+.calendar{
+  padding:5px;
+  margin:15px;
+  box-shadow: box-shadow('medium');
+  font-size:0.9em;
+  @include respond-between('phone', 'tablet') {
+    width: 720px;
+  }
+  .calendar-header{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    h1 {
+      padding:5px;
+      font-size:1.4em;
+      border-radius: 4pt;
+      cursor: pointer;
+      &:hover{
+        background-color: shade($color_2_base,2);
+      }
+    }
+    .calendar-header-controll{
+      div{
+        display: inline-block;
+        font-size:2.2em;
+        cursor: pointer;
+        padding:5px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  >*{
+    box-sizing: border-box;
+  }
+  background-color: $color_2_base;
+  color: $color_1_base;
+  .header{
+    border-bottom: solid 1px shade($color_2_base, 10);
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    div{
+      font-size:1.2em;
+      justify-items: center;
+      color:  shade($color_2_base, 20);
+      box-sizing: border-box;
+    }
+
+  }
+  .days{
+    display:grid;
+    grid-template-columns: repeat(7, 14.284%);
+    .day{
+      padding: 7px;
+      box-sizing: border-box;
+      border:1px solid shade($color_2_base, 10);
+      max-width: 100%;
+      span{
+        display: block;
+        cursor: pointer;
+        margin:0 auto;
+        a{
+          width: 100%;
+          color: inherit;
+          display: block;
+        }
+      }
+      .day-events{
+        width: 100%;
+        li{
+          padding: 4px;
+          border-radius:4pt;
+          box-sizing: border-box;
+          font-size:0.9rem;
+          text-shadow: 1px 1px 1px $color_1_base;
+          color: $color_2_base;
+          margin-bottom: 4px;
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          a{
+            color:inherit;
+          }
+        }
+      }
+
+    }
+
+  }
+
+
+
+  .monthBefore, .monthAfter{
+    opacity:0.3;
+  }
+}
+
+
+.busyDay{
+  background-color: shade($color_2_base, 5) ;
+  border-radius:50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    background-color: shade($color_2_base, 5) ;
+  }
+}

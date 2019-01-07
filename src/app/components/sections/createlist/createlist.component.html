@@ -1,0 +1,114 @@
+
+<h1>Crear lista</h1>
+<button mat-flat-button="" class="button" [disabled]="step === 1" (click)="step=1">
+    Información
+</button>
+<button mat-flat-button="" (click)="step=2" class="button" [disabled]="step === 2">
+    Películas ({{selected.movies.length}})
+</button>
+<button mat-flat-button="" (click)="step=3" class="button" [disabled]="step === 3">
+    Series ({{selected.tvshows.length}})
+</button>
+<button mat-flat-button="" (click)="step=4" class="button" [disabled]="step === 4">
+    Personas ({{selected.people.length}})
+</button>
+<button mat-flat-button="" (click)="step=5" class="button" [disabled]="step === 5">
+    Episodios ({{selected.episodes.length}})
+</button>
+<div class="form"  >
+<form [formGroup]="info" [hidden]="step!==1"(ngSubmit)="return;">
+    <h2>Título</h2>
+    <input type="text" [formControlName]="'title'" placeholder="Nombre" required minlength="5" maxlength="32"/>
+    <div *ngIf="info.controls.title.errors" class="errors">
+        <div *ngIf="info.controls.title.errors.required">El título es obligatorio</div>
+        <div *ngIf="info.controls.title.errors.minlength">Mínimo número de carácteres es 5</div>
+        <div *ngIf="info.controls.title.errors.maxlength">Máximo número de carácteres es 32</div>
+    </div>
+    <h2>Descripción <span class="optional">(Opcional)</span> </h2>
+
+    <div class="textarea">
+        <td-text-editor formControlName="description" [options]="options" minlength="0" maxlength="1000"></td-text-editor>
+    </div>
+</form>
+
+<div class="addresources"  *ngIf="step===2" >
+    <h2>Películas seleccionadas ({{selected.movies.length}}) <span class="optional">(Max {{this.limits.movies}})</span> </h2>
+    <p *ngIf="selected.movies.length === 0 ">No hay películas seleccionadas para la lista</p>
+    <div class="selected" *ngIf="selected.movies.length>0">
+        <input type="search" class="searchBox" [(ngModel)]="search.movie"  [ngModelOptions]="{standalone: true}" placeholder="Filtrar..." />
+        <ul class="list" >
+            <li *ngFor="let movie of  getFilteredResults(search.movie, 'movies')">{{movie.title}} <span class="close" (click)="removeResource(movie, 'movies')"><mat-icon>close</mat-icon></span> </li>
+        </ul>
+    </div>
+
+    <h2>Buscar películas</h2>
+
+    <div class="limited">
+        <app-show-selector [showLength]="1000" [showFilter]="{type: 'movie'}"
+                           [(selecteds)]="selected.movies"></app-show-selector>
+    </div>
+
+</div>
+<div class="addresources"  *ngIf="step===3" >
+    <h2>Series seleccionadas ({{selected.tvshows.length}})  <span class="optional">(Max {{this.limits.tvshows}})</span></h2>
+    <p *ngIf="selected.tvshows.length === 0 ">No hay series seleccionadas para la lista</p>
+    <div class="selected" *ngIf="selected.tvshows.length>0">
+        <input type="search" class="searchBox" [(ngModel)]="search.tvshow"  [ngModelOptions]="{standalone: true}" placeholder="Filtrar..." />
+        <ul class="list" >
+            <li *ngFor="let movie of  getFilteredResults(search.tvshow, 'tvshows')" >{{movie.title}}
+                <span class="close" (click)="removeResource(movie, 'tvshows')"><mat-icon>close</mat-icon></span> </li>
+        </ul>
+    </div>
+
+    <h2>Buscar películas</h2>
+    <div class="limited">
+        <app-show-selector [showLength]="1000" [showFilter]="{type: 'tvshow'}"
+                           [(selecteds)]="selected.tvshows"></app-show-selector>
+    </div>
+</div>
+<div class="addresources" *ngIf="step===4">
+    <h2>Personas seleccionadas ({{selected.people.length}})  <span class="optional">(Max {{this.limits.people}})</span></h2>
+    <p *ngIf="selected.people.length === 0 ">No hay personas seleccionadas para la lista</p>
+    <div class="selected" *ngIf="selected.people.length>0">
+        <input type="search" class="searchBox" [(ngModel)]="search.people"  [ngModelOptions]="{standalone: true}" placeholder="Filtrar..." />
+        <ul class="list" >
+            <li *ngFor="let person of  getFilteredResults(search.people, 'people')" >{{person.name}}
+                <span class="close" (click)="removeResource(person, 'people')"><mat-icon>close</mat-icon></span> </li>
+        </ul>
+    </div>
+
+    <h2>Buscar Personas</h2>
+    <div class="limited">
+        <app-person-selector [peopleLength]="1000" [showFilter]="{type: 'person'}"
+                             [(selecteds)]="selected.people"></app-person-selector>
+    </div>
+
+</div>
+<div class="addresources" *ngIf="step===5">
+    <h2>Episodios seleccionados ({{selected.episodes.length}})  <span class="optional">(Max {{this.limits.episodes}})</span></h2>
+    <p *ngIf="selected.episodes.length === 0 ">No hay episodios seleccionados para la lista</p>
+    <div class="selected" *ngIf="selected.episodes.length>0">
+        <input type="search" class="searchBox" [(ngModel)]="search.episode"  [ngModelOptions]="{standalone: true}" placeholder="Filtrar..." />
+        <ul class="list" >
+            <li *ngFor="let episode of  getFilteredResults(search.episode, 'episodes')" >
+                {{getNumericalEpisode(episode)}} {{episode.show.name}}
+                <span class="close" (click)="removeResource(person, 'episodes')"><mat-icon>close</mat-icon></span> </li>
+        </ul>
+    </div>
+
+    <h2>Buscar Episodios</h2>
+    <p>Busca primero una serie para seleccionar los episodios que quieras añadir a la lista</p>
+    <div class="limited">
+        <app-episode-selector [showLength]="1000" [showFilter]="{type: 'tvshow'}"
+                              [(selecteds)]="selected.episodes"></app-episode-selector>
+    </div>
+
+</div>
+</div>
+<div class="errors">
+    <div *ngIf="this.selected.movies.length > limits.movies">Máximo número de películas es {{limits.movies}}</div>
+    <div *ngIf="this.selected.tvshows.length > limits.tvshows">Máximo número de series es {{limits.tvshows}}</div>
+    <div *ngIf="this.selected.people.length > limits.people">Máximo número de películas es {{limits.people}}</div>
+    <div *ngIf="this.selected.episodes.length > limits.episodes">Máximo número de episodios es {{limits.episodes}}</div>
+</div>
+    <button mat-flat-button="" style="margin:15px;" (click)="editList()" [disabled]="!isValid() || !info.valid">Enviar</button>

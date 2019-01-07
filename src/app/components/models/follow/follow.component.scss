@@ -10,11 +10,57 @@
   text-shadow: 1px 1px 1px $color_1_base;
   border-radius: 4px;
   margin-right: 4px;
-  box-shadow: box-shadow('medium');
+}
+
+.icons{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  .icon{
+    margin-right:5px;
+    box-sizing: border-box;
+    margin-bottom: 3px;
+    a{
+      display: block;
+      cursor: pointer;
+      color: $color_2_base;
+      background-color: rgba($color_1_base, 0.8);
+      padding: 4px;
+      font-size: 1.1em;
+      border-radius: 4pt;
+      .title{
+        display: block;
+        font-size: 0.45em;
+        text-align: center;
+      }
+      .mat-icon{
+        margin:0 auto;
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+}
+.horizontal{
+  display: grid;
+  grid-template-columns: min-content min-content min-content min-content;
+}
+.vertical{
+  display: block;
 }
 
 .activeMenuitem{
 background-color: shade($color_2_base, 5);
+  opacity: 1;
+}
+
+.default{
+  opacity:0.85;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    opacity: 1;
+  }
 }
 
 .menu {
@@ -29,9 +75,12 @@ background-color: shade($color_2_base, 5);
 .library_add {
   background-color: rgba(tint($color_4_base,0.5),0.8) !important;
 }
-.hourglass_empty{
-  background-color: rgba(tint($color_3_base,0.5),0.8) !important;
+.arrow_right_alt{
+  background-color: rgba(92, 228, 130, 0.8) !important;
 }
-.done{
+.hourglass_empty, .pending{
+  background-color: rgba(228, 146, 46, 0.8) !important;
+}
+.remove_red_eye{
   background-color: rgba(shade($color_5_base,0.4),0.8) !important;
 }

@@ -5,14 +5,14 @@
             <small>{{utilService.getVoteCount(show)}} votos</small>
         </div>
         <div class="title">
-            <a [routerLink]="['/'+show.type, show._id]">
+            <a routerLink='{{Movie.getUrl(show)}}'>
                 <h1>{{show | moviename}}
                     <small>
                         ({{utilService.getReleaseDate(show)}})
                     </small>
                 </h1>
             </a>
-            <span class="follow"> <app-follow [movie]="show"></app-follow></span>
+            <div class="follow"> <app-follow [movie]="show" orientation="horizontal"></app-follow></div>
             <div class="info">
                 {{show.duration}} min | {{getReleaseDate()}} |
                 <app-genre *ngFor="let g of show.genres|slice:0:genreNumbers" [genre]="g"
@@ -29,18 +29,6 @@
                    routerLinkActive="active"
                    [routerLinkActiveOptions]="{exact:true}">
                     Info
-                </a>
-                <a mat-tab-link  routerLinkActive="active" *ngIf="show.type === 'tvshow'" [matMenuTriggerFor]="seasonMenu"> Temporadas
-                    <mat-menu #seasonMenu="matMenu">
-                        <ng-container *ngFor="let s of show.seasons">
-                            <ng-container>
-                                <button mat-menu-item
-                                        routerLink="{{Movie.getUrl(show)}}/season"
-                                        [queryParams]="{'number': s.season_number }">{{s.name}}
-                                </button>
-                            </ng-container>
-                        </ng-container>
-                    </mat-menu>
                 </a>
                 <a mat-tab-link routerLink="{{Movie.getUrl(show)}}/cast" routerLinkActive="active">Personas</a>
                 <a mat-tab-link routerLink="{{Movie.getUrl(show)}}/images" routerLinkActive="active">Videos e

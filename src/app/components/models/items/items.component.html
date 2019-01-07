@@ -17,7 +17,6 @@
               <mat-select  [(ngModel)]="params.mode" placeholder="Series que..." (selectionChange)="filter()" multiple="true">
                   <mat-option value="pending">Tiene pendientes</mat-option>
                   <mat-option value="following">Que sigue</mat-option>
-                  <mat-option value="finalized">Que ha finalizado</mat-option>
                   <mat-option value="favorite">Son favoritas</mat-option>
               </mat-select>
           </mat-form-field>
@@ -25,19 +24,19 @@
       <div class="filterBlock" *ngIf="filters.textSearch === true">
           <mat-form-field>
               <input matInput type="text" [(ngModel)]="params.text" placeholder="Buscar por nombre o título"
-                     aria-label="Buscar por nombre o título..." (keyup.enter)="filter()">
+                     aria-label="Buscar por nombre o título..." (keyup.enter)="$event.preventDefault();filter()">
           </mat-form-field>
       </div>
       <div class="filterBlock" *ngIf="filters.patternSearch === true">
           <mat-form-field>
               <input matInput type="text" [(ngModel)]="params.patterntext" placeholder="Buscar por nombre o título"
-                     aria-label="Buscar por nombre o título..." (keyup.enter)="filter()">
+                     aria-label="Buscar por nombre o título..." (keyup.enter)="$event.preventDefault();filter()">
           </mat-form-field>
       </div>
     <div class="filterBlock" *ngIf="filters.showSort === true">
       <h3>Ordenar </h3>
       <mat-form-field>
-        <mat-select id="orderBy"  [(ngModel)]="params.sort" placeholder="Ordenar por.." (selectionChange)="filter()">
+        <mat-select id="orderBy"  [(value)]="params.sort" placeholder="Ordenar por.." (selectionChange)="filter()">
           <mat-option value="release_date">Fecha de estreno ⬇</mat-option>
           <mat-option value="duration">Duración ⬇</mat-option>
           <mat-option value="rating.averageRating">Puntuación ⬇</mat-option>
@@ -47,7 +46,7 @@
     </div>
       <div class="filterBlock" *ngIf="filters.peopleSort=== true">
       <mat-form-field>
-          <mat-select [(ngModel)]="params.sort" placeholder="Ordenar por.."
+          <mat-select [(value)]="params.sort"  placeholder="Ordenar por.."
                       (selectionChange)="filter()">
               <mat-option value="name">Alfabéticamente ⬇</mat-option>
               <mat-option value="id">Novedades ⬇</mat-option>
@@ -58,7 +57,7 @@
       <div class="filterBlock" *ngIf="filters.tvOrMovie === true">
           <h1>Películas o series</h1>
           <mat-form-field>
-              <mat-select placeholder="Serie o película..." [(ngModel)]="params.type" (selectionChange)="filter()">
+              <mat-select placeholder="Serie o película..." [(value)]="params.type" (selectionChange)="filter()">
                   <mat-option value="movie" >Películas</mat-option>
                   <mat-option value="tvshow" >Series</mat-option>
               </mat-select>
@@ -67,7 +66,7 @@
       <div class="filterBlock" *ngIf="filters.gender === true">
           <h3>Género</h3>
           <mat-form-field>
-              <mat-select placeholder="Géneros" [(ngModel)]="params.gender" (selectionChange)="filter()" multiple>
+              <mat-select placeholder="Géneros" [(value)]="params.gender" (selectionChange)="filter()" multiple>
                   <mat-option value="1">Mujer</mat-option>
                   <mat-option value="2">Hombre</mat-option>
                   <mat-option value="0">Desconocido</mat-option>
@@ -77,14 +76,14 @@
       <div class="filterBlock" *ngIf="filters.placeOfBirth === true">
           <h3>Lugar de nacimiento</h3>
           <mat-form-field>
-              <input matInput type="text" [(ngModel)]="params.place_of_birth" placeholder="Lugar de nacimiento..."
+              <input matInput type="text" [(value)]="params.place_of_birth" placeholder="Lugar de nacimiento..."
                      aria-label="Lugar de nacimiento..." (keyup.enter)="filter()">
           </mat-form-field>
       </div>
     <div class="filterBlock" *ngIf="filters.genres === true">
       <h3>Géneros</h3>
       <mat-form-field >
-        <mat-select placeholder="Géneros" [(ngModel)]="params.genres" (selectionChange)="filter()"  multiple>
+        <mat-select placeholder="Géneros" [(value)]="params.genres" (selectionChange)="filter()"  multiple>
           <mat-option value="{{genre.id}}" *ngFor="let genre of configService.getGenres('movie')">{{genre.name}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -92,7 +91,7 @@
       <div class="filterBlock" *ngIf="filters.durationMovie === true">
       <h3>Duración</h3>
       <mat-form-field>
-        <mat-select placeholder="Duración" [(ngModel)]="params.duration" (selectionChange)="filter()">
+        <mat-select placeholder="Duración" [(value)]="params.duration" (selectionChange)="filter()">
           <mat-option [value]="undefined">Todas</mat-option>
           <mat-option value="<=90"> Corta Duración (<90 min)</mat-option>
             <mat-option value=">90;<=120"> Corta Duración (<120 min)</mat-option>
@@ -155,6 +154,7 @@
     <app-itemlist [type]="type" [(items)]="items" [firstLoad]="firstLoad" [method]="loadMoreItems"
                   [object]="this" class="items" [loading]="loading"
                   [class]="changiParams === true ? 'items loadingMoviesOpacity' : 'items'"
+                  [filteredFn]="filteredFn"
                   [noLoadMore]="noMoreData" [itemCallback]="itemCallback" [extraDataFunction]="extraDataFn">
     </app-itemlist>
 

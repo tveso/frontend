@@ -4,12 +4,13 @@
   position: relative;
   box-sizing: border-box;
   margin: 0 auto;
+  white-space: initial;
   .person-image {
-    max-width: 75%;
+    max-width: 100%;
     box-sizing: border-box;
   }
   .person-name {
-    width: 75%;
+    width: 100%;
     position: absolute;
     bottom:  0;
     font-weight: bold;
@@ -43,8 +44,13 @@
   height: 50px;
 }
 
+.pointer{
+  cursor: pointer;
+}
+
 .extras{
-  display: block;;
+  display: block;
+  white-space: normal;
   font-size:0.9em;
   margin:0 auto;
   padding:10px;

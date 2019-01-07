@@ -1,12 +1,20 @@
-<div class="tag" [matMenuTriggerFor]="tagMenu" [matMenuTriggerData]="{'movie': movie}"
-     [class]="'tag ' + getUserCurrentTag().icon">
-  <mat-icon>{{getUserCurrentTag().icon}}</mat-icon> {{getUserCurrentTag().show}}</div>
-<mat-menu #tagMenu="matMenu">
-  <ng-template matMenuContent  let-movie="movie">
-    <ng-container  *ngFor="let type of getTypes()">
-      <button mat-menu-item [class]="getClass(type)" *ngIf="!(type.tag === 'cancel' && doesFollow() === null)" (click)="follow(type)">
-        <mat-icon>{{type.icon}}</mat-icon>{{type.name}}</button>
-    </ng-container>
-
-  </ng-template>
-</mat-menu>
+<div [class]="'icons ' + orientation">
+  <div class="icon"  *ngFor="let type of getTypes()">
+    <a [class]="getClass(type)" (click)="follow(type)">
+        <div class="maticon">
+            <mat-icon>{{type.icon}}</mat-icon>
+        </div>
+    <div class="title">{{type.show}}</div>
+    </a>
+    </div>
+    <div class="icon" *ngIf="listable">
+        <a>
+            <div class="maticon">
+                <mat-icon>list</mat-icon>
+            </div>
+            <div class="title">
+                Lista
+            </div>
+        </a>
+    </div>
+</div>

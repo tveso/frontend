@@ -1,8 +1,8 @@
 @import "../../../../assets/src/abstracts/abstract";
 section{
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-column-gap: 2%;
+  grid-template-columns: 33% 33% 33%;
+  grid-column-gap: 1%;
   grid-row-gap: 10px;
   @include respond-between('phone','tablet'){
     grid-template-columns: 100%;

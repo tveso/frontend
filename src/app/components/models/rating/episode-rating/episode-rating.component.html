@@ -1,0 +1,23 @@
+<ng-container *ngIf="canBeWatched() === true">
+<div class="not-watched" [class]="(isWatched()) ? 'watched' : 'not-watched'">
+  <a (click)="watch()" class="pointer">
+    <ng-container *ngIf="isWatched()">
+      <div class="icon">
+        <mat-icon>remove_red_eye</mat-icon>
+      </div>
+      <div class="text">
+        Visto
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isWatched() === false">
+      <div class="icon">
+        <mat-icon>remove_red_eye</mat-icon>
+      </div>
+
+      <div class="text">
+        Visto
+      </div>
+    </ng-container>
+  </a>
+</div>
+</ng-container>

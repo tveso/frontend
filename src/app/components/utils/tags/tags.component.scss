@@ -1,0 +1,23 @@
+@import "../../../../assets/util";
+
+.content{
+  .tags{
+    margin-right: 5px;
+  }
+  input {
+  }
+  .tag{
+    display: inline-block;
+    margin-right: 2px;
+    border-radius:4pt;
+    color: $color_2_base;
+    font-size: 0.8em;
+    padding:4px 8px;
+    background-color: tint($color_4_base, 20);
+  }
+}
+.deleteTag{
+  float:right;
+  cursor: pointer;
+  font-size: 0.9em;
+}

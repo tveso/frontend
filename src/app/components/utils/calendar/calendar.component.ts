@@ -11,7 +11,8 @@ export class CalendarDate {
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-    protected date: Date;
+    @Input() public date: Date;
+    @Input() public initialDate: Date;
     protected month: number;
     protected year: number;
     public days: any[];
@@ -23,7 +24,7 @@ export class CalendarComponent implements OnInit {
     protected yearSelected: number;
 
   constructor() {
-      this.build(new Date());
+          this.build(new Date());
   }
   build(date) {
       this.date = date;

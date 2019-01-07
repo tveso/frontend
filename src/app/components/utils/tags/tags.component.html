@@ -1,0 +1,8 @@
+<div class="content">
+  <div class="tags">
+    <div class="tag" *ngFor="let tag of tags">
+      {{tag}} <span class="deleteTag" (click)="removeTag(tag)"><mat-icon>close</mat-icon></span>
+    </div>
+  </div>
+  <input type="text" [(ngModel)]="text" (ngModelChange)="update($event)"/>
+</div>

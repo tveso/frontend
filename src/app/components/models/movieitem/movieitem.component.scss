@@ -5,9 +5,10 @@ small{
 }
 article{
   margin-bottom: 10px;
-    box-shadow: box-shadow("soft");
-    padding: 0;
-    box-sizing: border-box;
+  border:1px solid $color_1_base;
+  box-shadow: box-shadow('medium');
+  padding: 0;
+  box-sizing: border-box;
   background-color:tint($color_1_base,20);
   transition: 0.2s all ease-in-out;
   border-radius: 4px;
@@ -44,8 +45,7 @@ article{
   .tags{
     position: absolute;
     bottom:15px;
-    left:5px;
-
+    right:5px;
   }
   .util{
     position: absolute;

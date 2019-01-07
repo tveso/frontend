@@ -1,0 +1,4 @@
+<app-items [changeQueryParams]="false" type="person" [type]="'people'"   [options]="showFilter" [loadItemsCallback]="callback"
+          [filteredFn]="filteredFn.bind(this)" [filters]="{peopleSort:true, gender: true, placeOfBirth: true, textSearch: true}"
+           [itemCallback]="select.bind(this)" >
+</app-items>

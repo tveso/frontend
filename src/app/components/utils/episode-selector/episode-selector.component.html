@@ -1,0 +1,30 @@
+<app-items [changeQueryParams]="false" type="movie" [options]="showFilter" [loadItemsCallback]="callback"
+           [filters]="{showSort:true, years: true, genres: true,
+ famous: true, releasedShows: true, textSearch: true}" [itemCallback]="selectTvshow.bind(this)"
+           [filteredFn]="filteredFn.bind(this)" *ngIf="!selectedTvshow" >
+</app-items>
+
+<button *ngIf="selectedTvshow" mat-flat-button="" style="margin:15px;"
+        (click)="selectedTvshow=undefined;selectedSeason=undefined;episodes=undefined"><mat-icon>tv</mat-icon> Volver a series</button>
+
+<div *ngIf="selectedTvshow && !episodes">
+    <h1>{{selectedTvshow.name}}</h1>
+    <h2>Temporadas</h2>
+    <p>Selecciona una temporada</p>
+    <ul class="menu">
+        <li *ngFor="let s of selectedTvshow.seasons">
+            <a (click)="selectSeason(s)"><app-tmdbimage image="{{s.poster_path}}" [alternative]="selectedTvshow.poster_path"></app-tmdbimage>
+              <span class="title">{{s.name}}</span></a>
+        </li>
+    </ul>
+</div>
+<button
+        style="margin:15px;"  *ngIf="episodes" mat-flat-button
+        (click)="episodes=undefined;selectedSeason=undefined"><mat-icon>list</mat-icon> Temporadas</button>
+<h2 *ngIf="selectedSeason">{{selectedSeason.name}}</h2>
+<p *ngIf="selectedSeason && episodes">Selecciona los capítulos para añadir a la lista</p>
+<div class="episodes" *ngIf="episodes">
+    <div  *ngFor="let e of filterEpisodes()">
+        <app-tvshowepisode [episode]="e" [mode]="'compact'" [callback]="select.bind(this)"></app-tvshowepisode>
+    </div>
+</div>

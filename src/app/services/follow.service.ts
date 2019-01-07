@@ -10,6 +10,11 @@ export class FollowService {
   constructor(private http: HttpClient) { }
 
     follow(id, type, resourceType) {
+      if (!(typeof id === 'string')) {
+          if ('$oid' in id) {
+              id = id.$oid;
+          }
+      }
         return this.http.get<any[]>(`${this.apiuri}${id}?type=${type}&resourceType=${resourceType}`);
     }
     all(options: Array<any> = []) {

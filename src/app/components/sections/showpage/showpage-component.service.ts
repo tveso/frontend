@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Injectable, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Injectable, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ImageService} from '../../../services/image.service';
 import {Movie} from '../../../entities/movie';
@@ -12,6 +12,9 @@ import {UtilService} from '../../../services/util.service';
 import {PageAbstract, SharedService} from '../../../entities/page.abstract';
 import {RecommendatorService} from '../../../services/recommendator.service';
 import {EventsService} from '../../../services/events.service';
+import {EpisodeCalendarProperties} from '../../models/epiosodescalendar/epiosodescalendar.component';
+import {CalendarService, CalendarServiceParams} from '../../../services/calendar.service';
+import {CalendarDate} from '../../utils/calendar/calendar.component';
 
 @Injectable({
     providedIn: 'root'
@@ -111,10 +114,10 @@ class SeasonComponent extends PageAbstract implements OnInit, OnDestroy, AfterVi
             this.show$.next(data['show']);
         });
         this.activatedRouter.queryParams.subscribe((data2) => {
-            if (typeof data2['number'] === 'undefined') {
+            if (typeof data2['season_number'] === 'undefined') {
                 this.changeSeason(1);
             } else {
-                this.changeSeason(data2['number']);
+                this.changeSeason(data2['season_number']);
             }
         });
     }
@@ -227,18 +230,15 @@ class SeasonComponent extends PageAbstract implements OnInit, OnDestroy, AfterVi
 })
 class TvInfoComponent extends PageAbstract implements OnInit {
 
-    departments = {
-        'Writing': 'Guionista',
-        'Costume & Make-Up': 'Disfraz y maquillaje',
-        'Co-Executive Producer': 'Co-Productor Ejecutivo',
-        'Production': 'Productor'
-    };
+    public calendar$ = new EventEmitter<CalendarDate>();
+    showInfo = '';
 
     constructor(imageService: ImageService, protected findService: FindService,
                 protected activatedRouter: ActivatedRoute,
                 public dialog: MatDialog, protected titleService: TitleService, utilService: UtilService,
                 protected  sharedService: SharedService, protected messageService: MessageService,
-                protected tvshowService: TvshowService, recommendatorService: RecommendatorService, eventsService: EventsService) {
+                protected tvshowService: TvshowService, recommendatorService: RecommendatorService, eventsService: EventsService,
+                private calendarService: CalendarService) {
         super(imageService, findService, activatedRouter, dialog, titleService, utilService, sharedService, messageService, tvshowService,
             recommendatorService, eventsService);
     }
@@ -249,6 +249,19 @@ class TvInfoComponent extends PageAbstract implements OnInit {
             this.getRecommendedShows(this.recommendShowsPage);
         });
     }
+    Date() {
+        if (this.show.next_episode_to_air === null) {
+            return new Date();
+        }
+        if (typeof this.show.next_episode_to_air.air_date === 'undefined' || this.show.next_episode_to_air.air_date === 'null'
+        || this.show.next_episode_to_air.air_date === null) {
+            return new Date();
+        }
+        return new Date(this.show.next_episode_to_air.air_date);
+    }
+    getEpisodesCallback(props: EpisodeCalendarProperties) {
+        return this.calendarService.getTvshowsEpisodesBetweenDates(props.minDate, props.maxDate, [this.show.id]);
+    }
 
 }
 @Component({
@@ -258,6 +271,7 @@ class TvInfoComponent extends PageAbstract implements OnInit {
 })
 class TvImagesComponent implements OnInit {
     private show$ = new BehaviorSubject<Movie>(new Movie());
+    showInfo = '';
     tvshow: any;
     private sucriptions$: Subscription;
     constructor(private sharedService: SharedService, private messageService: MessageService) {

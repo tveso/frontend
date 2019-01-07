@@ -3,6 +3,7 @@ import {CalendarComponent, CalendarDate, formatDate} from '../../utils/calendar/
 import {CalendarService, CalendarServiceParams} from '../../../services/calendar.service';
 import {getNumPad} from '../../models/tvshowepisode/tvshowepisode.component';
 import {stringToColour} from '../../utils/functions';
+import {EpisodeCalendarProperties} from '../../models/epiosodescalendar/epiosodescalendar.component';
 
 @Component({
   selector: 'app-calendarsection',
@@ -98,40 +99,10 @@ export class CalendarTvshowsComponent extends CalendarMoviesComponent {
     styleUrls: ['./mycalendar.component.scss']
 })
 export class MyCalendarComponent extends CalendarComponent implements OnInit {
-    params: CalendarServiceParams = {include_movies: 0, include_tvshows: 1, only_user_followed: 0};
-    private episodes = [];
-    private dates = new Set();
-    constructor(private calendarService: CalendarService) {
+    constructor( private calendarService: CalendarService) {
         super();
-        this.handler = () => {};
     }
-    bgColour(colour: string) {
-        return stringToColour(colour);
-    }
-    ngOnInit() {
-        this.buildDays();
-        this.calendar$.subscribe((a: CalendarDate) => {
-            this.changeMonth(a.date);
-            let dayOneDate: any = new Date(a.date);
-            dayOneDate.setDate(1);
-            dayOneDate = formatDate(dayOneDate);
-            let lastDayDate: any = new Date(a.date);
-            lastDayDate.setDate(31);
-            lastDayDate = formatDate(lastDayDate);
-            if (this.dates.has(dayOneDate)) {
-                return;
-            }
-            this.dates.add(dayOneDate);
-            this.calendarService.getEpisodesBetweenDates(dayOneDate, lastDayDate).subscribe((episodes) => {
-                this.episodes = this.episodes.concat(episodes);
-            });
-        });
-        this.calendar$.emit({date: formatDate(this.date)});
-    }
-    getNumericalEpisode(episode) {
-        return `${episode.season_number}x${getNumPad(episode.episode_number)}`;
-    }
-    getEpisodesFromDate(date: string) {
-        return this.episodes.filter(a => a.air_date === date);
+    getEpisodesCallback(props: EpisodeCalendarProperties) {
+        return this.calendarService.getEpisodesBetweenDates(props.minDate, props.maxDate);
     }
 }

@@ -4,21 +4,24 @@
             <small><a [routerLink]="['/movies']"  [queryParams]="{sort: 'popularity'}">Ver mas</a> </small>
         </h1>
         <div class="mainShows">
-            <div class="col-{{i}}"  *ngFor="let m of popularMovies; let i = index">
+            <div class="col-{{i}}"  *ngFor="let m of popularMovies|slice:0:5; let i = index">
                 <app-movieitem [movie]="m" [mode]="'backdrop'"></app-movieitem>
             </div>
 
         </div>
     </article>
     <article>
-        <small><a [routerLink]="['/calendar','mycalendar']">Ver mas</a> </small>
+        <h1>
+        <small><a [routerLink]="['/calendar','mycalendar']">Ver mas</a> </small> </h1>
         <app-mycalendar></app-mycalendar>
+    </article>
+    <article>
         <h1>Mis capítulos pendientes
             <small><a [routerLink]="['/movies']"  [queryParams]="{sort: 'popularity'}">Ver mas</a> </small>
         </h1>
-        <div class="episodes">
+        <div class="episodes" *ngIf="pendingEpisodes">
             <div  *ngFor="let e of pendingEpisodes">
-                <app-tvshowepisode [episode]="e" [mode]="'compact'"></app-tvshowepisode>
+                <app-tvshowepisode [episode]="e" [mode]="'compact'" (episodeUpdate)="updatePendingEpisodes($event)"></app-tvshowepisode>
             </div>
         </div>
     </article>

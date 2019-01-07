@@ -10,11 +10,11 @@
             <app-rating [resource]="movie"></app-rating>
         </h2>
         <div class="tags">
-            <app-follow [movie]="movie"></app-follow>
+            <app-follow [movie]="movie" [orientation]="orientation"></app-follow>
         </div>
     </div>
 
-    <h1>   <a routerLink="/{{movie.type}}/{{movie._id}}">{{movie|moviename}}
+    <h1>   <a routerLink='{{Movie.getUrl(movie)}}'>{{movie|moviename}}
         <small>({{utilService.getReleaseDate(movie)}})</small></a>
     </h1>
 </article>

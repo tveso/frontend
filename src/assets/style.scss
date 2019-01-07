@@ -25,6 +25,7 @@
   @include respond-between("phone", "tablet"){
     min-width: 100%;
   }
+  overflow: auto;
 }
 .dialog-overlay-black{
   background-color: rgba($color_1_base,0.7);
@@ -153,4 +154,9 @@ background-color: $color_2_base;
     font-size: 1.5em;
     margin: 15px;
   }
+}
+
+.mat-tab-nav-bar, .mat-tab-links{
+  width: 100%;
+  overflow: auto;
 }

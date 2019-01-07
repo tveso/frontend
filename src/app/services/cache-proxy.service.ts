@@ -12,7 +12,7 @@ export class CacheProxyService {
   constructor() {
     this.repository = new Repository();
   }
-  public proxy(key, observable: Observable<any>) {
+  public proxy(key, observable: Observable<any>): Observable<any> {
       key = Md5.hashStr(key);
     if (key in this.cacheData) {
       const ids = this.cacheData[key];

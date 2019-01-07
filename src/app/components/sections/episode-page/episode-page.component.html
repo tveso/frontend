@@ -1,0 +1,49 @@
+<article class="panel">
+    <header  [style.background-image]="poster">
+
+
+        <div class="rating">
+            <app-rating [resource]="episode"></app-rating>
+        </div>
+        <div class="title">
+            <div class="episode-title">
+                <h1><a  routerLink='{{Movie.getUrl(episode.show)}}'>{{episode.show.name}}</a></h1>
+                <h2>
+                    <div class="beforeEpisode" *ngIf="episode.before_episode">
+                        <a [routerLink]="['/episode', episode.before_episode._id]"><mat-icon>navigate_before</mat-icon></a>
+                    </div>
+                    {{episode|episodenumber}} - {{episode.name}} <div class="afterEpisode" *ngIf="episode.next_episode">
+                    <a [routerLink]="['/episode', episode.next_episode._id]"><mat-icon>navigate_next</mat-icon></a>
+                </div>  </h2>
+            </div>
+        </div>
+        <div class="episode-rating">
+            <app-episode-rating [episode]="episode" [mode]="'compact'"></app-episode-rating>
+        </div>
+    </header>
+    <div class="container">
+        <article class="sidebar">
+               <span class="showInfo"><button mat-flat-button (click)="showInfo=(showInfo==='') ? 'show_side_bar' : ''">
+        {{(showInfo!=='') ? 'Ocultar' : 'Mostrar más'}}
+    </button></span>
+            <h2>Fecha de estreno</h2>
+            {{episode.air_date|date:'fullDate':undefined:'es'}}
+            <h2>Serie</h2>
+            <span class="show">
+                 <app-movieitem [movie]="episode.show"></app-movieitem>
+            </span>
+
+        </article>
+        <article class="main">
+            <p>{{episode.overview}}</p>
+            <h2>Cast</h2>
+            <div class="cast">
+                <div class="person"  *ngFor="let i of episode.credits.cast.concat(episode.guest_stars)">
+                        <app-personitem [extras]="true" [person]="i"></app-personitem>
+                </div>
+            </div>
+            <app-comment-section [entity]="episode" [resource]="episode._id" [comments]="episode.comments"></app-comment-section>
+        </article>
+
+    </div>
+</article>

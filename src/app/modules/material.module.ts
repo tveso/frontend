@@ -18,6 +18,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatBadgeModule} from '@angular/material/badge';
 @NgModule({
     imports: [
         MatMenuModule,
@@ -35,8 +37,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatTabsModule,
         MatIconModule,
         MatTooltipModule,
+        MatStepperModule,
         MatAutocompleteModule,
         MatExpansionModule,
+        MatBadgeModule
     ],
     exports: [
         MatMenuModule,
@@ -49,6 +53,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatSlideToggleModule,
         MatDialogModule,
         MatTableModule,
+        MatStepperModule,
         MatSortModule,
         MatTabsModule,
         MatRippleModule,
@@ -56,6 +61,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatTooltipModule,
         MatAutocompleteModule,
         MatExpansionModule,
+        MatBadgeModule
     ]
 })
 

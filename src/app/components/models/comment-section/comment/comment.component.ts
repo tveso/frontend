@@ -18,12 +18,10 @@ import {UserService} from '../../../../services/user.service';
     preserveWhitespaces: true
 })
 export class CommentComponent extends Commentable implements OnInit {
-    test = '<app-spinner></app-spinner>';
     getId = function () {
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     };
     protected id;
-    @ViewChild('dynamicContentPlaceHolder', {read: ViewContainerRef})
     protected dynamicComponentTarget: ViewContainerRef;
     private formatedComment = null;
 

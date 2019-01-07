@@ -1,0 +1,53 @@
+<section [style.background-image]="poster">
+    <header>
+        <div class="follow">
+            <app-follow [movie]="list" [listable]="false"></app-follow>
+        </div>
+        <div class="title">
+            <a routerLink='{{List.getUrl(list)}}'>
+                <h1>{{list.title}}
+                    <small>
+                        ({{list.created_at}})
+                    </small>
+                </h1>
+            </a>
+            <div class="info">
+                Creador: {{list.user.username}}
+            </div>
+        </div>
+    </header>
+    <article class="main">
+        <nav class="navigation">
+            <nav mat-tab-nav-bar>
+                <a mat-tab-link routerLink="{{List.getUrl(list)}}/movies"
+                   routerLinkActive="active"><mat-icon>movie</mat-icon> Películas</a>
+                <a mat-tab-link routerLink="{{List.getUrl(list)}}/tvshows"
+                   routerLinkActive="active"><mat-icon>tv</mat-icon> Series</a>
+                <a mat-tab-link routerLink="{{List.getUrl(list)}}/people"
+                   routerLinkActive="active"><mat-icon>people</mat-icon> Personas</a>
+                <a mat-tab-link routerLink="{{List.getUrl(list)}}/episodes"
+                   routerLinkActive="active"><mat-icon>ondemand_video</mat-icon> Episodes</a>
+            </nav>
+        </nav>
+        <div class="content">
+        <article class="sidebar">
+            <h2>{{list.title}}</h2>
+            <p>{{list.description}}</p>
+        </article>
+            <article *ngIf="nav==='movies'">
+                <h1>Películas</h1>
+                <app-items [changeQueryParams]="true" [type]="'movie'"  [options]="{type:'movie', sort:'popularity'}"
+                           [loadItemsCallback]="loadMovies.bind(this)"
+                           [filters]="{showSort:true, years: true, genres: true,
+ famous: true, releasedShows: true, durationMovie: true, patternSearch: true}"></app-items>
+            </article>
+            <article *ngIf="nav==='tvshows'">
+                <h1>Series</h1>
+                <app-items [changeQueryParams]="true" [type]="'tvshow'"  [options]="{type:'tvshow', sort:'popularity'}"
+                           [loadItemsCallback]="loadTvshows.bind(this)"
+                           [filters]="{showSort:true, years: true, genres: true,
+ famous: true, releasedShows: true, durationMovie: true, patternSearch: true}"></app-items>
+            </article>
+        </div>
+    </article>
+</section>

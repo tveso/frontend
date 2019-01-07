@@ -19,6 +19,7 @@ export class Movie {
     next_episode_to_air: any;
     userFollow: any;
     name: any;
+    id: any;
     static  getTitle(tvshow): any {
         if (typeof tvshow.name !== 'undefined') {
             return tvshow.name;

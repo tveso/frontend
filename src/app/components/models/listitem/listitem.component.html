@@ -1,0 +1,37 @@
+<ng-container *ngIf="list">
+<div class="container">
+  <div class="posterContainer">
+    <div class="type">
+      Lista
+    </div>
+    <div class="follow">
+      <app-follow [movie]="list" [listable]="false"></app-follow>
+    </div>
+      <a [routerLink]="List.getUrl(list)">
+    <div class="poster">
+      <div class="pictures" *ngFor="let it of getPictures()">
+        <app-tmdbimage [image]="it"></app-tmdbimage>
+      </div>
+    </div>
+      </a>
+  </div>
+
+  <div class="info">
+      <h2> <a [routerLink]="List.getUrl(list)">{{list.title}}</a></h2>
+    <div class="stats">
+      <div>
+        <mat-icon>movie</mat-icon> {{list.stats.count.movies}}
+      </div>
+      <div>
+        <mat-icon>tv</mat-icon> {{list.stats.count.tvshows}}
+      </div>
+      <div>
+        <mat-icon>people</mat-icon> {{list.stats.count.people}}
+      </div>
+      <div>
+        <mat-icon>ondemand_video</mat-icon> {{list.stats.count.episodes}}
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>

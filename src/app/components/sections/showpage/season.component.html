@@ -12,8 +12,8 @@
         <ul class="menu">
             <li *ngFor="let s of show.seasons">
                 <ng-container>
-                    <a  routerLink="{{Movie.getUrl(show)}}/season"
-                       [queryParams]="{'number': s.season_number }"
+                    <a  routerLink="{{Movie.getUrl(show)}}"
+                       [queryParams]="{'season_number': s.season_number }"
                        [queryParamsHandling]="'merge'" routerLinkActive="active">{{s.name}}</a>
                 </ng-container>
             </li>

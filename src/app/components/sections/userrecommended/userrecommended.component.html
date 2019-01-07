@@ -31,7 +31,7 @@
         <mat-expansion-panel-header>
             Escoge las pelis o series
         </mat-expansion-panel-header>
-            <app-show-selector (output)="updateSelectedShows($event)" [selecteds]="selectedShows"></app-show-selector>
+            <app-show-selector (output)="updateSelectedShows($event)" [selecteds]="selectedMovies"></app-show-selector>
     </mat-expansion-panel>
     <h1>Recomendaciones</h1>
     <ng-container *ngIf="loading===false && recommended.length===0">

@@ -15,13 +15,16 @@ export class MovieitemComponent implements OnInit {
     @Input() callback;
     Movie = Movie;
     private imagePath: string;
+    private orientation: string;
   constructor(public utilService: UtilService) { }
 
   ngOnInit() {
     if (this.mode === 'poster') {
       this.imagePath = 'poster_path';
+      this.orientation = 'vertical';
     } else {
       this.imagePath = 'backdrop_path';
+      this.orientation = 'horizontal';
     }
   }
 

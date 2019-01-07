@@ -27,4 +27,9 @@ export class CalendarService {
         const paramsSended = {min_date: minDate, max_date: maxDate};
         return this.http.get<Movie[]>(`${this.apiuri}episodes`, {params: paramsSended});
     }
+
+    getTvshowsEpisodesBetweenDates(minDate: string, maxDate: string, anies: any[]) {
+        const paramsSended = {min_date: minDate, max_date: maxDate, include: anies};
+        return this.http.get<Movie[]>(`${this.apiuri}tvshowsepisodes`, {params: paramsSended});
+    }
 }

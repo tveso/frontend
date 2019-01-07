@@ -30,6 +30,10 @@ import {
     CalendarsectionComponent,
     CalendarTvshowsComponent, MyCalendarComponent
 } from './components/sections/calendarsection/calendarsection.component';
+import {EpisodePageComponent, EpisodePageResolver} from './components/sections/episode-page/episode-page.component';
+import {ListpageComponent, ListPageResolver} from './components/sections/listpage/listpage.component';
+import {ListlistComponent} from './components/sections/listlist/listlist.component';
+import {CreatelistComponent} from './components/sections/createlist/createlist.component';
 
 
 const RoutesList = [
@@ -43,6 +47,8 @@ const RoutesList = [
                 }
             },
             {path: 'movies', canActivate: [AuthGuard],  component: MovielistComponent, data: {title: 'Películas', needAuth: 'ROLE_USER'}},
+            {path: 'lists', canActivate: [AuthGuard],  component: ListlistComponent, data: {title: 'Listas', needAuth: 'ROLE_USER'}},
+            {path: 'lists/create', canActivate: [AuthGuard],  component: CreatelistComponent, data: {title: 'Crear Lista', needAuth: 'ROLE_USER'}},
             {path: 'people',  canActivate: [AuthGuard], component: PeoplelistComponent, data: {title: 'Personas', needAuth: 'ROLE_USER'}},
             {path: 'search',  canActivate: [AuthGuard], component: SearchResultsComponent,
                 data: {needAuth: 'ROLE_USER'}, resolve: {
@@ -88,6 +94,13 @@ const RoutesList = [
                     {path: 'movies', component: UserMoviesComponent,   data: {title: 'Películas'}},
                     {path: 'tvshows', component: UserTvshowsComponent,  data: {title: 'Series'}},
                 ]},
+            {path: 'episode/:id', component: EpisodePageComponent,  canActivate: [AuthGuard],   resolve: {
+                    episode: EpisodePageResolver},  data: { needAuth: 'ROLE_USER'}, children: [
+                ]},
+            {path: 'list/:name/:id', component: ListpageComponent, resolve: {list: ListPageResolver},   canActivate: [AuthGuard],
+                data: {needAuth: 'ROLE_USER'}},
+            {path: 'list/:name/:id/:mode', component: ListpageComponent, resolve: {list: ListPageResolver},   canActivate: [AuthGuard],
+                data: {needAuth: 'ROLE_USER'}},
             {path: 'login', component: LoginComponent, data: {title: 'Entrar'}},
             {path: 'register', component: RegisterComponent, data: {title: 'Registro'}},
             {path: 'logout', component: LogoutComponent,  canActivate: [AuthGuard],  data: {needAuth: 'ROLE_USER'}},

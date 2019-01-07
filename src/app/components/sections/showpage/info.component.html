@@ -3,6 +3,12 @@
     <span class="showInfo"><button mat-flat-button (click)="showInfo=(showInfo==='') ? 'show_side_bar' : ''">
         {{(showInfo!=='') ? 'Ocultar' : 'Mostrar más'}}
     </button></span>
+        <ng-container  *ngIf="show.type === 'tvshow'" >
+            <h2>Calendario de episodios</h2>
+            <app-epiosodescalendar [initialDate]="Date()"
+                                   [callback]="getEpisodesCallback.bind(this)"></app-epiosodescalendar>
+        </ng-container>
+
         <h2>Series Recomendadas</h2>
         <ng-container *ngIf="!loadingRecommnededMovies">
             Cargando series recomendadas...
@@ -26,8 +32,8 @@
     <article>
         <h2>Sinopsis</h2>
         <p>{{show.overview}}</p>
-        <h2 *ngIf="getTrailer(show)"></h2>
-        <!--<app-youtube [id]="getTrailer(tvshow)"></app-youtube>-->
+        <h1 *ngIf="show.type==='tvshow'">Temporadas</h1>
+        <app-seasoncomponent *ngIf="show.type==='tvshow'"></app-seasoncomponent>
         <app-comment-section [entity]="show" [resource]="show._id" [comments]="show.comments"></app-comment-section>
     </article>
 </div>

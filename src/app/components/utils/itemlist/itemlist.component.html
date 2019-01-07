@@ -2,14 +2,17 @@
     <app-placeholderitems></app-placeholderitems>
 </ng-container>
 <ul class="items" infiniteScroll [infiniteScrollDistance]="0.2" [infiniteScrollThrottle]="500"
-    (scrolled)="callback()" [class]="class">
-    <li *ngFor="let item of items">
+    (scrolled)="callback()" [class]="class" [ngStyle]="{'grid-template-columns': 'repeat('+itemSize+', 1fr)'}">
+    <li *ngFor="let item of getFilteredItems()">
         <div class="extra" [innerHtml]="extraData(item)" *ngIf="extraDataFunction"></div>
         <ng-container *ngIf="type=='movie' || type=='tvshow'">
             <app-movieitem [movie]="item" [callback]="itemCallback"></app-movieitem>
         </ng-container>
         <ng-container *ngIf="type=='people'">
             <app-personitem *ngIf="item" [person]="item" [callback]="itemCallback"></app-personitem>
+        </ng-container>
+        <ng-container *ngIf="type=='list'">
+            <app-listitem *ngIf="item" [list]="item" [callback]="itemCallback"></app-listitem>
         </ng-container>
 
     </li>
@@ -18,6 +21,6 @@
 <div class="loading" [hidden]="loading===false || noLoadMore===true">
     <app-spinner></app-spinner>
 </div>
-<div class="loading" [hidden]="loading===false || noLoadMore===true ">
+<div class="loading" [hidden]="noLoadMore===true ">
     <button (click)="callback()" mat-raised-button>Cargar más</button>
 </div>

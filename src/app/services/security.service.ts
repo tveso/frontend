@@ -84,8 +84,6 @@ export class SecurityService {
     }
 
     register(model: User) {
-        const data: any = model;
-        data.csrf_token = this.csrfToken;
         return this.http.post<any>(`${this.apiuri}register`, model, this.httpOptions);
     }
 

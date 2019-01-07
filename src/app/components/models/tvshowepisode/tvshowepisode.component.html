@@ -1,11 +1,19 @@
 <div class="episode" [class]="'episode ' + (isWatched() ? 'episode-watched' : '')"  *ngIf="mode==='explicit'">
+    <a [routerLink]="['/episode', episode._id]" *ngIf="!hasCallback()">
     <div class="poster">
         <div class="episode-number">{{getNumericalEpisode()}}</div>
         <img [src]="getBackground()" class="poster"/>
     </div>
+    </a>
+    <a (click)="handle()" *ngIf="hasCallback()">
+        <div class="poster">
+            <div class="episode-number">{{getNumericalEpisode()}}</div>
+            <img [src]="getBackground()" class="poster"/>
+        </div>
+    </a>
     <div class="info">
         <div class="episode-rating"><app-rating [resource]="episode"></app-rating></div>
-        <h1>{{episode.name}}</h1>
+        <h1><a [routerLink]="['/episode', episode._id]">{{episode.name}}</a></h1>
         <div class="episode-airdate">{{episode.air_date}}</div>
         <p class="episode-description">
             <b *ngIf="episode.overview===null || episode.overview === ''">
@@ -13,44 +21,29 @@
             </b>
             {{episode.overview}}
         </p>
-        <div class="not-watched" [class]="(isWatched()) ? 'watched' : 'not-watched'">
-            <a (click)="watch()" class="pointer">
-            <ng-container *ngIf="isWatched()">
-                <mat-icon>check_circle</mat-icon>Visto
-            </ng-container>
-            <ng-container *ngIf="isWatched() === false">
-                <mat-icon>check_circle_outline</mat-icon>Marcar como visto
-            </ng-container>
-            </a>
-        </div>
+     <app-episode-rating [episode]="episode" [mode]="'list'" (episodeUpdate)="update($event)"></app-episode-rating>
     </div>
 </div>
 <article *ngIf="mode==='compact'" class="compact">
     <div class="poster">
-        <a routerLink='/lol'>
+        <a [routerLink]="['/episode', episode._id]" *ngIf="!hasCallback()">
+            <app-tmdbimage image="{{episode.season_poster_path}}" [alternative]="episode.show.poster_path"></app-tmdbimage>
+        </a>
+        <a (click)="handle()" *ngIf="hasCallback()">
             <app-tmdbimage image="{{episode.season_poster_path}}" [alternative]="episode.show.poster_path"></app-tmdbimage>
         </a>
         <h2>
             <app-rating [resource]="episode"></app-rating>
         </h2>
         <div class="tags">
-            <div class="not-watched" [class]="(isWatched()) ? 'watched' : 'not-watched'">
-                <a (click)="watch()" class="pointer">
-                    <ng-container *ngIf="isWatched()">
-                        <mat-icon>check_circle</mat-icon>Visto
-                    </ng-container>
-                    <ng-container *ngIf="isWatched() === false">
-                        <mat-icon>check_circle_outline</mat-icon>Marcar como visto
-                    </ng-container>
-                </a>
-            </div>
+            <app-episode-rating [episode]="episode" [mode]="'list'" (episodeUpdate)="update($event)"></app-episode-rating>
         </div>
     </div>
 
     <div class="episode-show-info"> <a routerLink="{{Movie.getUrl(episode.show)}}">{{episode.show.name}}</a>
-        <div class="episode-show-info-episode"> <b>{{getNumericalEpisode()}} -
+        <div class="episode-show-info-episode"> <a [routerLink]="['/episode', episode._id]"><b>{{getNumericalEpisode()}} -
            {{episode.name}}</b>
-            <div>{{episode.air_date}}</div>
+            <div>{{episode.air_date}}</div></a>
             </div>
     </div>
 </article>

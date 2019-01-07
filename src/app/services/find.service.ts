@@ -12,7 +12,7 @@ export class FindService {
 
     constructor(private http: HttpClient, private cacheProxyService: CacheProxyService) { }
     private apiuri = `${Api.API_URL}find/`;
-    all(options) {
+    all(options): Observable<any> {
         let params = new HttpParams();
         for (const o in options) {
             if (options.hasOwnProperty(o)) {

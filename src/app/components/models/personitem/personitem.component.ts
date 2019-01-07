@@ -21,9 +21,9 @@ export class PersonitemComponent implements OnInit {
 
     ngOnInit() {
     }
-    handle($event: Event) {
+    handle(person, $event: Event) {
         if (this.hasCallback()) {
-            return this.callback();
+            return this.callback(person, $event);
         }
     }
 

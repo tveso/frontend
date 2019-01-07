@@ -27,8 +27,13 @@ export class ShowSelectorComponent implements OnInit {
       return this.findService.all(params);
   }
 
+    filteredFn(items: Array<any>) {
+        return items.filter((a: any) => {
+            return this.selecteds.indexOf(a) === -1;
+        });
+    }
 
-    select(id, $event) {
+  select(id, $event) {
       if (this.exists(id)) {
           this.remove(id);
       } else {

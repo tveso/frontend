@@ -15,6 +15,8 @@ import {Movie} from '../../../entities/movie';
 })
 export class FollowComponent implements OnInit {
   @Input() movie: Movie;
+  @Input() orientation = 'vertical';
+  @Input() listable = true;
     movieTypes = [
         {
             'name' : 'Pendiente',
@@ -24,7 +26,7 @@ export class FollowComponent implements OnInit {
         },
         {
             'name': 'Vista',
-            'icon': 'done',
+            'icon': 'remove_red_eye',
             'show': 'Vista',
             'tag': 'watched',
         },
@@ -33,11 +35,6 @@ export class FollowComponent implements OnInit {
             'icon': 'favorite',
             'show': 'Favorita',
             'tag': 'favorite'
-        },
-        {
-            'name': 'Cancelar',
-            'icon': 'cancel',
-            'tag': 'cancel'
         },
         ];
     tvshowTypes = [
@@ -54,21 +51,18 @@ export class FollowComponent implements OnInit {
             'tag': 'following',
         },
         {
-            'name': 'Finalizar',
-            'show': 'Finalizada',
-            'icon': 'done',
-            'tag': 'finalized',
-        },
-        {
             'name': 'Favorita',
             'icon': 'favorite',
             'show': 'Favorita',
             'tag': 'favorite'
         },
+    ];
+    listTypes = [
         {
-            'name': 'Cancelar',
-            'icon': 'cancel',
-            'tag': 'cancel'
+            'name': 'Seguir',
+            'show': 'Siguiendo',
+            'icon': 'arrow_right_alt',
+            'tag': 'following',
         },
     ];
 
@@ -83,17 +77,20 @@ export class FollowComponent implements OnInit {
   }
 
     getTypes() {
-        const result = [];
-        if (this.movie.type === 'movie') {
-            return this.movieTypes;
+        switch (this.movie.type) {
+            case 'movie':
+                return this.movieTypes;
+            case 'tvshow':
+                return this.tvshowTypes;
+            case 'list':
+                return this.listTypes;
         }
-        return this.tvshowTypes;
     }
     getClass(tag) {
         const followed = this.doesFollow();
-        const result = 'mat-menu-item ';
-        if (followed === null) { return 'mat-menu-item'; }
-        return (tag.tag === followed) ? result + 'activeMenuitem' : result;
+        const result = 'default ';
+        if (followed === null) { return 'default'; }
+        return (tag.tag === followed) ? 'activeMenuitem ' + tag.icon : result;
 
     }
     doesFollow() {
@@ -103,34 +100,18 @@ export class FollowComponent implements OnInit {
         return this.movie.userFollow.mode;
     }
     follow(type) {
+        let tag = type.tag;
+        type = Object.assign({}, type);
         const follow = this.doesFollow();
-        if (follow === type.tag ) {
-            return;
+        if (follow === type.tag && follow !== null ) {
+            type.tag = 'cancel';
+            tag = 'cancel';
         }
       this.frontFollow(type);
-      const tag = type.tag;
-      const typeName = type.name;
-      const user = this.userService.getUser();
-      const name = (typeof this.movie.name !== 'undefined') ? this.movie.name : this.movie.title;
       this.followService.follow(this.movie._id, tag, this.movie.type).subscribe((a) => {
-          if (tag === 'cancel') {
-              this.snackbar.open(`${name} ha sido quitada de la lista de seguimiento`, 'CERRAR', {duration: 2000});
-              return;
-          }
-          this.snackbar.open(`${name} ha sido añadida a la lista '${typeName}'`, 'CERRAR', {duration: 2000});
       });
     }
 
-    getUserCurrentTag() {
-        const follow = this.doesFollow();
-        if (follow === null ) {
-            return {icon: 'menu', name: 'Seguir', show: 'Seguir'};
-        }
-        const types = (this.movie.type === 'movie') ? this.movieTypes : this.tvshowTypes;
-        return types.find((a) => {
-            return a.tag === follow;
-        });
-    }
 
     private frontFollow(type) {
         const tag = type.tag;

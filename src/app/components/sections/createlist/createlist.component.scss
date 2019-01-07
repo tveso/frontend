@@ -1,0 +1,58 @@
+@import "../../../../assets/util";
+
+.optional {
+  font-size:0.8em;
+  color: shade($color_2_base, 40);
+}
+
+.button{
+  margin:10px;
+
+}
+
+.addresources{
+  max-height: 100%;
+  overflow: auto;
+  .list {
+    max-height: 200px;
+    overflow: auto;
+    li{
+      display: block;
+      padding: 15px;
+      border-bottom: 1px solid shade($color_2_base, 5);
+      .close{
+        float:right;
+        cursor: pointer;
+      }
+      &:hover{
+        background-color: shade($color_2_base, 10);
+        &>.close {
+            color:$color_5_base;
+        }
+      }
+    }
+  }
+}
+.selected{
+  padding: 5px;
+  background-color: shade($color_2_base, 1);
+  .searchBox{
+    background-color: $color_2_base;
+    border: 1px solid shade($color_2_base, 10);
+  }
+}
+
+.errors {
+  color:$color_5_base;
+  font-size: 0.9em;
+}
+
+.limited{
+  max-height: 400px;
+  overflow: auto;
+  background-color: shade($color_2_base, 3);
+}
+
+.form{
+  border: 1px solid shade($color_2_base, 10);
+}

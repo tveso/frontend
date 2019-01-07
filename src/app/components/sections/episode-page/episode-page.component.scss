@@ -1,0 +1,181 @@
+@import "../../../../assets/util";
+
+
+header{
+  height: 300px;
+  font-size:1.5em;
+  margin: 0 auto;
+  background-size: 100% auto;
+  text-shadow: 1px 1px 1px $color_1_base;
+  position: relative;
+
+  @include respond-between('phone','tablet'){
+    height: 200px;
+    background-position: 0 0;
+    background-size: 100% auto;
+  }
+  .rating{
+    padding:15px;
+    background-color: rgba($color_1_base,0.3);
+    color:white;
+    font-size: 1.5rem;
+    z-index:1;
+    width: fit-content;
+    position: absolute;
+    @include respond-between('phone','tablet'){
+      padding:8px;
+      font-size: 1.2rem;
+    }
+    right:0;
+    small{
+      font-size: 0.4em;
+      display: block;
+    }
+  }
+  .show{
+    position: absolute;
+    top:0;
+    height: 150px;
+    width: 150px;
+  }
+  .title{
+    position: absolute;
+    bottom:0;
+    left:70px;
+    font-size: 0.8em;
+    color:$color_2_base;
+    @include respond-between('phone','pc'){
+      top: 0;
+      left:5px;
+      font-size: 0.7em;
+    }
+    a{
+      color: inherit;
+    }
+  }
+}
+.watched{
+  @extend .not-watched;
+  background-color: rgba($color_5_base,0.8) !important;
+  text-shadow: 1px 1px 1px $color_1_base;
+  color:$color_2_base!important;
+  &:hover{
+    background-color: rgba(shade($color_5_base,0.4),0.8) !important;
+  }
+}
+
+.not-watched{
+  text-shadow: none;
+  display: inline-table;
+  background-color: rgba(tint($color_4_base, 75),0.9);
+  cursor: pointer;
+  border-radius: 4pt;
+  padding: 6px 8px;
+  margin: 8px;
+  font-size:1rem;
+  color: $color_1_base;
+  a{
+    color:inherit;
+  }
+  transition: 0.2s all ease-in-out;
+  &:hover{
+    color:$color_2_base;
+    background-color: rgba(shade($color_5_base,0.4),0.9) !important;
+  }
+}
+
+.panel{
+  padding: 0;
+  margin: 0;
+
+}
+.container {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  @include respond-between('phone','tablet'){
+    display: block;
+  }
+}
+.showInfo {
+  position: absolute;;
+  right: 15px;
+  top: 15px;
+  display: none;
+  @include respond-between('phone', 'tablet') {
+    display: block;
+  }
+}
+.sidebar{
+  position: relative;
+  color:$color_1_base;
+  font-size: 0.9em;
+  @include respond-between('phone', 'tablet') {
+    max-height: 100px;
+    overflow: hidden;
+  }
+  background-color: tint($color_3_base,93);
+  &>ul{
+    @include respond-between('phone','tablet'){
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    li{
+      margin-bottom: 10px;
+    }
+  }
+  h3{
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+  }
+}
+.episode-rating{
+  position: absolute;
+  right:0;
+  bottom: 0;
+  font-size:1.25em;
+}
+.cast{
+  white-space: nowrap;
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  .person{
+    display: inline-block;
+    margin-right: 5px;
+    width: 120px;
+  }
+}
+
+.show{
+  width: 180px;
+  display: inline-block;
+}
+
+.controls{
+  display: inline-block;
+  margin: 0 auto;
+  background-color: rgba($color_1_base, 0.6);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: $color_2_base;
+  font-size:1em;
+  a{
+    color:inherit;
+    transition: 0.2s all ease-in-out;
+    &:hover{
+      opacity: 0.5;
+    }
+  }
+}
+
+.beforeEpisode{
+  @extend .controls;
+}
+.afterEpisode{
+  @extend .controls;
+}

@@ -1,0 +1,21 @@
+@import "../../../../assets/util";
+
+.container{
+  padding: 5px;
+  background-color: $color_2_base;
+  box-shadow: box-shadow('medium');
+  .lists {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 1%;
+    @include respond-between('phone', 'tablet') {
+      grid-template-columns: 1fr 1fr;
+    }
+    margin-top: 30px !important;
+    li {
+      width: 100%;
+      height: 150px;
+      display: inline-table;;
+    }
+  }
+}

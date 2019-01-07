@@ -41,10 +41,12 @@ export class ItemsComponent implements OnInit {
   @Input() loadItemsCallback;
   @Output() paramsOutput: EventEmitter<any> = new EventEmitter<any>();
   @Input() extraDataFn: Function;
+  multiples = ['gender', 'genres', 'year', 'mode'];
+  @Input() filteredFn;
   firstLoad = false;
   loading = false;
   showFilters = false;
-    public noMoreData  = false;
+  @Input() public noMoreData  = false;
   constructor(private router: Router, private activatedRoute: ActivatedRoute, public configService: ConfigService) { }
 
   ngOnInit() {
@@ -140,28 +142,23 @@ export class ItemsComponent implements OnInit {
     }
 
     private fixParams(params: any, data: any) {
+      console.log(params);
         for (const param in params) {
             if (params.hasOwnProperty(param)) {
                 if (typeof params[param] === 'undefined' || params[param] === 'undefined' || params[param] === '') {
                     delete params[param];
                     continue;
                 }
-                if ((params[param] instanceof Array) === false) {
+                if ((params[param] instanceof Array) === false && this.multiples.indexOf(param) > -1) {
                     params[param] = [params[param]];
-                } else {
-                    if (params[param].length === 0) {
-                        delete params[param];
-                    } else {
-                        if (typeof params[param][0] === 'undefined' || params[param][0].length === 0) {
-                            delete params[param];
-                        }
-                    }
+                }
+                if (params[param] instanceof Array && params[param].length === 0 ) {
+                    delete params[param];
                 }
             }
         }
         delete params.filter;
         params.page = Number(params.page);
-
         return params;
     }
 

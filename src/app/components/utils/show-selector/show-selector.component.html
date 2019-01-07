@@ -1,12 +1,4 @@
-<h2>Pelis o serie seleccionadas</h2>
-<div *ngIf="selecteds.length === 0">
-    No hay ninguna serie o pelicula seleccionada aún
-</div>
-<div class="badges" *ngIf="selecteds.length>0">
-        <app-itembadge *ngFor="let s of selecteds" [item]="s" (click)="select(s, $event)"></app-itembadge>
-</div>
-<h2>Buscar</h2>
 <app-items [changeQueryParams]="false" type="movie" [options]="showFilter" [loadItemsCallback]="callback"
            [filters]="{showSort:true, years: true, genres: true,
- famous: true, releasedShows: true, textSearch: true}" [itemCallback]="select.bind(this)">
+ famous: true, releasedShows: true, textSearch: true}" [itemCallback]="select.bind(this)" [filteredFn]="filteredFn.bind(this)" >
 </app-items>

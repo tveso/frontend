@@ -1,0 +1,47 @@
+@import "../../../../../assets/src/abstracts/abstract";
+
+.watched{
+  @extend .not-watched;
+  background-color: rgba($color_5_base,0.6) !important;
+  text-shadow: 1px 1px 1px $color_1_base;
+  color:$color_2_base!important;
+  &:hover{
+    background-color: rgba(shade($color_5_base,0.4),0.8) !important;
+  }
+}
+
+.not-watched{
+  float:right;
+  color: $color_2_base;
+  background-color: rgba($color_1_base, 0.8);
+  opacity: 0.8;
+  text-shadow: none;
+  display: block;
+  cursor: pointer;
+  padding: 6px 8px;
+  font-size:1em;
+  border-radius: 4pt;
+  a{
+    color:inherit;
+  }
+  transition: 0.2s all ease-in-out;
+  &:hover{
+    opacity: 1;
+    color:$color_2_base!important;
+    background-color: rgba(shade($color_5_base,0.4),0.8) !important;
+  }
+  .icon{
+    display: block;
+    text-align: center;
+  }
+  .text{
+    font-size: 0.8em;
+  }
+}
+
+.episode-watched {
+  opacity: 0.65;
+  &:hover{
+    opacity: 1;
+  }
+}

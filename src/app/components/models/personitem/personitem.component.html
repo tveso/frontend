@@ -12,7 +12,7 @@
         </div>
     </div>
 </a>
-<a class="pointer" (click)="handle($event)" *ngIf="hasCallback()">
+<a class="pointer" (click)="handle(person, $event)" *ngIf="hasCallback()">
     <div class="person">
         <div class="person-image">
             <app-tmdbimage [image]="person?.profile_path"></app-tmdbimage>
