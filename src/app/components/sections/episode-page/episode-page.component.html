@@ -7,7 +7,19 @@
         </div>
         <div class="title">
             <div class="episode-title">
-                <h1><a  routerLink='{{Movie.getUrl(episode.show)}}'>{{episode.show.name}}</a></h1>
+                <h1><a  routerLink='{{Movie.getUrl(episode.show)}}'>{{episode.show.name}}</a>
+                </h1>
+                <div class="follow">
+                    <app-episode-rating [episode]="episode" [mode]="'compact'"></app-episode-rating>
+                    <a class="list-menu" appAddToListResource="" [resource]="episode">
+                        <div class="maticon">
+                            <mat-icon>list</mat-icon>
+                        </div>
+                        <div class="list-title">
+                            Lista
+                        </div>
+                    </a>
+                </div>
                 <h2>
                     <div class="beforeEpisode" *ngIf="episode.before_episode">
                         <a [routerLink]="['/episode', episode.before_episode._id]"><mat-icon>navigate_before</mat-icon></a>
@@ -16,9 +28,6 @@
                     <a [routerLink]="['/episode', episode.next_episode._id]"><mat-icon>navigate_next</mat-icon></a>
                 </div>  </h2>
             </div>
-        </div>
-        <div class="episode-rating">
-            <app-episode-rating [episode]="episode" [mode]="'compact'"></app-episode-rating>
         </div>
     </header>
     <div class="container">

@@ -21,7 +21,10 @@
             </b>
             {{episode.overview}}
         </p>
-     <app-episode-rating [episode]="episode" [mode]="'list'" (episodeUpdate)="update($event)"></app-episode-rating>
+        <div class="episode-follow">
+            <app-episode-rating [episode]="episode" [mode]="'list'" (episodeUpdate)="update($event)"></app-episode-rating>
+        </div>
+
     </div>
 </div>
 <article *ngIf="mode==='compact'" class="compact">
@@ -37,6 +40,14 @@
         </h2>
         <div class="tags">
             <app-episode-rating [episode]="episode" [mode]="'list'" (episodeUpdate)="update($event)"></app-episode-rating>
+            <a class="list" appAddToListResource="" [resource]="episode">
+                <div class="maticon">
+                    <mat-icon>list</mat-icon>
+                </div>
+                <div class="list-title">
+                    Listas
+                </div>
+            </a>
         </div>
     </div>
 

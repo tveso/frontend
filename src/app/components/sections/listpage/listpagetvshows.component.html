@@ -1,0 +1,5 @@
+<h1>Series</h1>
+<app-items [changeQueryParams]="true" [type]="'tvshow'"  [options]="{type:'tvshow', sort:'popularity'}"
+           [loadItemsCallback]="loadTvshows.bind(this)"
+           [filters]="{showSort:true, years: true, genres: true,
+ famous: true, releasedShows: true, durationMovie: true, patternSearch: true}"></app-items>

@@ -1,0 +1,27 @@
+<h1>Listas</h1>
+<div class="resource">
+    <ng-container *ngIf="resourceType=='movie' || resourceType=='tvshow'">
+        <app-movieitem [movie]="resource"></app-movieitem>
+    </ng-container>
+    <ng-container *ngIf="resourceType=='people'">
+        <app-personitem *ngIf="resource" [person]="item"></app-personitem>
+    </ng-container>
+    <ng-container *ngIf="resourceType==='episode'">
+        <app-tvshowepisode [episode]="resource" [mode]="'compact'"></app-tvshowepisode>
+    </ng-container>
+</div>
+<nav class="navigation">
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link (click)="nav=1">
+            Añadir a lista
+        </a>
+        <a mat-tab-link (click)="nav=2">Listas en la que sale
+        </a>
+    </nav>
+</nav>
+<section *ngIf="nav===1">
+    <h1>Añadir {{getName()}} a una lista</h1>
+    <p>Pulsa en una lista para añadir a dicha lista</p>
+    <app-items [changeQueryParams]="false" [type]="'list'"  [options]="{type:'list', sort:'popularity'}" [loadItemsCallback]="loadUserLists.bind(this)"
+               [filters]="{textSearch: true}" [itemCallback]="addToList.bind(this)"></app-items>
+</section>

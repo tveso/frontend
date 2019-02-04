@@ -1,0 +1,4 @@
+<h1>Personas</h1>
+<app-items [changeQueryParams]="true" [type]="'people'"  [options]="{type:'people', sort:'popularity'}"
+           [loadItemsCallback]="loadPeople.bind(this)"
+           [filters]="{peopleSort:true, gender: true, placeOfBirth: true, textSearch: true}"></app-items>

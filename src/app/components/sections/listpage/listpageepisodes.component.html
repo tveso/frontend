@@ -1,0 +1,4 @@
+<h1>Episodios</h1>
+<app-items [changeQueryParams]="true" [type]="'episode'"  [options]="{}"
+           [loadItemsCallback]="loadEpisodes.bind(this)"
+           [filters]="{textSearch: true}"></app-items>

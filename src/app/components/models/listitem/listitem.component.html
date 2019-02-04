@@ -2,18 +2,25 @@
 <div class="container">
   <div class="posterContainer">
     <div class="type">
-      Lista
+      Lista <ng-container *ngIf="canBeDeleted()"><a matTooltip="Borrar Lista"  class="red" (click)="delete()"><mat-icon>clear</mat-icon></a></ng-container>
     </div>
     <div class="follow">
       <app-follow [movie]="list" [listable]="false"></app-follow>
     </div>
-      <a [routerLink]="List.getUrl(list)">
+      <a [routerLink]="List.getUrl(list)" *ngIf="!hasCallback()">
     <div class="poster">
       <div class="pictures" *ngFor="let it of getPictures()">
         <app-tmdbimage [image]="it"></app-tmdbimage>
       </div>
     </div>
       </a>
+    <a (click)="handle(list, $event)" *ngIf="hasCallback()">
+      <div class="poster">
+        <div class="pictures" *ngFor="let it of getPictures()">
+          <app-tmdbimage [image]="it"></app-tmdbimage>
+        </div>
+      </div>
+    </a>
   </div>
 
   <div class="info">

@@ -31,7 +31,12 @@ import {
     CalendarTvshowsComponent, MyCalendarComponent
 } from './components/sections/calendarsection/calendarsection.component';
 import {EpisodePageComponent, EpisodePageResolver} from './components/sections/episode-page/episode-page.component';
-import {ListpageComponent, ListPageResolver} from './components/sections/listpage/listpage.component';
+import {
+    ListpageComponent, ListPageEpisodesComponent, ListPageInfoComponent,
+    ListPageMoviesComponent, ListPagePeopleComponent,
+    ListPageResolver,
+    ListPageTvshowsComponent
+} from './components/sections/listpage/listpage.component';
 import {ListlistComponent} from './components/sections/listlist/listlist.component';
 import {CreatelistComponent} from './components/sections/createlist/createlist.component';
 
@@ -69,8 +74,7 @@ const RoutesList = [
                 ]},
             {path: 'movie/:name/:id', component: ShowpageComponent,   canActivate: [AuthGuard],  resolve: {
                     show: MovieInfoPageResolver},  data: { needAuth: 'ROLE_USER'}, children: [
-                    {path: '', component: TvInfoComponent
-                    },
+                    {path: '', component: TvInfoComponent},
                     {path: 'recommended', component: TvInfoComponent},
                     {path: 'images', component: TvImagesComponent},
                     {path: 'cast', component: ShowCastComponent}
@@ -98,9 +102,15 @@ const RoutesList = [
                     episode: EpisodePageResolver},  data: { needAuth: 'ROLE_USER'}, children: [
                 ]},
             {path: 'list/:name/:id', component: ListpageComponent, resolve: {list: ListPageResolver},   canActivate: [AuthGuard],
-                data: {needAuth: 'ROLE_USER'}},
-            {path: 'list/:name/:id/:mode', component: ListpageComponent, resolve: {list: ListPageResolver},   canActivate: [AuthGuard],
-                data: {needAuth: 'ROLE_USER'}},
+                data: {needAuth: 'ROLE_USER'}, children: [
+                    {path: 'movies', component: ListPageMoviesComponent},
+                    {path: 'tvshows', component: ListPageTvshowsComponent},
+                    {path: 'people', component: ListPagePeopleComponent},
+                    {path: 'episodes', component: ListPageEpisodesComponent},
+                    {path: '',  component: ListPageInfoComponent},
+                    {path: 'info', component: ListPageInfoComponent}
+                ]
+            },
             {path: 'login', component: LoginComponent, data: {title: 'Entrar'}},
             {path: 'register', component: RegisterComponent, data: {title: 'Registro'}},
             {path: 'logout', component: LogoutComponent,  canActivate: [AuthGuard],  data: {needAuth: 'ROLE_USER'}},

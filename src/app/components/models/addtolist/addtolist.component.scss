@@ -1,0 +1,9 @@
+@import "../../../../assets/src/abstracts/abstract";
+
+.resource{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  @include respond-between('phone','tablet'){
+    grid-template-columns: 1fr 1fr;
+  }
+}

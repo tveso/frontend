@@ -1,0 +1,6 @@
+<h1>Lista</h1>
+<h2>{{list.title}}</h2>
+<p *ngIf="list.description">
+    {{list.description}}
+</p>
+<app-comment-section [entity]="list" [resource]="list._id.$oid" [comments]="list.comments"></app-comment-section>

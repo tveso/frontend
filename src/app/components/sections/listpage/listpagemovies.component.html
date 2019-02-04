@@ -1,0 +1,5 @@
+<h1>Películas</h1>
+<app-items [changeQueryParams]="true" [type]="'movie'"  [options]="{type:'movie', sort:'popularity'}"
+           [loadItemsCallback]="loadMovies.bind(this)"
+           [filters]="{showSort:true, years: true, genres: true,
+ famous: true, releasedShows: true, durationMovie: true, patternSearch: true}"></app-items>

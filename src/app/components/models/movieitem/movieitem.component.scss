@@ -8,10 +8,14 @@ article{
   border:1px solid $color_1_base;
   box-shadow: box-shadow('medium');
   padding: 0;
+  position: relative;
   box-sizing: border-box;
   background-color:tint($color_1_base,20);
   transition: 0.2s all ease-in-out;
   border-radius: 4px;
+  &*{
+    pointer-events: none;
+  }
   .poster{
     position: relative;
   }
@@ -25,7 +29,7 @@ article{
         color:inherit;
       }
     }
-  h2{
+    .rating{
     position: absolute;
     padding: 5px;
     background-color: rgba($color_1_base,0.5);

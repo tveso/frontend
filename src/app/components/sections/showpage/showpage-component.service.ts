@@ -89,10 +89,12 @@ class SeasonComponent extends PageAbstract implements OnInit, OnDestroy, AfterVi
     Movie = Movie;
     private sucriptions$: any;
     private updating: boolean;
+    private selectedSeasons = new Map<Number, Array<any>>();
     @Input() orderType = 'episode_number';
     @Input() showFilter = false;
     private show$ = new BehaviorSubject<Movie>(new Movie());
     private episodes: any;
+    private loadingEpisodes = false;
 
     constructor(imageService: ImageService, protected findService: FindService,
                 activatedRouter: ActivatedRoute,
@@ -128,8 +130,17 @@ class SeasonComponent extends PageAbstract implements OnInit, OnDestroy, AfterVi
         });
         this.eventsService.emit('poster_change', this.selectedSeason.poster_path);
         this.episodes = [];
+        this.loadingEpisodes = true;
+        if (this.selectedSeasons.has(number)) {
+            this.episodes = this.selectedSeasons.get(number);
+            this.loadingEpisodes = false;
+            this.order();
+            return;
+        }
         this.tvshowService.getSeasonEpisodes(this.show.id, number).subscribe((a) => {
             this.episodes = a;
+            this.loadingEpisodes = false;
+            this.selectedSeasons.set(number, a);
         });
         this.order();
     }

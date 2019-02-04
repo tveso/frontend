@@ -123,4 +123,5 @@ export class FollowComponent implements OnInit {
         this.movie.userFollow.mode = tag;
         this.cacheProxyService.update(this.movie._id, this.movie);
     }
+
 }

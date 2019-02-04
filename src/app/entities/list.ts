@@ -14,6 +14,7 @@ export class List {
     user?: User;
     stats?: ListStats;
     created_at?: any;
+    description: any;
     static getUrl(list: List): string {
         return `/list/${slugify(list.title)}/${list._id.$oid}`;
     }

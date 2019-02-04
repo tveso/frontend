@@ -27,6 +27,12 @@
                      aria-label="Buscar por nombre o título..." (keyup.enter)="$event.preventDefault();filter()">
           </mat-form-field>
       </div>
+      <div class="filterBlock" *ngIf="filters.search === true">
+          <mat-form-field>
+              <input matInput type="text" [(ngModel)]="params.search" placeholder="Buscar por nombre o título"
+                     aria-label="Buscar por nombre o título..." (keyup.enter)="$event.preventDefault();filter()">
+          </mat-form-field>
+      </div>
       <div class="filterBlock" *ngIf="filters.patternSearch === true">
           <mat-form-field>
               <input matInput type="text" [(ngModel)]="params.patterntext" placeholder="Buscar por nombre o título"

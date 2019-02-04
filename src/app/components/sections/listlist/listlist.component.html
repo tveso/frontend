@@ -2,6 +2,6 @@
   <button mat-flat-button="" (click)="openCreateListDialog()">Crear Lista</button>
     <h1>Listas</h1>
     <app-items [changeQueryParams]="true" [type]="'list'"  [options]="{type:'list', sort:'popularity'}" [loadItemsCallback]="load.bind(this)"
-               [filters]="{textSearch: true}"></app-items>
+               [filters]="{search: true}" [update]="updates$"></app-items>
 
 </section>

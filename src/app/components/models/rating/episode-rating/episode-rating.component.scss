@@ -11,15 +11,15 @@
 }
 
 .not-watched{
-  float:right;
   color: $color_2_base;
   background-color: rgba($color_1_base, 0.8);
   opacity: 0.8;
   text-shadow: none;
   display: block;
   cursor: pointer;
+  border:1px solid $color_2_base;
+  font-size:0.8em;
   padding: 6px 8px;
-  font-size:1em;
   border-radius: 4pt;
   a{
     color:inherit;

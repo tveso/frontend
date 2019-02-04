@@ -14,6 +14,9 @@
         <ng-container *ngIf="type=='list'">
             <app-listitem *ngIf="item" [list]="item" [callback]="itemCallback"></app-listitem>
         </ng-container>
+        <ng-container *ngIf="type==='episode'">
+            <app-tvshowepisode [episode]="item" [mode]="'compact'" [callback]="itemCallback"></app-tvshowepisode>
+        </ng-container>
 
     </li>
 </ul>

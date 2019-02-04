@@ -41,6 +41,9 @@
                 </mat-select>
             </mat-form-field>
         </div>
+        <ng-container *ngIf="loadingEpisodes===true">
+            <app-spinner>Cargando episodios...</app-spinner>
+        </ng-container>
         <ul class="episodeList" *ngIf="episodes">
             <li *ngFor="let e of episodes">
                 <app-tvshowepisode [episode]="e" (episodeUpdate)="update($event)" [alternativePosterPath]="show.backdrop_path"></app-tvshowepisode>

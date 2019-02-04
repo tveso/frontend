@@ -53,6 +53,10 @@
       cursor: pointer;
     }
   }
+  .episode-follow{
+    float: right;
+    width: 50px;
+  }
   .poster{
     width: 180px;
     position: relative;
@@ -171,5 +175,27 @@
       z-index: 5;
       transition: all 0.2s ease-in-out;
     }
+  }
+}
+
+.list{
+  color: $color_2_base;
+  background-color: rgba($color_1_base, 0.8);
+  opacity: 0.8;
+  text-shadow: none;
+  display: block;
+  margin-top: 3px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border:1px solid $color_2_base;
+  font-size:0.8em;
+  border-radius: 4pt;
+  a{
+    color:inherit;
+  }
+  transition: 0.2s all ease-in-out;
+  .mat-icon{
+    display: block;
+    text-align: center;
   }
 }

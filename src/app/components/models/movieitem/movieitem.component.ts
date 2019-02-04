@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {UtilService} from '../../../services/util.service';
-import {slugify} from '../../utils/functions';
 import {Movie} from '../../../entities/movie';
+import {MoviesService} from '../../../services/movies.service';
+import {ImageService} from '../../../services/image.service';
 
 
 @Component({
@@ -11,12 +12,15 @@ import {Movie} from '../../../entities/movie';
 })
 export class MovieitemComponent implements OnInit {
     @Input() movie;
+    @ViewChild('tooltip') tooltipElement: ElementRef;
     @Input() mode = 'poster';
     @Input() callback;
+    public completeMovie: Movie;
     Movie = Movie;
     private imagePath: string;
     private orientation: string;
-  constructor(public utilService: UtilService) { }
+    movie: any = false;
+  constructor(public utilService: UtilService, private movieService: MoviesService, private imageService: ImageService) { }
 
   ngOnInit() {
     if (this.mode === 'poster') {
@@ -35,9 +39,11 @@ export class MovieitemComponent implements OnInit {
     }
 
     getUrl() {
-      return
+      return;
     }
     hasCallback() {
         return typeof this.callback !== 'undefined';
     }
+
+
 }

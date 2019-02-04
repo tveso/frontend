@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ConfigService} from '../../../services/config.service';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 
 
@@ -14,6 +14,7 @@ export class Filters {
     durationTvShow = false;
     userTv = false;
     userMovie = false;
+    search = false;
     famous = false;
     textSearch = false;
     patternSearch = false;
@@ -37,6 +38,7 @@ export class ItemsComponent implements OnInit {
   @Input() changeQueryParams = false;
   @Input() itemCallback: Function;
   items = [];
+  @Input() update = new Subject<any>();
   @Input() type;
   @Input() loadItemsCallback;
   @Output() paramsOutput: EventEmitter<any> = new EventEmitter<any>();
@@ -65,6 +67,19 @@ export class ItemsComponent implements OnInit {
       } else {
           this.load();
       }
+      this.update.asObservable().subscribe((a) => {
+          console.log(a);
+            this[a.callback](a.resource);
+      });
+  }
+  delete(item: any) {
+      const index = this.items.indexOf(item);
+      if (index > -1) {
+          this.items.splice(index, 1);
+      }
+  }
+  add(item: any) {
+      this.items.push(item);
   }
 
     purgeIfFalse(param) {
@@ -142,7 +157,6 @@ export class ItemsComponent implements OnInit {
     }
 
     private fixParams(params: any, data: any) {
-      console.log(params);
         for (const param in params) {
             if (params.hasOwnProperty(param)) {
                 if (typeof params[param] === 'undefined' || params[param] === 'undefined' || params[param] === '') {

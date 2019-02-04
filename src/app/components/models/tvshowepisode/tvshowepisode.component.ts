@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ImageService} from '../../../services/image.service';
 import {FollowService} from '../../../services/follow.service';
 import {MatDialog} from '@angular/material';
-import {ConfirmDialogComponent} from '../../utils/confirm-dialog/confirm-dialog.component';
 import {Movie} from '../../../entities/movie';
 
 @Component({
@@ -21,7 +20,7 @@ export class TvshowepisodeComponent implements OnInit {
     @Input() mode = 'explicit';
     @Output() episodeUpdate: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private imageService: ImageService, private followService: FollowService, public dialog: MatDialog) { }
+  constructor(private imageService: ImageService, private followService: FollowService) { }
 
   ngOnInit() {
   }

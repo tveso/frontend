@@ -1,18 +1,18 @@
-
+<button mat-icon-button="" [mat-dialog-close]="true" style="float:right" ><i class="fa fa-close"></i> </button>
 <h1>Crear lista</h1>
-<button mat-flat-button="" class="button" [disabled]="step === 1" (click)="step=1">
+<button mat-flat-button="" class="button" [disabled]="step === 1" (click)="changeStep(1)">
     Información
 </button>
-<button mat-flat-button="" (click)="step=2" class="button" [disabled]="step === 2">
+<button mat-flat-button="" (click)="changeStep(2)" class="button" [disabled]="step === 2">
     Películas ({{selected.movies.length}})
 </button>
-<button mat-flat-button="" (click)="step=3" class="button" [disabled]="step === 3">
+<button mat-flat-button="" (click)="changeStep(3)" class="button" [disabled]="step === 3">
     Series ({{selected.tvshows.length}})
 </button>
-<button mat-flat-button="" (click)="step=4" class="button" [disabled]="step === 4">
+<button mat-flat-button="" (click)="changeStep(4)" class="button" [disabled]="step === 4">
     Personas ({{selected.people.length}})
 </button>
-<button mat-flat-button="" (click)="step=5" class="button" [disabled]="step === 5">
+<button mat-flat-button="" (click)="changeStep(5)" class="button" [disabled]="step === 5">
     Episodios ({{selected.episodes.length}})
 </button>
 <div class="form"  >
@@ -92,7 +92,7 @@
         <ul class="list" >
             <li *ngFor="let episode of  getFilteredResults(search.episode, 'episodes')" >
                 {{getNumericalEpisode(episode)}} {{episode.show.name}}
-                <span class="close" (click)="removeResource(person, 'episodes')"><mat-icon>close</mat-icon></span> </li>
+                <span class="close" (click)="removeResource(episode, 'episodes')"><mat-icon>close</mat-icon></span> </li>
         </ul>
     </div>
 

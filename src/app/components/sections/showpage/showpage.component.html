@@ -12,7 +12,9 @@
                     </small>
                 </h1>
             </a>
-            <div class="follow"> <app-follow [movie]="show" orientation="horizontal"></app-follow></div>
+            <div class="follow"> <app-follow [movie]="show" orientation="horizontal"></app-follow>
+
+            </div>
             <div class="info">
                 {{show.duration}} min | {{getReleaseDate()}} |
                 <app-genre *ngFor="let g of show.genres|slice:0:genreNumbers" [genre]="g"
@@ -23,7 +25,7 @@
     </header>
     <article class="main">
         <nav class="navigation">
-            <nav mat-tab-nav-bar>
+            <nav mat-tab-nav-bar style="width: auto">
                 <a mat-tab-link
                    routerLink="{{Movie.getUrl(show)}}"
                    routerLinkActive="active"

@@ -1,8 +1,5 @@
 <section [style.background-image]="poster">
     <header>
-        <div class="follow">
-            <app-follow [movie]="list" [listable]="false"></app-follow>
-        </div>
         <div class="title">
             <a routerLink='{{List.getUrl(list)}}'>
                 <h1>{{list.title}}
@@ -12,41 +9,56 @@
                 </h1>
             </a>
             <div class="info">
-                Creador: {{list.user.username}}
+                <div class="stats-info">
+                    <div class="follow">
+                        <app-follow [movie]="list" [listable]="false"></app-follow>
+                    </div>
+                    <div class="stats">
+                        <div>
+                            <mat-icon>movie</mat-icon> {{list.stats.count.movies}}
+                        </div>
+                        <div>
+                            <mat-icon>tv</mat-icon> {{list.stats.count.tvshows}}
+                        </div>
+                        <div>
+                            <mat-icon>people</mat-icon> {{list.stats.count.people}}
+                        </div>
+                        <div>
+                            <mat-icon>ondemand_video</mat-icon> {{list.stats.count.episodes}}
+                        </div>
+                    </div>
+                </div>
+                <div>  <b>Creador:</b> {{list.user.username}}</div>
             </div>
         </div>
     </header>
     <article class="main">
         <nav class="navigation">
             <nav mat-tab-nav-bar>
+                <a mat-tab-link routerLink="{{List.getUrl(list)}}/info"
+                   routerLinkActive="active"><mat-icon>info</mat-icon> Info</a>
                 <a mat-tab-link routerLink="{{List.getUrl(list)}}/movies"
-                   routerLinkActive="active"><mat-icon>movie</mat-icon> Películas</a>
+                   routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}"
+                   *ngIf="list.stats.count.movies>0"><mat-icon>movie</mat-icon> Películas</a>
                 <a mat-tab-link routerLink="{{List.getUrl(list)}}/tvshows"
-                   routerLinkActive="active"><mat-icon>tv</mat-icon> Series</a>
+                   routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}"
+                   *ngIf="list.stats.count.tvshows>0"><mat-icon>tv</mat-icon> Series</a>
                 <a mat-tab-link routerLink="{{List.getUrl(list)}}/people"
-                   routerLinkActive="active"><mat-icon>people</mat-icon> Personas</a>
+                   routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}"
+                   *ngIf="list.stats.count.people>0"><mat-icon>people</mat-icon> Personas</a>
                 <a mat-tab-link routerLink="{{List.getUrl(list)}}/episodes"
-                   routerLinkActive="active"><mat-icon>ondemand_video</mat-icon> Episodes</a>
+                   routerLinkActive="active" [routerLinkActiveOptions]="{exact:false}"
+                   *ngIf="list.stats.count.episodes>0"><mat-icon>ondemand_video</mat-icon> Episodes</a>
             </nav>
         </nav>
         <div class="content">
         <article class="sidebar">
+            <button mat-flat-button="" *ngIf="isEditable()" (click)="openEditDialog()">Editar</button>
             <h2>{{list.title}}</h2>
             <p>{{list.description}}</p>
         </article>
-            <article *ngIf="nav==='movies'">
-                <h1>Películas</h1>
-                <app-items [changeQueryParams]="true" [type]="'movie'"  [options]="{type:'movie', sort:'popularity'}"
-                           [loadItemsCallback]="loadMovies.bind(this)"
-                           [filters]="{showSort:true, years: true, genres: true,
- famous: true, releasedShows: true, durationMovie: true, patternSearch: true}"></app-items>
-            </article>
-            <article *ngIf="nav==='tvshows'">
-                <h1>Series</h1>
-                <app-items [changeQueryParams]="true" [type]="'tvshow'"  [options]="{type:'tvshow', sort:'popularity'}"
-                           [loadItemsCallback]="loadTvshows.bind(this)"
-                           [filters]="{showSort:true, years: true, genres: true,
- famous: true, releasedShows: true, durationMovie: true, patternSearch: true}"></app-items>
+            <article>
+       <router-outlet></router-outlet>
             </article>
         </div>
     </article>

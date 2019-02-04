@@ -95,13 +95,19 @@ import { EpisodenumberPipe } from './pipes/episodenumber.pipe';
 import { EpiosodescalendarComponent } from './components/models/epiosodescalendar/epiosodescalendar.component';
 import { EpisodeRatingComponent } from './components/models/rating/episode-rating/episode-rating.component';
 import { ListitemComponent } from './components/models/listitem/listitem.component';
-import {ListpageComponent, ListPageResolver} from './components/sections/listpage/listpage.component';
+import {
+    ListpageComponent, ListPageEpisodesComponent, ListPageInfoComponent,
+    ListPageMoviesComponent, ListPagePeopleComponent,
+    ListPageResolver,
+    ListPageTvshowsComponent
+} from './components/sections/listpage/listpage.component';
 import { ListlistComponent } from './components/sections/listlist/listlist.component';
-import { CreatelistComponent } from './components/sections/createlist/createlist.component';
+import {CreatelistComponent, EditlistComponent} from './components/sections/createlist/createlist.component';
 import { TagsComponent } from './components/utils/tags/tags.component';
 import {FilterPipeModule} from 'ngx-filter-pipe';
 import { PersonSelectorComponent } from './components/utils/person-selector/person-selector.component';
 import { EpisodeSelectorComponent } from './components/utils/episode-selector/episode-selector.component';
+import {AddtolistComponent, AddToListResourceDirective} from './components/models/addtolist/addtolist.component';
 registerLocaleData(localeEs, 'es');
 // Configs
 export function getAuthServiceConfigs() {
@@ -194,6 +200,14 @@ const appRoutes: Routes = RoutesList;
       TagsComponent,
       PersonSelectorComponent,
       EpisodeSelectorComponent,
+      EditlistComponent,
+      ListPageMoviesComponent,
+      ListPageTvshowsComponent,
+      ListPagePeopleComponent,
+      ListPageEpisodesComponent,
+      ListPageInfoComponent,
+      AddtolistComponent,
+      AddToListResourceDirective
   ],
   imports: [
     BrowserModule,
@@ -248,7 +262,9 @@ const appRoutes: Routes = RoutesList;
       },
   ],
   bootstrap: [AppComponent],
-    entryComponents: [LinksComponent,  SpinnerComponent, ShowRecommendedComponent, ConfirmDialogComponent, CreatelistComponent]
+    entryComponents: [LinksComponent, EditlistComponent,  SpinnerComponent,
+        ShowRecommendedComponent, ConfirmDialogComponent, CreatelistComponent,
+    AddtolistComponent]
 })
 
 export class AppModule { }
